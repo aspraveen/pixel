@@ -92,16 +92,16 @@ export default function PostDetails({ post, categories }) {
                 })}
               </Box>
               <Spacer />
-              <NextLink href="/blog" passHref legacyBehavior>
-                <Button
-                  size="xs"
-                  leftIcon={<HiChevronDoubleLeft />}
-                  variant="outline"
-                  mr={[2, 5, 5]}
-                >
-                  Back
-                </Button>
-              </NextLink>
+
+              <Button
+                size="xs"
+                leftIcon={<HiChevronDoubleLeft />}
+                variant="outline"
+                mr={[2, 5, 5]}
+                onClick={() => router.back()}
+              >
+                Back
+              </Button>
             </Flex>
 
             <Heading as="h6" mt={5} mb={2} fontFamily="inter" fontSize={["xl", "4xl", "5xl"]}>
