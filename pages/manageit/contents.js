@@ -14,9 +14,10 @@ import Header from "../../components/Header"
 import { RichTextBlock } from "../../components/manageit/RichTextBlock"
 import Link from "next/link"
 import { useEffect, useState } from "react"
-import { useSession } from "next-auth/react"
 import { useRouter } from "next/router"
 import { prisma } from "../../util/db"
+import { authOptions } from "../api/auth/[...nextauth]"
+import { unstable_getServerSession } from "next-auth"
 
 const { log } = console
 
@@ -167,14 +168,32 @@ const Contents = ({ categories }) => {
 }
 
 export async function getServerSideProps() {
-  try {
-    const categories = await prisma.category.findMany()
-    const data = JSON.parse(JSON.stringify(categories))
+  const session = await unstable_getServerSession(context.req, context.res, authOptions)
+  if (!session) {
     return {
-      props: { categories: data },
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
     }
-  } catch (err) {
-    console.log(err)
+  } else {
+    if (session.isAdmin != true) {
+      return {
+        redirect: {
+          destination: "/",
+          permanent: false,
+        },
+      }
+    }
+    try {
+      const categories = await prisma.category.findMany()
+      const data = JSON.parse(JSON.stringify(categories))
+      return {
+        props: { categories: data, session },
+      }
+    } catch (err) {
+      console.log(err)
+    }
   }
 }
 

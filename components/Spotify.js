@@ -49,6 +49,7 @@ const Spotify = () => {
       </Box>
     )
   }
+  const audioType = data.audioType == "track" ? "song" : "podcast"
   return (
     <Box
       boxShadow={"base"}
@@ -63,10 +64,12 @@ const Spotify = () => {
         <FaSpotify size={30} color="#f5ad42" />
         <Box>
           <Text fontSize={["xs", null, "sm"]} color={themeColor}>
-            {data.isPlaying ? "Listening to" : "I'm presently not listening to Spotify."}
+            {data.isPlaying
+              ? `Listening to ${audioType}`
+              : "I'm presently not listening to Spotify."}
           </Text>
 
-          <Link href={data.isPlaying ? data.songUrl : ""} target="_blank">
+          <Link href={data.isPlaying ? data.trackUrl : ""} target="_blank">
             <Text
               fontSize={["xs", null, "sm"]}
               color={useColorModeValue("orange.300", "orange.100")}

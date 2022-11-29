@@ -142,21 +142,36 @@ const editContent = ({ post, categories }) => {
   )
 }
 export async function getServerSideProps({ params }) {
-  const post = await prisma.post.findFirst({
-    where: {
-      slug: params.slug,
-    },
-  })
-  const data = JSON.parse(JSON.stringify(post))
+  const session = await unstable_getServerSession(context.req, context.res, authOptions)
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    }
+  } else {
+    if (session.isAdmin != true) {
+      return {
+        redirect: {
+          destination: "/",
+          permanent: false,
+        },
+      }
+    }
 
-  const categories = await prisma.category.findMany()
-  const categories_data = JSON.parse(JSON.stringify(categories))
-  console.log(categories_data)
-  return {
-    props: {
-      post: data,
-      categories: categories_data,
-    },
+    const post = await prisma.post.findFirst({
+      where: {
+        slug: params.slug,
+      },
+    })
+    const data = JSON.parse(JSON.stringify(post))
+    const categories = await prisma.category.findMany()
+    const categories_data = JSON.parse(JSON.stringify(categories))
+
+    return {
+      props: { session, post: data, categories: categories_data },
+    }
   }
 }
 export default editContent

@@ -5,7 +5,7 @@ const {
 } = process.env
 
 const basic = Buffer.from(`${client_id}:${client_secret}`).toString("base64")
-const NOW_PLAYING_ENDPOINT = `https://api.spotify.com/v1/me/player/currently-playing`
+const NOW_PLAYING_ENDPOINT = `https://api.spotify.com/v1/me/player/currently-playing?additional_types=episode`
 const TOKEN_ENDPOINT = `https://accounts.spotify.com/api/token`
 
 const getAccessToken = async () => {
@@ -34,27 +34,45 @@ export const getNowPlaying = async () => {
   })
 }
 
-export default async (_, res) => {
+export default async (req, res) => {
   const response = await getNowPlaying()
 
   if (response.status === 204 || response.status > 400) {
     return res.status(200).json({ isPlaying: false })
   }
 
-  const song = await response.json()
-  const isPlaying = song.is_playing
-  const title = song.item.name
-  const artist = song.item.artists.map((_artist) => _artist.name).join(", ")
-  const album = song.item.album.name
-  const albumImageUrl = song.item.album.images[0].url
-  const songUrl = song.item.external_urls.spotify
+  const audio = await response.json()
+  //const artist = audio.item.artists.map((_artist) => _artist.name).join(", ")
+
+  let album = ""
+  let isPlaying = ""
+  let title = ""
+  let albumImageUrl = ""
+  let trackUrl = ""
+  let audioType = audio.currently_playing_type
+  //const artist = audio.item.artists.map((_artist) => _artist.name).join(", ")
+
+  if (audio.currently_playing_type === "track") {
+    album = audio.item.album.name
+    isPlaying = audio.is_playing
+    title = audio.item.name
+    albumImageUrl = audio.item.album.images[0].url
+    trackUrl = audio.item.external_urls.spotify
+  } else if (audio.currently_playing_type === "episode") {
+    album = audio.item.show.name
+    isPlaying = audio.is_playing
+    title = audio.item.name
+    albumImageUrl = audio.item.show.images[0].url
+    trackUrl = audio.item.external_urls.spotify
+  }
 
   return res.status(200).json({
     album,
     albumImageUrl,
-    artist,
     isPlaying,
-    songUrl,
+    trackUrl,
     title,
+    audioType,
   })
+  return res.status(200)
 }
