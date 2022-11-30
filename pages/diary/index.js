@@ -21,11 +21,13 @@ import {
   Td,
   Tr,
   useColorModeValue,
+  SimpleGrid,
+  VStack,
 } from "@chakra-ui/react"
-import Header from "../../components/Header"
+
 import useSWR from "swr"
 import Footer from "../../components/Footer"
-import RightDesign from "../../components/RightDesign"
+import Header from "../../components/diary/Header"
 const index = () => {
   const fetcher = async (req, res) => {
     const response = await fetch("api/diary")
@@ -42,12 +44,10 @@ const index = () => {
   if (error) {
     return (
       <Container maxWidth={"container.xl"}>
-        <Header />
         <Flex>
           <Box w={{ base: "98%", md: "75%" }} mt={10} p={[2, 5, 5]}>
             {error.message}
           </Box>
-          <RightDesign />
         </Flex>
         <Footer />
       </Container>
@@ -56,46 +56,57 @@ const index = () => {
   if (!data) {
     return (
       <Container maxWidth={"container.xl"}>
-        <Header />
         <Flex>
           <Box w={{ base: "98%", md: "75%" }} mt={10} p={[2, 5, 5]}>
             Loading...
           </Box>
-          <RightDesign />
         </Flex>
         <Footer />
       </Container>
     )
   }
   return (
-    <Container maxWidth={"container.xl"}>
-      <Header />
-      <Wrap spacing={5}>
-        {data.map((entry, index) => (
-          <WrapItem>
-            <Box
-              key={index}
-              p={3}
-              width={{ lg: "290px" }}
-              backgroundColor={useColorModeValue("gray.50", "gray.600")}
-              fontFamily={"Open Sans"}
-              textTransform={"capitalize"}
-              rounded={"md"}
-              fontSize={"small"}
-              boxShadow={"base"}
-            >
-              <Box fontWeight={"bold"}>{entry.title}</Box>
-              <Box>{entry.details}</Box>
-              <Flex>
-                <Box></Box>
-                <Box fontSize={"6xl"} color={"purple.200"}>
-                  {entry.amount}
+    <Container
+      maxWidth={"full"}
+      backgroundColor={"gray.700"}
+      height={{ base: "full", md: "full", lg: "100vh" }}
+    >
+      <Container maxWidth={"container.xl"}>
+        <Header />
+
+        <SimpleGrid spacing={1} columns={{ base: 1, lg: 2 }}>
+          <Box height={20}>CONTROLS</Box>
+          <Box height={"90vh"} overflow={"auto"} scrollBehavior={"auto"} p={5}>
+            <VStack>
+              {data.map((entry, index) => (
+                <Box
+                  key={index}
+                  p={3}
+                  fontFamily={"Open Sans"}
+                  textTransform={"capitalize"}
+                  rounded={"md"}
+                  fontSize={"small"}
+                  boxShadow={"base"}
+                  width={"full"}
+                >
+                  <Box fontWeight={"bold"} color={"gray.600"}>
+                    {entry.title}
+                  </Box>
+                  <Box color={"whiteAlpha.600"} lineHeight={"6"}>
+                    {entry.details}
+                  </Box>
+                  <Flex>
+                    <Box></Box>
+                    <Box fontSize={"6xl"} color={"purple.400"}>
+                      {entry.amount}
+                    </Box>
+                  </Flex>
                 </Box>
-              </Flex>
-            </Box>
-          </WrapItem>
-        ))}
-      </Wrap>
+              ))}
+            </VStack>
+          </Box>
+        </SimpleGrid>
+      </Container>
     </Container>
   )
 }
