@@ -34,7 +34,7 @@ const Header = () => {
             fontFamily={"Inter"}
             pr={5}
             pt={{ base: 5, lg: 1 }}
-            bgGradient="linear(to-l, #666666, #eeeeee
+            bgGradient="linear(to-r, #734F96, #EE82EE
 )"
             bgClip="text"
             textTransform={"uppercase"}

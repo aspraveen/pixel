@@ -29,13 +29,22 @@ const handler = async (req, res) => {
       }
     }
   } else if (req.method === "GET") {
+    //console.log("🚀 ~ file: diary.js:32 ~ handler ~ req", req)
+    const { selectedDate } = req.query
+    console.log("🚀 ~ file: diary.js:34 ~ handler ~ selectedDate", selectedDate)
     if (!session) {
       res.status(401).json({ msg: "Not Authenticated" })
     } else {
       const transDate =
-        new Date().getFullYear() + "-" + (new Date().getMonth() + 1) + "-" + new Date().getDate()
-      //const formattedDate = `${transDate}T00:00:00.000Z`
-      const formattedDate = `2016-11-01T00:00:00.000Z`
+        new Date(selectedDate).getFullYear() +
+        "-" +
+        (new Date(selectedDate).getMonth() + 1) +
+        "-" +
+        new Date(selectedDate).getDate()
+      const formattedDate = `${selectedDate}T00:00:00.000Z`
+
+      console.log("🚀 ~ file: diary.js:46 ~ handler ~ transDate", transDate)
+      //const formattedDate = `2016-11-01T00:00:00.000Z`
       /*const data =
         await prisma.$queryRaw`SELECT * FROM pixel."Diary" where "transDate"='2022-11-26'`*/
       const data = await prisma.diary.findMany({

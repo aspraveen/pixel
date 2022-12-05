@@ -23,14 +23,22 @@ import {
   useColorModeValue,
   SimpleGrid,
   VStack,
+  Spinner,
+  Center,
 } from "@chakra-ui/react"
 
 import useSWR from "swr"
 import Footer from "../../components/Footer"
 import Header from "../../components/diary/Header"
+import { useState } from "react"
 const index = () => {
-  const fetcher = async (req, res) => {
-    const response = await fetch("api/diary")
+  const dateString = new Date()
+  const [selectedDate, setSelectedDate] = useState(dateString.toISOString().slice(0, 10))
+  console.log("🚀 ~ file: index.js:34 ~ index ~ transDate", selectedDate)
+  const fetcher = async (url, selectedDate) => {
+    console.log("🚀 ~ file: index.js:35 ~ fetcher ~ transDate", selectedDate)
+
+    const response = await fetch(`${url}${selectedDate}`)
     const data = await response.json()
     console.log("🚀 ~ file: index.js ~ line 22 ~ fetcher ~ data", data)
     if (data.msg == "Not Authenticated") {
@@ -38,31 +46,25 @@ const index = () => {
     }
     return data
   }
-  const { data, error } = useSWR("diary", fetcher)
+  const { data, error } = useSWR(["api/diary/?selectedDate=", selectedDate], fetcher)
   console.log("🚀 ~ file: index.js ~ line 27 ~ index ~ data", data)
 
   if (error) {
     return (
       <Container maxWidth={"container.xl"}>
         <Flex>
-          <Box w={{ base: "98%", md: "75%" }} mt={10} p={[2, 5, 5]}>
-            {error.message}
-          </Box>
+          <Box>{error.message}</Box>
         </Flex>
-        <Footer />
       </Container>
     )
   }
   if (!data) {
     return (
-      <Container maxWidth={"container.xl"}>
-        <Flex>
-          <Box w={{ base: "98%", md: "75%" }} mt={10} p={[2, 5, 5]}>
-            Loading...
-          </Box>
-        </Flex>
-        <Footer />
-      </Container>
+      <Container
+        maxWidth={"full"}
+        backgroundColor={"gray.700"}
+        height={{ base: "full", md: "full", lg: "100vh" }}
+      ></Container>
     )
   }
   return (
@@ -74,8 +76,19 @@ const index = () => {
       <Container maxWidth={"container.xl"}>
         <Header />
 
-        <SimpleGrid spacing={1} columns={{ base: 1, lg: 2 }}>
-          <Box height={20}>CONTROLS</Box>
+        <Flex flexDirection={{ base: "column", lg: "row" }} gap={10}>
+          <Box height={20} width={"300px"}>
+            <Input
+              onChange={(e) => setSelectedDate(e.target.value)}
+              type={"date"}
+              color={"blackAlpha.400"}
+              sx={{ filter: "invert(1)" }}
+              borderColor={"blackAlpha.700"}
+              width={210}
+              h={70}
+              value={selectedDate}
+            ></Input>
+          </Box>
           <Box height={"90vh"} overflow={"auto"} scrollBehavior={"auto"} p={5}>
             <VStack>
               {data.map((entry, index) => (
@@ -85,9 +98,9 @@ const index = () => {
                   fontFamily={"Open Sans"}
                   textTransform={"capitalize"}
                   rounded={"md"}
-                  fontSize={"small"}
+                  fontSize={"sm"}
                   boxShadow={"base"}
-                  width={"full"}
+                  width={"700px"}
                 >
                   <Box fontWeight={"bold"} color={"gray.600"}>
                     {entry.title}
@@ -97,7 +110,7 @@ const index = () => {
                   </Box>
                   <Flex>
                     <Box></Box>
-                    <Box fontSize={"6xl"} color={"purple.400"}>
+                    <Box fontSize={"3xl"} color={"purple.400"}>
                       {entry.amount}
                     </Box>
                   </Flex>
@@ -105,7 +118,7 @@ const index = () => {
               ))}
             </VStack>
           </Box>
-        </SimpleGrid>
+        </Flex>
       </Container>
     </Container>
   )
