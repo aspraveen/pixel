@@ -1,5 +1,5 @@
 import { Box, Flex, Select, Wrap } from "@chakra-ui/react"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 const Days = (props) => {
   const handleClick = (e) => {
@@ -11,7 +11,6 @@ const Days = (props) => {
     days.push(
       <Box
         fontSize={"xx-small"}
-        backgroundColor="gray.600"
         p={1}
         w={5}
         alignItems={"center"}
@@ -20,6 +19,7 @@ const Days = (props) => {
         data-day={i}
         key={i}
         _hover={{ backgroundColor: "orange.600", cursor: "pointer" }}
+        backgroundColor={i == props.default ? "orange.400" : "gray.600"}
       >
         {i}
       </Box>,
@@ -30,7 +30,6 @@ const Days = (props) => {
 
 const Months = (props) => {
   const handleOnChange = (month) => {
-    console.log("🚀 ~ file: Calendar.js:33 ~ handleOnChange ~ month", month)
     props.onChange(parseInt(month) + 1)
   }
   const monthValues = [
@@ -58,9 +57,15 @@ const Months = (props) => {
       borderColor={"gray.600"}
       onChange={(e) => handleOnChange(e.target.selectedIndex)}
     >
-      {monthValues.map((value, key) => (
-        <option name={key}>{value}</option>
-      ))}
+      {monthValues.map((value, key) =>
+        key + 1 == props.default ? (
+          <option name={key} selected>
+            {value}
+          </option>
+        ) : (
+          <option name={key}>{value}</option>
+        ),
+      )}
     </Select>
   )
 }
@@ -74,7 +79,15 @@ const Years = (props) => {
   const years = []
 
   for (let i = 2000; i <= currentYear; i++) {
-    years.push(<option value={i}>{i}</option>)
+    years.push(
+      i == props.default ? (
+        <option value={i} selected>
+          {i}
+        </option>
+      ) : (
+        <option value={i}>{i}</option>
+      ),
+    )
   }
   return (
     <Select
@@ -92,24 +105,30 @@ const Years = (props) => {
 }
 
 const Calendar = (props) => {
-  const [selectedYear, setSelectedYear] = useState()
-  const [selectedMonth, setSelectedMonth] = useState()
-  const [selectedDay, setSelectedDay] = useState()
+  const dateString = new Date()
+  const [selectedYear, setSelectedYear] = useState(dateString.getFullYear())
+  const [selectedMonth, setSelectedMonth] = useState(
+    String(dateString.getMonth() + 1).padStart(2, "0"),
+  )
+  const [selectedDay, setSelectedDay] = useState(dateString.getDate())
   const [selectedDate, setSelectedDate] = useState()
-  console.log("🚀 ~ file: Calendar.js:99 ~ Calendar ~ selectedDate", selectedDate)
+
+  useEffect(() => {
+    setSelectedDate(`${selectedYear}-${selectedMonth}-${selectedDay}`)
+  }, [selectedYear, selectedMonth, selectedDay])
+  useEffect(() => {
+    props.onClick(selectedDate)
+  }, [selectedDate])
 
   const handleYearChange = (year) => {
     setSelectedYear(year)
-    props.onChange(selectedDate)
   }
   const handleMonthChange = (month) => {
+    console.log("handleMonthChange", month)
     setSelectedMonth(String(month).padStart(2, "0"))
-    props.onChange(selectedDate)
   }
   const handleDayChange = (day) => {
     setSelectedDay(String(day).padStart(2, "0"))
-    setSelectedDate(`${selectedYear}-${selectedMonth}-${selectedDay}`)
-    props.onChange(selectedDate)
   }
 
   return (
@@ -123,10 +142,10 @@ const Calendar = (props) => {
       pl={4}
     >
       <Flex py={2} gap={1}>
-        <Years onChange={handleYearChange} />
-        <Months onChange={handleMonthChange} />
+        <Years onChange={handleYearChange} default={selectedYear} />
+        <Months onChange={handleMonthChange} default={selectedMonth} />
       </Flex>
-      <Days onChange={handleDayChange} />
+      <Days onChange={handleDayChange} default={selectedDay} />
     </Box>
   )
 }

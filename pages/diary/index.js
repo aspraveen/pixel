@@ -3,15 +3,19 @@ import { unstable_getServerSession } from "next-auth"
 import { Container, Input, Box, Flex } from "@chakra-ui/react"
 import useSWR from "swr"
 import Header from "../../components/diary/Header"
-import { useState } from "react"
+import { useState, useRef } from "react"
 import Display from "../../components/diary/Display"
 import Calendar from "../../components/diary/Calendar"
 const index = () => {
   const dateString = new Date()
-  const [selectedDate, setSelectedDate] = useState(dateString.toISOString().slice(0, 10))
-  const handleSelectedDate = (selectedDate) => {
-    console.log("🚀 ~ file: index.js:13 ~ handleSelectedDate ~ date", selectedDate)
-    setSelectedDate(selectedDate)
+  //const [selectedDate, setSelectedDate] = useState(dateString.toISOString().slice(0, 10))
+  const selectedDate = useRef(dateString.toISOString().slice(0, 10))
+  const handleSelectedDate = (dateFromCalenderComponent) => {
+    console.log(
+      "🚀 ~ file: index.js:13 ~ dateFromCalenderComponent ~ date",
+      dateFromCalenderComponent,
+    )
+    selectedDate.current = dateFromCalenderComponent
   }
   console.log("🚀 ~ file: index.js:34 ~ index ~ transDate", selectedDate)
   const fetcher = async (url, selectedDate) => {
@@ -19,7 +23,7 @@ const index = () => {
     //const response = await fetch(`${url}${selectedDate}`)
     const response = await fetch(`${url}${dateString.toISOString().slice(0, 10)}`)
     const data = await response.json()
-    console.log("🚀 ~ file: index.js ~ line 22 ~ fetcher ~ data", data)
+
     if (data.msg == "Not Authenticated") {
       throw new Error("User Not authenticated")
     }
@@ -57,7 +61,7 @@ const index = () => {
 
         <Flex flexDirection={{ base: "column", lg: "row" }} gap={10}>
           <Box height={20} width={"300px"}>
-            <Calendar onChange={handleSelectedDate} />
+            <Calendar onClick={handleSelectedDate} />
           </Box>
           <Display data={data} />
         </Flex>
