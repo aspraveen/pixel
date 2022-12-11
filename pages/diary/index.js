@@ -1,70 +1,79 @@
 import { authOptions } from "../api/auth/[...nextauth]"
 import { unstable_getServerSession } from "next-auth"
-import { Container, Input, Box, Flex } from "@chakra-ui/react"
-import useSWR from "swr"
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  Container,
+  Flex,
+  Button,
+  useDisclosure,
+  useColorModeValue,
+  Box,
+  Divider,
+} from "@chakra-ui/react"
 import Header from "../../components/diary/Header"
-import { useState, useRef } from "react"
+import { useState, useEffect } from "react"
 import Display from "../../components/diary/Display"
 import Calendar from "../../components/diary/Calendar"
+import { FaPlus } from "react-icons/fa"
+import Addnotes from "../../components/diary/Addnotes"
+import TotalExpense from "../../components/diary/TotalExpense"
+import EditNote from "../../components/diary/EditNote"
 const index = () => {
   const dateString = new Date()
-  //const [selectedDate, setSelectedDate] = useState(dateString.toISOString().slice(0, 10))
-  const selectedDate = useRef(dateString.toISOString().slice(0, 10))
+  const [selectedDate, setSelectedDate] = useState(dateString.toISOString().slice(0, 10))
   const handleSelectedDate = (dateFromCalenderComponent) => {
-    console.log(
-      "🚀 ~ file: index.js:13 ~ dateFromCalenderComponent ~ date",
-      dateFromCalenderComponent,
-    )
-    selectedDate.current = dateFromCalenderComponent
+    setSelectedDate(dateFromCalenderComponent)
   }
-  console.log("🚀 ~ file: index.js:34 ~ index ~ transDate", selectedDate)
-  const fetcher = async (url, selectedDate) => {
-    console.log("🚀 ~ file: index.js:35 ~ fetcher ~ transDate", selectedDate)
-    //const response = await fetch(`${url}${selectedDate}`)
-    const response = await fetch(`${url}${dateString.toISOString().slice(0, 10)}`)
-    const data = await response.json()
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const [totalExpense, setTotalExpense] = useState()
 
-    if (data.msg == "Not Authenticated") {
-      throw new Error("User Not authenticated")
-    }
-    return data
-  }
-  const { data, error } = useSWR(["api/diary/?selectedDate=", selectedDate], fetcher)
-  console.log("🚀 ~ file: index.js ~ line 27 ~ index ~ data", data)
-
-  if (error) {
-    return (
-      <Container maxWidth={"container.xl"}>
-        <Flex>
-          <Box>{error.message}</Box>
-        </Flex>
-      </Container>
-    )
-  }
-  if (!data) {
-    return (
-      <Container
-        maxWidth={"full"}
-        backgroundColor={"gray.700"}
-        height={{ base: "full", md: "full", lg: "100vh" }}
-      ></Container>
-    )
-  }
   return (
     <Container
       maxWidth={"full"}
-      backgroundColor={"gray.700"}
+      backgroundColor={useColorModeValue("gray.100", "gray.700")}
       height={{ base: "full", md: "full", lg: "100vh" }}
     >
       <Container maxWidth={"container.xl"}>
         <Header />
 
-        <Flex flexDirection={{ base: "column", lg: "row" }} gap={10}>
-          <Box height={20} width={"300px"}>
-            <Calendar onClick={handleSelectedDate} />
+        <Flex
+          flexDirection={{ base: "column", md: "row", lg: "row" }}
+          gap={2}
+          justifyContent={"flex-start"}
+        >
+          <Calendar onClick={handleSelectedDate} />
+
+          <Display selectedDate={selectedDate} setTotalExpense={setTotalExpense} />
+          <Box>
+            <Button
+              onClick={onOpen}
+              leftIcon={<FaPlus />}
+              colorScheme={useColorModeValue("orange", "gray")}
+              size={"lg"}
+            >
+              Add
+            </Button>
+            <Divider py={1} />
+            <TotalExpense totalExpense={totalExpense} />
           </Box>
-          <Display data={data} />
         </Flex>
+        <Modal isOpen={isOpen} onClose={onClose} size="full">
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Add Notes</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              <Addnotes selectedDate={selectedDate} />
+            </ModalBody>
+            <ModalFooter>Click the + button for adding multiple notes.</ModalFooter>
+          </ModalContent>
+        </Modal>
       </Container>
     </Container>
   )

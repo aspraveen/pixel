@@ -1,4 +1,4 @@
-import { Box, Flex, Select, Wrap } from "@chakra-ui/react"
+import { Box, Flex, Select, Wrap, useColorModeValue } from "@chakra-ui/react"
 import { useState, useEffect } from "react"
 
 const Days = (props) => {
@@ -14,12 +14,14 @@ const Days = (props) => {
         p={1}
         w={5}
         alignItems={"center"}
-        color={"gray.100"}
+        color={useColorModeValue("gray.600", "gray.100")}
         onClick={(e) => handleClick(e)}
         data-day={i}
         key={i}
         _hover={{ backgroundColor: "orange.600", cursor: "pointer" }}
-        backgroundColor={i == props.default ? "orange.400" : "gray.600"}
+        backgroundColor={
+          i == props.default ? "orange.400" : useColorModeValue("gray.300", "gray.600")
+        }
       >
         {i}
       </Box>,
@@ -54,7 +56,7 @@ const Months = (props) => {
       size={"xs"}
       color={"gray.300"}
       py={2}
-      borderColor={"gray.600"}
+      borderColor={useColorModeValue("gray.300", "gray.600")}
       onChange={(e) => handleOnChange(e.target.selectedIndex)}
     >
       {monthValues.map((value, key) =>
@@ -96,7 +98,7 @@ const Years = (props) => {
       size={"xs"}
       color={"gray.300"}
       py={2}
-      borderColor={"gray.600"}
+      borderColor={useColorModeValue("gray.300", "gray.600")}
       onChange={(e) => handleChange(e.target.value)}
     >
       {years}
@@ -106,28 +108,35 @@ const Years = (props) => {
 
 const Calendar = (props) => {
   const dateString = new Date()
-  const [selectedYear, setSelectedYear] = useState(dateString.getFullYear())
-  const [selectedMonth, setSelectedMonth] = useState(
-    String(dateString.getMonth() + 1).padStart(2, "0"),
-  )
-  const [selectedDay, setSelectedDay] = useState(dateString.getDate())
+  const [selectedYear, setSelectedYear] = useState()
+  const [selectedMonth, setSelectedMonth] = useState()
+  const [selectedDay, setSelectedDay] = useState()
   const [selectedDate, setSelectedDate] = useState()
 
   useEffect(() => {
     setSelectedDate(`${selectedYear}-${selectedMonth}-${selectedDay}`)
+    //console.log("🚀 ~ file: Calendar.js:115 ~ Calendar ~ selectedDate", selectedDate)
   }, [selectedYear, selectedMonth, selectedDay])
+
   useEffect(() => {
     props.onClick(selectedDate)
   }, [selectedDate])
+
+  useEffect(() => {
+    setSelectedDate(dateString.toISOString().slice(0, 10))
+    setSelectedYear(dateString.getFullYear())
+    setSelectedMonth(String(dateString.getMonth() + 1).padStart(2, "0"))
+    setSelectedDay(String(dateString.getDate()).padStart(2, "0"))
+  }, []) //initial render only
 
   const handleYearChange = (year) => {
     setSelectedYear(year)
   }
   const handleMonthChange = (month) => {
-    console.log("handleMonthChange", month)
     setSelectedMonth(String(month).padStart(2, "0"))
   }
   const handleDayChange = (day) => {
+    //console.log("🚀 ~ file: Calendar.js:130 ~ handleDayChange ~ day", day)
     setSelectedDay(String(day).padStart(2, "0"))
   }
 
@@ -136,10 +145,11 @@ const Calendar = (props) => {
       width={"220px"}
       height={"220px"}
       boxShadow={"base"}
-      borderColor={"gray.600"}
+      borderColor={useColorModeValue("gray.300", "gray.600")}
       borderWidth={"1px"}
       p={2}
       pl={4}
+      ml={{ base: "40px", md: 0 }}
     >
       <Flex py={2} gap={1}>
         <Years onChange={handleYearChange} default={selectedYear} />

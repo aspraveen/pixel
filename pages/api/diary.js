@@ -16,7 +16,6 @@ const handler = async (req, res) => {
         data["userId"] = userId
         newData.push(data)
       })
-      console.log("🚀 ~ file: diary.js ~ line 15 ~ handler ~ newData", newData)
       //add data to prisma
       try {
         const addRecords = await prisma.diary.createMany({
@@ -30,28 +29,35 @@ const handler = async (req, res) => {
     }
   } else if (req.method === "GET") {
     //console.log("🚀 ~ file: diary.js:32 ~ handler ~ req", req)
-    const { selectedDate } = req.query
-    console.log("🚀 ~ file: diary.js:34 ~ handler ~ selectedDate", selectedDate)
+    const { type, selectedDate, note } = req.query
+    //console.log("🚀 ~ file: diary.js:34 ~ handler ~ selectedDate", selectedDate)
     if (!session) {
       res.status(401).json({ msg: "Not Authenticated" })
     } else {
-      const transDate =
-        new Date(selectedDate).getFullYear() +
-        "-" +
-        (new Date(selectedDate).getMonth() + 1) +
-        "-" +
-        new Date(selectedDate).getDate()
-      const formattedDate = `${selectedDate}T00:00:00.000Z`
+      let data = []
+      if (type == "display") {
+        const transDate =
+          new Date(selectedDate).getFullYear() +
+          "-" +
+          (new Date(selectedDate).getMonth() + 1) +
+          "-" +
+          new Date(selectedDate).getDate()
+        const formattedDate = `${selectedDate}T00:00:00.000Z`
 
-      console.log("🚀 ~ file: diary.js:46 ~ handler ~ transDate", transDate)
-      //const formattedDate = `2016-11-01T00:00:00.000Z`
-      /*const data =
+        //console.log("🚀 ~ file: diary.js:46 ~ handler ~ transDate", transDate)
+        //const formattedDate = `2016-11-01T00:00:00.000Z`
+        /*const data =
         await prisma.$queryRaw`SELECT * FROM pixel."Diary" where "transDate"='2022-11-26'`*/
-      const data = await prisma.diary.findMany({
-        where: {
-          transDate: formattedDate,
-        },
-      })
+        data = await prisma.diary.findMany({
+          where: {
+            transDate: formattedDate,
+          },
+        })
+      } else if (type == "edit") {
+        data = await prisma.diary.findUnique({
+          where: { id: parseInt(note) },
+        })
+      }
       //console.log(data)
       res.status(200).json(data)
     }

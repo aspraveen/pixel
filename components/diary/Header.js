@@ -3,13 +3,12 @@ import {
   Flex,
   Spacer,
   Box,
-  animation,
   Image,
   usePrefersReducedMotion,
   keyframes,
-  Text,
 } from "@chakra-ui/react"
 import Link from "next/link"
+import ColorModeSwitch from "../ColorModeSwitch"
 const Header = () => {
   const prefersReducedMotion = usePrefersReducedMotion()
   const spin = keyframes`
@@ -20,27 +19,15 @@ const Header = () => {
   return (
     <Container maxWidth={"container.xl"} height={"50"} mb={"5"}>
       <Flex>
-        <Box py={2} pt={{ base: 5, lg: 3 }}>
+        <Box py={2} pt={{ base: 2, lg: 3 }}>
           <Link href={"/"}>
-            {" "}
-            <Image src={"/favicon-32x32.png"} animation={animation} ml={[0, 10]} />
+            <Image src={"/favicon-32x32.png"} animation={animation} ml={[0, 2]} />
           </Link>
         </Box>
+
         <Spacer />
-        <Box>
-          <Text
-            fontSize={{ base: "2xl", lg: "4xl" }}
-            color={"gray.200"}
-            fontFamily={"Inter"}
-            pr={5}
-            pt={{ base: 5, lg: 1 }}
-            bgGradient="linear(to-r, #734F96, #EE82EE
-)"
-            bgClip="text"
-            textTransform={"uppercase"}
-          >
-            Diary
-          </Text>
+        <Box py={2} mr={{ base: 0, md: 20, lg: 20 }}>
+          <ColorModeSwitch />
         </Box>
       </Flex>
     </Container>
