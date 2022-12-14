@@ -34,6 +34,7 @@ const handler = async (req, res) => {
     if (!session) {
       res.status(401).json({ msg: "Not Authenticated" })
     } else {
+      let { userId } = session
       let data = []
       if (type == "display") {
         const transDate =
@@ -51,15 +52,38 @@ const handler = async (req, res) => {
         data = await prisma.diary.findMany({
           where: {
             transDate: formattedDate,
+            userId,
           },
         })
       } else if (type == "edit") {
-        data = await prisma.diary.findUnique({
-          where: { id: parseInt(note) },
+        data = await prisma.diary.findFirst({
+          where: { id: parseInt(note), userId },
         })
+        //data = { msg: "ok" }
       }
       //console.log(data)
       res.status(200).json(data)
+    }
+  } else if (req.method == "PUT") {
+    if (!session) {
+      res.status(401).json({ msg: "Not Authenticated" })
+    } else {
+      const { userId } = session
+      const reqPayLoad = req.body
+      const { inputField } = reqPayLoad
+      console.log("🚀 ~ file: diary.js:74 ~ handler ~ inputFields", inputField)
+
+      //add data to prisma
+      try {
+        const editNote = await prisma.diary.update({
+          where: { id: inputField.id },
+          data: { title: inputField.title },
+        })
+        res.status(200).json({ msg: "ok" })
+      } catch (err) {
+        console.log(err)
+        res.status(400).json({ msg: err })
+      }
     }
   }
 }

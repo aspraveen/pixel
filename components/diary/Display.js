@@ -1,52 +1,27 @@
-import {
-  Box,
-  VStack,
-  Flex,
-  useColorModeValue,
-  Heading,
-  IconButton,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  useDisclosure,
-} from "@chakra-ui/react"
+import { Box, VStack, Flex, useColorModeValue, Heading, IconButton } from "@chakra-ui/react"
 import { FaEdit } from "react-icons/fa"
-import { useState, useEffect } from "react"
+import { useContext } from "react"
 import useSWR from "swr"
-import EditNote from "./EditNote"
+import { NoteContext } from "../../pages/diary"
+
 const SelectNote = ({ note }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  const [noteToEdit, setNoteToEdit] = useState()
-  console.log("🚀 ~ file: Display.js:27 ~ DisplayDiary ~ noteToEdit", noteToEdit)
+  const [noteToEdit, setNoteToEdit] = useContext(NoteContext)
+
   const handleClick = (note) => {
     setNoteToEdit(note)
-    onOpen()
+    console.log(noteToEdit)
   }
 
   return (
     <>
       <IconButton
-        colorScheme="orange"
+        colorScheme="gray"
         aria-label="edit"
-        size="sm"
-        icon={<FaEdit />}
+        size="xs"
+        icon={<FaEdit color="#666666" />}
         onClick={() => handleClick(note)}
+        variant={"outline"}
       ></IconButton>
-      <Modal isOpen={isOpen} onClose={onClose} size="full">
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Add Notes</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <EditNote note={noteToEdit} />
-          </ModalBody>
-          <ModalFooter>Click the + button for adding multiple notes.</ModalFooter>
-        </ModalContent>
-      </Modal>
     </>
   )
 }
@@ -86,7 +61,9 @@ const DisplayDiary = (props) => {
                   {entry.amount}
                 </Box>
               </Flex>
-              <SelectNote note={entry.id} />
+              <Box textAlign={"right"}>
+                <SelectNote note={entry.id} />
+              </Box>
             </Box>
           ))}
         </Box>
