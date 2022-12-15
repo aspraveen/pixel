@@ -9,7 +9,6 @@ const SelectNote = ({ note }) => {
 
   const handleClick = (note) => {
     setNoteToEdit(note)
-    console.log(noteToEdit)
   }
 
   return (

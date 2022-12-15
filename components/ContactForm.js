@@ -112,6 +112,13 @@ const ContactForm = () => {
             <Button variant={"outline"} colorScheme="gray" size={"sm"} width={200} type="submit">
               Submit
             </Button>
+            <Text fontSize={"xx-small"} fontStyle={"italic"}>
+              This form is protected by reCAPTCHA and the Google
+              <a href="https://policies.google.com/privacy">&nbsp;Privacy Policy&nbsp;</a>
+              and
+              <a href="https://policies.google.com/terms">&nbsp;Terms of Service&nbsp;</a>
+              apply.
+            </Text>
             <Alert
               status={alertType}
               variant="left-accent"

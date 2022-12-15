@@ -1,7 +1,9 @@
 import { Input, Box, Textarea, Button, useToast } from "@chakra-ui/react"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
+import { NoteContext } from "../../pages/diary"
 
 const EditNote = (props) => {
+  const [noteToEdit, setNoteToEdit] = useContext(NoteContext)
   const toast = useToast()
   const [inputField, setInputField] = useState({
     transDate: "",
@@ -25,7 +27,6 @@ const EditNote = (props) => {
       inputField,
     }
     //console.log(postPayLoad)
-    console.log("🚀 ~ file: EditNote.js:25 ~ handleSubmit ~ putPayLoad", putPayLoad)
     const url = "/api/diary"
     const response = await fetch(url, {
       method: "PUT",
@@ -36,12 +37,13 @@ const EditNote = (props) => {
     //console.log("🚀 ~ file: index.js ~ line 49 ~ handleSubmit ~ result", result)
     if (response.status == "200") {
       toast({
-        title: "Transactions Edite",
+        title: "Transactions Edited",
         description: "We've updated the transaction",
         status: "success",
         duration: 9000,
         isClosable: true,
       })
+      setNoteToEdit(undefined) // to reset the call otherwise add notes showing edit of previously selected note.
     } else {
       toast({
         title: "Sorry",

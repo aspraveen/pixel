@@ -58,7 +58,6 @@ const handler = async (req, res) => {
         } catch (err) {
           res.status(400).json({ msg: "We failed to send message through sendgrid" })
         }
-        console.log(sendStatus.Response["statusCode"])
       } else {
         res.status(400).json({
           msg: `We failed to submit the message as score [${verifiedToken.score}] is low for Recaptcha`,

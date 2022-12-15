@@ -2,7 +2,6 @@ import { Box, useColorModeValue } from "@chakra-ui/react"
 import { useState } from "react"
 
 const TotalExpense = ({ totalExpense }) => {
-  console.log("🚀 ~ file: TotalExpense.js:6 ~ TotalExpense ~ totalExpense", totalExpense)
   return (
     <Box
       p={2}

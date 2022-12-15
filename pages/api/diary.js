@@ -68,16 +68,24 @@ const handler = async (req, res) => {
     if (!session) {
       res.status(401).json({ msg: "Not Authenticated" })
     } else {
-      const { userId } = session
       const reqPayLoad = req.body
-      const { inputField } = reqPayLoad
-      console.log("🚀 ~ file: diary.js:74 ~ handler ~ inputFields", inputField)
-
-      //add data to prisma
+      const { inputField: selectedNote } = reqPayLoad //destructuring inputField as selectedNote to simplify
+      //update data on prisma
       try {
         const editNote = await prisma.diary.update({
-          where: { id: inputField.id },
-          data: { title: inputField.title },
+          where: { id: selectedNote.id },
+          data: {
+            transDate: selectedNote.transDate,
+            title: selectedNote.title,
+            details: selectedNote.details,
+            amount: selectedNote.amount,
+            tags: selectedNote.tags,
+            places: selectedNote.places,
+            people: selectedNote.people,
+            category: selectedNote.category,
+            currency: selectedNote.currency,
+            paymentMethod: selectedNote.paymentMethod,
+          },
         })
         res.status(200).json({ msg: "ok" })
       } catch (err) {

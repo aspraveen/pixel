@@ -90,15 +90,6 @@ const Footer = () => {
               {currentYear}
             </Text>
           </Box>
-          <Box height={50} alignContent={"baseline"} alignItems={"flex-end"} display={"flex"}>
-            <Text fontSize={"xx-small"} fontStyle={"italic"}>
-              Protected by reCAPTCHA and the Google
-              <a href="https://policies.google.com/privacy">&nbsp;Privacy Policy&nbsp;</a>
-              and
-              <a href="https://policies.google.com/terms">&nbsp;Terms of Service&nbsp;</a>
-              apply.
-            </Text>
-          </Box>
         </Container>
       </Container>
     </>
