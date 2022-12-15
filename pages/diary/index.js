@@ -32,11 +32,17 @@ const index = () => {
   const handleSelectedDate = (dateFromCalenderComponent) => {
     setSelectedDate(dateFromCalenderComponent)
   }
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen: addIsOpen, onOpen: addOnOpen, onClose: addOnClose } = useDisclosure()
+  const { isOpen: editIsOpen, onOpen: editOnOpen, onClose: editOnClose } = useDisclosure()
   const [totalExpense, setTotalExpense] = useState()
   const [noteToEdit, setNoteToEdit] = useState()
+  const closeModal = (modal) => {
+    if (modal == "add") {
+      addOnClose()
+    }
+  }
   useEffect(() => {
-    noteToEdit != undefined && onOpen()
+    noteToEdit != undefined ? editOnOpen() : editOnClose()
   }, [noteToEdit])
   return (
     <NoteContext.Provider value={[noteToEdit, setNoteToEdit]}>
@@ -58,7 +64,7 @@ const index = () => {
             <Display selectedDate={selectedDate} setTotalExpense={setTotalExpense} />
             <Box>
               <Button
-                onClick={onOpen}
+                onClick={addOnOpen}
                 leftIcon={<FaPlus />}
                 colorScheme={useColorModeValue("orange", "gray")}
                 size={"lg"}
@@ -69,17 +75,26 @@ const index = () => {
               <TotalExpense totalExpense={totalExpense} />
             </Box>
           </Flex>
-          <Modal isOpen={isOpen} onClose={onClose} size="full">
+          {/* modal for adding */}
+          <Modal isOpen={addIsOpen} onClose={addOnClose} size="full">
             <ModalOverlay />
             <ModalContent>
-              <ModalHeader>{noteToEdit != undefined ? "Edit Note" : "Add Notes"}</ModalHeader>
+              <ModalHeader>Add Notes</ModalHeader>
               <ModalCloseButton />
               <ModalBody>
-                {noteToEdit != undefined ? (
-                  <EditNote note={noteToEdit} />
-                ) : (
-                  <Addnotes selectedDate={selectedDate} />
-                )}
+                <Addnotes selectedDate={selectedDate} closeModal={closeModal} />
+              </ModalBody>
+              <ModalFooter>Click the + button for adding multiple notes.</ModalFooter>
+            </ModalContent>
+          </Modal>
+          {/* modal for editing */}
+          <Modal isOpen={editIsOpen} onClose={editOnClose} size="full">
+            <ModalOverlay />
+            <ModalContent>
+              <ModalHeader>Edit Note</ModalHeader>
+              <ModalCloseButton />
+              <ModalBody>
+                <EditNote note={noteToEdit} />
               </ModalBody>
               <ModalFooter>Click the + button for adding multiple notes.</ModalFooter>
             </ModalContent>

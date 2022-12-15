@@ -38,31 +38,46 @@ const Addnotes = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const postPayLoad = {
-      transDate,
-      inputFields,
-    }
-    //console.log(postPayLoad)
-    const url = "/api/diary"
-    const response = await fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(postPayLoad),
-    })
-    const result = await response.json()
-    //console.log("🚀 ~ file: index.js ~ line 49 ~ handleSubmit ~ result", result)
-    if (response.status == "200") {
-      toast({
-        title: "Transactions Added",
-        description: "We've created the transactions",
-        status: "success",
-        duration: 9000,
-        isClosable: true,
+    let isValid = true //need to handle
+    //check all data array
+
+    //validate title and details
+    if (isValid) {
+      const postPayLoad = {
+        transDate,
+        inputFields,
+      }
+      //console.log(postPayLoad)
+      const url = "/api/diary"
+      const response = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(postPayLoad),
       })
+      const result = await response.json()
+      //console.log("🚀 ~ file: index.js ~ line 49 ~ handleSubmit ~ result", result)
+      if (response.status == "200") {
+        toast({
+          title: "Transactions Added",
+          description: "We've created the transactions",
+          status: "success",
+          duration: 9000,
+          isClosable: true,
+        })
+        props.closeModal("add")
+      } else {
+        toast({
+          title: "Sorry",
+          description: result.msg,
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+        })
+      }
     } else {
       toast({
         title: "Sorry",
-        description: result.msg,
+        description: "Title & Description required",
         status: "error",
         duration: 9000,
         isClosable: true,
