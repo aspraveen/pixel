@@ -21,9 +21,8 @@ import { unstable_getServerSession } from "next-auth"
 
 const { log } = console
 
-const Contents = ({ categories }) => {
+const Contents = ({ categories, session }) => {
   const router = useRouter()
-  const session = useSession()
   const [title, setTitle] = useState()
   const [slug, setSlug] = useState()
   const [details, setDetails] = useState()
@@ -64,10 +63,8 @@ const Contents = ({ categories }) => {
     }
   }
 
-  if (session.status == "authenticated") {
-    const {
-      data: { isAdmin },
-    } = session
+  if (session) {
+    const { isAdmin } = session
     if (isAdmin) {
       return (
         <Container maxW="container.xl">
@@ -167,7 +164,7 @@ const Contents = ({ categories }) => {
   }
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
   const session = await unstable_getServerSession(context.req, context.res, authOptions)
   if (!session) {
     return {
