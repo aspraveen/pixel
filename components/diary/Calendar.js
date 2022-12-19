@@ -1,4 +1,4 @@
-import { Box, Flex, Select, Wrap, useColorModeValue } from "@chakra-ui/react"
+import { Box, Flex, Select, Wrap, useColorModeValue, Grid, GridItem } from "@chakra-ui/react"
 import { useState, useEffect } from "react"
 
 const Days = (props) => {
@@ -7,9 +7,12 @@ const Days = (props) => {
   }
 
   const days = []
-  for (let i = 1; i <= 31; i++) {
+  const startOfMonth = new Date(props.year, props.month - 1).getDay()
+  const numOfDays = 32 - new Date(props.year, props.month - 1, 32).getDate()
+
+  for (let i = 1; i <= numOfDays; i++) {
     days.push(
-      <Box
+      <GridItem
         fontSize={"xx-small"}
         p={1}
         w={5}
@@ -24,10 +27,21 @@ const Days = (props) => {
         }
       >
         {i}
-      </Box>,
+      </GridItem>,
     )
   }
-  return <Wrap>{days}</Wrap>
+  return (
+    <Grid templateColumns="repeat(7,1fr)" gap={1}>
+      <GridItem fontSize={"xx-small"}>Sun</GridItem>
+      <GridItem fontSize={"xx-small"}>Mon</GridItem>
+      <GridItem fontSize={"xx-small"}>Tue</GridItem>
+      <GridItem fontSize={"xx-small"}>Wed</GridItem>
+      <GridItem fontSize={"xx-small"}>Thu</GridItem>
+      <GridItem fontSize={"xx-small"}>Fri</GridItem>
+      <GridItem fontSize={"xx-small"}>Sat</GridItem>
+      {days}
+    </Grid>
+  )
 }
 
 const Months = (props) => {
@@ -155,7 +169,12 @@ const Calendar = (props) => {
         <Years onChange={handleYearChange} default={selectedYear} />
         <Months onChange={handleMonthChange} default={selectedMonth} />
       </Flex>
-      <Days onChange={handleDayChange} default={selectedDay} />
+      <Days
+        onChange={handleDayChange}
+        default={selectedDay}
+        year={selectedYear}
+        month={selectedMonth}
+      />
     </Box>
   )
 }
