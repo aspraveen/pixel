@@ -1,15 +1,29 @@
-import { Box, Flex, Select, Wrap, useColorModeValue, Grid, GridItem } from "@chakra-ui/react"
+import { Box, Flex, Select, useColorModeValue, Grid, GridItem } from "@chakra-ui/react"
 import { useState, useEffect } from "react"
 
 const Days = (props) => {
   const handleClick = (e) => {
     props.onChange(e.target.getAttribute("data-day"))
   }
-
   const days = []
   const startOfMonth = new Date(props.year, props.month - 1).getDay()
-  const numOfDays = 32 - new Date(props.year, props.month - 1, 32).getDate()
-
+  const numOfDays = 32 - new Date(props.year, props.month - 1, 32).getDate() //for eg if feb 2019, 32nd day will be 4th mar - so 32-4=28
+  for (let j = 1; j <= startOfMonth; j++) {
+    days.push(
+      <GridItem
+        fontSize={"xx-small"}
+        p={1}
+        w={5}
+        alignItems={"center"}
+        color={useColorModeValue("gray.600", "gray.100")}
+        onClick={(e) => handleClick(e)}
+        key={"j" + j}
+        _hover={{ backgroundColor: "orange.600", cursor: "pointer" }}
+      >
+        &nbsp;
+      </GridItem>,
+    )
+  }
   for (let i = 1; i <= numOfDays; i++) {
     days.push(
       <GridItem
@@ -20,7 +34,7 @@ const Days = (props) => {
         color={useColorModeValue("gray.600", "gray.100")}
         onClick={(e) => handleClick(e)}
         data-day={i}
-        key={i}
+        key={"i" + i}
         _hover={{ backgroundColor: "orange.600", cursor: "pointer" }}
         backgroundColor={
           i == props.default ? "orange.400" : useColorModeValue("gray.300", "gray.600")
@@ -37,8 +51,12 @@ const Days = (props) => {
       <GridItem fontSize={"xx-small"}>Tue</GridItem>
       <GridItem fontSize={"xx-small"}>Wed</GridItem>
       <GridItem fontSize={"xx-small"}>Thu</GridItem>
-      <GridItem fontSize={"xx-small"}>Fri</GridItem>
-      <GridItem fontSize={"xx-small"}>Sat</GridItem>
+      <GridItem fontSize={"xx-small"} color={"orange.400"}>
+        Fri
+      </GridItem>
+      <GridItem fontSize={"xx-small"} color={"orange.400"}>
+        Sat
+      </GridItem>
       {days}
     </Grid>
   )
@@ -75,11 +93,13 @@ const Months = (props) => {
     >
       {monthValues.map((value, key) =>
         key + 1 == props.default ? (
-          <option name={key} selected>
+          <option name={key} selected key={value}>
             {value}
           </option>
         ) : (
-          <option name={key}>{value}</option>
+          <option name={key} key={value}>
+            {value}
+          </option>
         ),
       )}
     </Select>
@@ -94,14 +114,16 @@ const Years = (props) => {
 
   const years = []
 
-  for (let i = 2000; i <= currentYear; i++) {
+  for (let i = 2000; i <= currentYear + 1; i++) {
     years.push(
       i == props.default ? (
-        <option value={i} selected>
+        <option value={i} selected key={i}>
           {i}
         </option>
       ) : (
-        <option value={i}>{i}</option>
+        <option value={i} key={i}>
+          {i}
+        </option>
       ),
     )
   }
@@ -157,7 +179,7 @@ const Calendar = (props) => {
   return (
     <Box
       width={"220px"}
-      height={"220px"}
+      height={"240px"}
       boxShadow={"base"}
       borderColor={useColorModeValue("gray.300", "gray.600")}
       borderWidth={"1px"}

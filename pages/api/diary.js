@@ -28,9 +28,7 @@ const handler = async (req, res) => {
       }
     }
   } else if (req.method === "GET") {
-    //console.log("🚀 ~ file: diary.js:32 ~ handler ~ req", req)
     const { type, selectedDate, note } = req.query
-    //console.log("🚀 ~ file: diary.js:34 ~ handler ~ selectedDate", selectedDate)
     if (!session) {
       res.status(401).json({ msg: "Not Authenticated" })
     } else {
@@ -86,6 +84,24 @@ const handler = async (req, res) => {
             currency: selectedNote.currency,
             paymentMethod: selectedNote.paymentMethod,
           },
+        })
+        res.status(200).json({ msg: "ok" })
+      } catch (err) {
+        console.log(err)
+        res.status(400).json({ msg: err })
+      }
+    }
+  } else if (req.method == "DELETE") {
+    if (!session) {
+      res.status(401).json({ msg: "Not Authenticated" })
+    } else {
+      let { userId } = session
+      const reqPayLoad = req.body
+      const { id } = reqPayLoad
+      //delete data on prisma
+      try {
+        const deleteNote = await prisma.diary.deleteMany({
+          where: { id, userId },
         })
         res.status(200).json({ msg: "ok" })
       } catch (err) {

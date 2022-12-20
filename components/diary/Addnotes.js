@@ -172,6 +172,10 @@ const Addnotes = (props) => {
                   <option>CrediMax Prepaid</option>
                   <option>Federal</option>
                   <option>ICICI</option>
+                  <option>Cash</option>
+                  <option>STC Pay</option>
+                  <option>Beyon</option>
+                  <option>ILA Card</option>
                 </Select>
                 <Input
                   name="tags"
