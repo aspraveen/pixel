@@ -34,15 +34,23 @@ export default function PostDetails({ post, categories }) {
 
   const fetcher = async () => {
     const response = await fetch(`/api/post-swr?postId=${post.id}`)
+    if (!response.ok) {
+      const error = new Error("Failed reading data")
+      throw error
+    }
     const data = await response.json()
     return data
   }
   //record the count
   useEffect(() => {
     const asyncFn = async () => {
-      const updateView = await fetch(`/api/post-update-fields?postId=${post.id}&fieldType=view`)
-      const updateViewResult = await updateView.json()
-      console.log(updateViewResult)
+      try {
+        const updateView = await fetch(`/api/post-update-fields?postId=${post.id}&fieldType=view`)
+        const updateViewResult = await updateView.json()
+        console.log(updateViewResult)
+      } catch (ex) {
+        console.log(updateViewResult)
+      }
     }
     asyncFn()
   }, [])
@@ -53,7 +61,7 @@ export default function PostDetails({ post, categories }) {
     console.log(updateLikeResult)
   }
 
-  const { data, error } = useSWR("post", fetcher, { fallbackData: post })
+  const { data, error } = useSWR("post", fetcher, { fallbackData: post, keepPreviousData: true })
   if (error) {
     return (
       <Container maxW="container.xl">

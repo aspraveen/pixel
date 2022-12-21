@@ -61,6 +61,7 @@ const handler = async (req, res) => {
       }
     } catch (err) {
       console.log(err)
+      res.status(200).json({ msg: "couldn't find database" })
     }
   } else if (field == "like") {
     //check if recently recorded
