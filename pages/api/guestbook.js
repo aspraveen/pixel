@@ -30,12 +30,13 @@ const handler = async (req, res) => {
       const { userId } = session
       const reqPayLoad = req.body
       const { message, token } = reqPayLoad
+      let score = "0"
       //verify token
-      const verifiedToken = await verifyCaptchaToken(token)
-      let score = 0
-      if (verifiedToken.success) {
-        score = verifiedToken.score.toString()
-      }
+      //const verifiedToken = await verifyCaptchaToken(token)
+      //
+      // if (verifiedToken.success) {
+      // score = verifiedToken.score.toString()
+      // }
       try {
         //add entry to guest book
         const addComment = await prisma.guestBook.create({

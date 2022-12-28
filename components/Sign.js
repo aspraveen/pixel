@@ -40,7 +40,7 @@ const Sign = () => {
       setAlertMsg("Valid message is required (min 10 chars)")
       return false
     }
-    const token = await executeRecaptcha()
+    const token = 0 //await executeRecaptcha() -- not using this for now
     const postPayLoad = { message, token }
     try {
       const url = "/api/guestbook"
