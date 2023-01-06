@@ -60,8 +60,16 @@ const index = () => {
             justifyContent={"flex-start"}
           >
             <Calendar onClick={handleSelectedDate} />
+            <Box
+              height={"90vh"}
+              overflow={"auto"}
+              scrollBehavior={"auto"}
+              p={5}
+              width={{ base: "sm", md: "md", lg: "lg", xl: "820px" }}
+            >
+              <Display selectedDate={selectedDate} setTotalExpense={setTotalExpense} />
+            </Box>
 
-            <Display selectedDate={selectedDate} setTotalExpense={setTotalExpense} />
             <Box>
               <Button
                 onClick={addOnOpen}

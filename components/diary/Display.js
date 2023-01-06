@@ -1,4 +1,13 @@
-import { Box, VStack, Flex, useColorModeValue, Heading, IconButton } from "@chakra-ui/react"
+import {
+  Box,
+  VStack,
+  Flex,
+  useColorModeValue,
+  Heading,
+  IconButton,
+  Stack,
+  Skeleton,
+} from "@chakra-ui/react"
 import { FaEdit } from "react-icons/fa"
 import { useContext } from "react"
 import useSWR from "swr"
@@ -29,12 +38,12 @@ const DisplayDiary = (props) => {
   const diaryDate = new Date(props.diaryDate).toDateString()
 
   return (
-    <Box height={"90vh"} overflow={"auto"} scrollBehavior={"auto"} p={5}>
+    <Box>
       <VStack alignItems="flex-start">
         <Heading pl={2} color={"gray.500"} as="h4" size={"lg"}>
           {diaryDate}
         </Heading>
-        <Box width={{ base: "sm", md: "md", lg: "lg", xl: "820px" }}>
+        <Box>
           {data.map((entry, index) => (
             <Box
               key={index}
@@ -86,7 +95,15 @@ const Display = (props) => {
       return <Box>{error.message}</Box>
     }
     if (!data) {
-      return <Box> Loading </Box>
+      return (
+        <Box>
+          <Stack>
+            <Skeleton height="20px" />
+            <Skeleton height="20px" />
+            <Skeleton height="20px" />
+          </Stack>
+        </Box>
+      )
     }
     let totalExpense = data.reduce((total, item) => total + Number(item.amount), 0).toFixed(3)
     props.setTotalExpense(totalExpense)
