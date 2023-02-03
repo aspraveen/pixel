@@ -1,13 +1,14 @@
 import { Flex, Box, Heading, useColorModeValue, Link, Text } from "@chakra-ui/react"
 import NextImage from "next/image"
 import { motion } from "framer-motion"
-import create from "zustand"
-import { persist } from "zustand/middleware"
+//import create from "zustand"
+//import { persist } from "zustand/middleware"
+import { Suspense } from "react"
 import Spotify from "./Spotify"
 
 const Hero = () => {
   const gradient = useColorModeValue("linear(to-r,orange,red )", "linear(to-r, #ff7b00, #ecca2f )")
-  const useStore = create(
+  /*const useStore = create(
     persist(
       (set) => ({
         randomNumber: Math.floor(Math.random() * 8 + 1),
@@ -19,6 +20,8 @@ const Hero = () => {
     ),
   )
   const randomNumber = useStore((state) => state.randomNumber)
+*/
+  const randomNumber = 1
 
   const MotionBox = motion(Box)
   return (
@@ -85,7 +88,9 @@ const Hero = () => {
           height={400}
           alt={"praveen avatar"}
         ></NextImage>
-        <Spotify />
+        <Suspense fallback={<Text>Loading Spotify</Text>}>
+          <Spotify />
+        </Suspense>
       </Box>
     </Flex>
   )

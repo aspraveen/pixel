@@ -1,11 +1,11 @@
 import { DeleteObjectCommand, S3 } from "@aws-sdk/client-s3"
 import { createPresignedPost } from "@aws-sdk/s3-presigned-post"
 import { prisma } from "../../../util/db"
-import { unstable_getServerSession } from "next-auth"
+import { getServerSession } from "next-auth"
 import { authOptions } from "../auth/[...nextauth]"
 
 const handler = async (req, res) => {
-  const session = await unstable_getServerSession(req, res, authOptions)
+  const session = await getServerSession(req, res, authOptions)
   if (session) {
     const { userId } = session
     if (req.query.action == "upload") {

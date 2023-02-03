@@ -12,7 +12,7 @@ import {
   Button,
   Flex,
 } from "@chakra-ui/react"
-import { unstable_getServerSession } from "next-auth"
+import { getServerSession } from "next-auth"
 import Link from "next/link"
 import Header from "../../components/Header"
 import { prisma } from "../../util/db"
@@ -64,7 +64,7 @@ const listContents = ({ posts, session }) => {
 export default listContents
 
 export async function getServerSideProps(context) {
-  const session = await unstable_getServerSession(context.req, context.res, authOptions)
+  const session = await getServerSession(context.req, context.res, authOptions)
   if (!session) {
     return {
       redirect: {

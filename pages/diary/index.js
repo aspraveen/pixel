@@ -1,5 +1,5 @@
 import { authOptions } from "../api/auth/[...nextauth]"
-import { unstable_getServerSession } from "next-auth"
+import { getServerSession } from "next-auth"
 import {
   Modal,
   ModalOverlay,
@@ -114,7 +114,7 @@ const index = () => {
 }
 export default index
 export async function getServerSideProps(context) {
-  const session = await unstable_getServerSession(context.req, context.res, authOptions)
+  const session = await getServerSession(context.req, context.res, authOptions)
   if (!session) {
     return {
       redirect: {

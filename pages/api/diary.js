@@ -1,8 +1,8 @@
 import { authOptions } from "/pages/api/auth/[...nextauth]"
-import { unstable_getServerSession } from "next-auth"
+import { getServerSession } from "next-auth"
 import { prisma } from "../../util/db"
 const handler = async (req, res) => {
-  const session = await unstable_getServerSession(req, res, authOptions)
+  const session = await getServerSession(req, res, authOptions)
   if (req.method === "POST") {
     if (!session) {
       res.status(401).json({ msg: "Not Authenticated" })

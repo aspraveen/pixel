@@ -5,7 +5,7 @@ import { RichTextBlock } from "../../../components/manageit/RichTextBlock"
 import { Input, Button, Textarea, RadioGroup, Radio, Stack, Select } from "@chakra-ui/react"
 import { useEffect, useState } from "react"
 import { useRouter } from "next/router"
-import { unstable_getServerSession } from "next-auth"
+import { getServerSession } from "next-auth"
 import { authOptions } from "../../api/auth/[...nextauth]"
 const editContent = ({ post, categories }) => {
   const router = useRouter()
@@ -144,7 +144,7 @@ const editContent = ({ post, categories }) => {
   )
 }
 export async function getServerSideProps({ req, res, params }) {
-  const session = await unstable_getServerSession(req, res, authOptions)
+  const session = await getServerSession(req, res, authOptions)
   if (!session) {
     return {
       redirect: {

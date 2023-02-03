@@ -1,5 +1,5 @@
 import { authOptions } from "../api/auth/[...nextauth]"
-import { unstable_getServerSession } from "next-auth"
+import { getServerSession } from "next-auth"
 import { Container } from "@chakra-ui/react"
 import Header from "../../components/Header"
 import Dashboard from "../../components/manageit/Dashboard"
@@ -13,7 +13,7 @@ const Index = () => {
 }
 export default Index
 export async function getServerSideProps(context) {
-  const session = await unstable_getServerSession(context.req, context.res, authOptions)
+  const session = await getServerSession(context.req, context.res, authOptions)
   if (!session) {
     return {
       redirect: {

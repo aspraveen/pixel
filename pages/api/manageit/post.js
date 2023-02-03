@@ -1,9 +1,9 @@
 import { authOptions } from "/pages/api/auth/[...nextauth]"
-import { unstable_getServerSession } from "next-auth"
+import { getServerSession } from "next-auth"
 import { prisma } from "../../../util/db"
 
 const post = async (req, res) => {
-  const session = await unstable_getServerSession(req, res, authOptions)
+  const session = await getServerSession(req, res, authOptions)
   if (session) {
     const { userId } = session
     const reqPayLoad = JSON.parse(req.body)

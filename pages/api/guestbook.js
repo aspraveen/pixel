@@ -1,5 +1,5 @@
 import { authOptions } from "/pages/api/auth/[...nextauth]"
-import { unstable_getServerSession } from "next-auth"
+import { getServerSession } from "next-auth"
 import { prisma } from "../../util/db"
 import sg from "@sendgrid/mail"
 const verifyCaptchaToken = async (token) => {
@@ -21,7 +21,7 @@ const verifyCaptchaToken = async (token) => {
   return result
 }
 const handler = async (req, res) => {
-  const session = await unstable_getServerSession(req, res, authOptions)
+  const session = await getServerSession(req, res, authOptions)
   const ip = req.headers["x-real-ip"] || req.connection.remoteAddress
   if (req.method === "POST") {
     if (!session) {

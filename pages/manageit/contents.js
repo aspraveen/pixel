@@ -17,7 +17,7 @@ import { useEffect, useState } from "react"
 import { useRouter } from "next/router"
 import { prisma } from "../../util/db"
 import { authOptions } from "../api/auth/[...nextauth]"
-import { unstable_getServerSession } from "next-auth"
+import { getServerSession } from "next-auth"
 
 const { log } = console
 
@@ -165,7 +165,7 @@ const Contents = ({ categories, session }) => {
 }
 
 export async function getServerSideProps(context) {
-  const session = await unstable_getServerSession(context.req, context.res, authOptions)
+  const session = await getServerSession(context.req, context.res, authOptions)
   if (!session) {
     return {
       redirect: {
