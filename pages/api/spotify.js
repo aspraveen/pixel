@@ -74,5 +74,4 @@ export default async (req, res) => {
     title,
     audioType,
   })
-  return res.status(200)
 }

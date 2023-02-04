@@ -43,7 +43,7 @@ const handler = async (req, res) => {
           new Date(selectedDate).getDate()
         const formattedDate = `${selectedDate}T00:00:00.000Z`
 
-        console.log("🚀 ~ file: diary.js:46 ~ handler ~ transDate", transDate)
+        //console.log("🚀 ~ file: diary.js:46 ~ handler ~ transDate", transDate)
         //const formattedDate = `2016-11-01T00:00:00.000Z`
         /*const data =
         await prisma.$queryRaw`SELECT * FROM pixel."Diary" where "transDate"='2022-11-26'`*/

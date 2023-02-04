@@ -3,7 +3,6 @@ import NextImage from "next/image"
 import { motion } from "framer-motion"
 //import create from "zustand"
 //import { persist } from "zustand/middleware"
-import { Suspense } from "react"
 import Spotify from "./Spotify"
 
 const Hero = () => {
@@ -88,9 +87,7 @@ const Hero = () => {
           height={400}
           alt={"praveen avatar"}
         ></NextImage>
-        <Suspense fallback={<Text>Loading Spotify</Text>}>
-          <Spotify />
-        </Suspense>
+        <Spotify />
       </Box>
     </Flex>
   )
