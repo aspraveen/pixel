@@ -99,11 +99,26 @@ const handler = async (req, res) => {
       const reqPayLoad = req.body
       const { id } = reqPayLoad
       //delete data on prisma
+      //check if this transaction is owned by user
+      //this was added/changed on 4th Feb as prima delete all records for user in diary when the note id was null
       try {
-        const deleteNote = await prisma.diary.deleteMany({
-          where: { id, userId },
+        const noteToDelete = await prisma.diary.findUnique({
+          where: { id },
         })
-        res.status(200).json({ msg: "ok" })
+
+        if (noteToDelete.userId == userId) {
+          try {
+            const deleteNote = await prisma.diary.delete({
+              where: { id },
+            })
+            res.status(200).json({ msg: "ok" })
+          } catch (err) {
+            console.log(err)
+            res.status(400).json({ msg: err })
+          }
+        } else {
+          res.status(400).json({ msg: "Permission Denied" })
+        }
       } catch (err) {
         console.log(err)
         res.status(400).json({ msg: err })

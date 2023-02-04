@@ -8,7 +8,7 @@ import {
   Stack,
   Skeleton,
 } from "@chakra-ui/react"
-import { FaEdit } from "react-icons/fa"
+import { FaEdit, FaSmileWink } from "react-icons/fa"
 import { useContext } from "react"
 import useSWR from "swr"
 import { NoteContext } from "../../pages/diary"
@@ -74,6 +74,17 @@ const DisplayDiary = (props) => {
               </Box>
             </Box>
           ))}
+          {console.log(Object.keys(data).length)}
+          <Box display={Object.keys(data).length == 0 ? "block" : "none"} p={10}>
+            <Box fontSize={"xl"} color={useColorModeValue("orange.500", "orange.400")} mt={5}>
+              <Flex>
+                <FaSmileWink />
+                <Box fontSize={"sm"} ml={2}>
+                  No notes for this day!
+                </Box>
+              </Flex>
+            </Box>
+          </Box>
         </Box>
       </VStack>
     </Box>
