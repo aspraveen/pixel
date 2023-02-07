@@ -3,7 +3,7 @@ import NextImage from "next/image"
 import { motion } from "framer-motion"
 //import create from "zustand"
 //import { persist } from "zustand/middleware"
-import Spotify from "./Spotify"
+//import Spotify from "./Spotify"
 
 const Hero = () => {
   const gradient = useColorModeValue("linear(to-r,orange,red )", "linear(to-r, #ff7b00, #ecca2f )")
@@ -87,7 +87,6 @@ const Hero = () => {
           height={400}
           alt={"praveen avatar"}
         ></NextImage>
-        <Spotify />
       </Box>
     </Flex>
   )
