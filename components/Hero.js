@@ -1,9 +1,9 @@
 import { Flex, Box, Heading, useColorModeValue, Link, Text } from "@chakra-ui/react"
 import NextImage from "next/image"
-import { motion } from "framer-motion"
+//import { motion } from "framer-motion"
 //import create from "zustand"
 //import { persist } from "zustand/middleware"
-//import Spotify from "./Spotify"
+import Spotify from "./Spotify"
 
 const Hero = () => {
   const gradient = useColorModeValue("linear(to-r,orange,red )", "linear(to-r, #ff7b00, #ecca2f )")
@@ -22,7 +22,7 @@ const Hero = () => {
 */
   const randomNumber = 1
 
-  const MotionBox = motion(Box)
+  //const MotionBox = motion(Box)
   return (
     <Flex
       alignItems={"center"}
@@ -34,7 +34,7 @@ const Hero = () => {
       }}
       mb={5}
     >
-      <MotionBox
+      <Box
         width={{ base: "100%", xl: "60%" }}
         transition={{ ease: "easeOut", duration: 2 }}
         whileHover={{ y: -10 }}
@@ -79,7 +79,7 @@ const Hero = () => {
             &nbsp;for the tips and tricks I pick up while learning new technologies.
           </Box>
         </Box>
-      </MotionBox>
+      </Box>
       <Box>
         <NextImage
           src={`/assets/face${randomNumber}.png`}
@@ -87,6 +87,7 @@ const Hero = () => {
           height={400}
           alt={"praveen avatar"}
         ></NextImage>
+        <Spotify />
       </Box>
     </Flex>
   )
