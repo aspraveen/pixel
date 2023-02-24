@@ -1,14 +1,4 @@
-import {
-  Container,
-  Box,
-  Text,
-  Highlight,
-  SimpleGrid,
-  Heading,
-  Badge,
-  List,
-  ListItem,
-} from "@chakra-ui/react"
+import { Container, Box } from "@chakra-ui/react"
 import Header from "../components/Header"
 import Footer from "../components/Footer"
 import Seo from "../components/Seo"
