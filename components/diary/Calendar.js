@@ -8,7 +8,7 @@ const Days = (props) => {
   const days = []
   const startOfMonth = new Date(props.year, props.month - 1).getDay()
   //const numOfDays = 32 - new Date(props.year, props.month - 1, 32).getDate() //for eg if feb 2019, 32nd day will be 4th mar - so 32-4=28
-  const numOfDays = new Date(props.year, props.month, 0).getDate()
+  const numOfDays = new Date(props.year, props.month, 0).getDate() // formula is new Date(year,month+1,0).getDate()
   for (let j = 1; j <= startOfMonth; j++) {
     days.push(
       <GridItem

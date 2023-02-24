@@ -150,7 +150,6 @@ const Navigation = () => {
           lg: 0.95,
           xl: 0.95,
         }}
-        backgroundImage={"url('/assets/vvvortex.svg')"}
         backgroundSize={[2200, 3500]}
         backgroundRepeat={"no-repeat"}
         backgroundPosition={(-500, -420)}
@@ -161,14 +160,10 @@ const Navigation = () => {
             <LoginStatus />
           </center>
         </Box>
-        <SimpleGrid columns={{ base: 2, md: 3, lg: 3 }} spacing={10} py={5} px={10}>
-          <Box height="80px" p={2} boxShadow={"base"} borderWidth="1px">
+        <SimpleGrid columns={{ base: 1, md: 1, lg: 1 }} spacing={10} py={5} px={10}>
+          <Box height="30px" p={2}>
             <NextLink href={"/"}>
               <Text
-                p={currentPath == "/" ? 1 : 0}
-                pl={currentPath == "/" ? 2 : 0}
-                pr={currentPath == "/" ? 2 : 0}
-                rounded="md"
                 textDecoration={currentPath == "/" ? "overline" : "none"}
                 textDecorationThickness={3}
                 textDecorationColor={linkUpperLineColor}
@@ -178,13 +173,9 @@ const Navigation = () => {
             </NextLink>
           </Box>
 
-          <Box height="80px" p={2} boxShadow={"base"} borderWidth="1px">
+          <Box height="30px" p={2}>
             <NextLink href={"/about"}>
               <Text
-                p={currentPath == "/about" ? 1 : 0}
-                pl={currentPath == "/about" ? 2 : 0}
-                pr={currentPath == "/about" ? 2 : 0}
-                rounded="md"
                 textDecoration={currentPath == "/about" ? "overline" : "none"}
                 textDecorationThickness={3}
                 textDecorationColor={linkUpperLineColor}
@@ -194,13 +185,9 @@ const Navigation = () => {
             </NextLink>
           </Box>
 
-          <Box height="80px" p={2} boxShadow={"base"} borderWidth="1px">
+          <Box height="30px" p={2}>
             <NextLink href={"/uses"}>
               <Text
-                p={currentPath == "/uses" ? 1 : 0}
-                pl={currentPath == "/uses" ? 2 : 0}
-                pr={currentPath == "/uses" ? 2 : 0}
-                rounded="md"
                 textDecoration={currentPath == "/uses" ? "overline" : "none"}
                 textDecorationThickness={3}
                 textDecorationColor={linkUpperLineColor}
@@ -210,13 +197,9 @@ const Navigation = () => {
             </NextLink>
           </Box>
 
-          <Box height="80px" p={2} boxShadow={"base"} borderWidth="1px">
+          <Box height="30px" p={2}>
             <NextLink href={"/blog"}>
               <Text
-                p={currentPath == "/blog" || currentPath == "/blog/[slug]" ? 1 : 0}
-                pl={currentPath == "/blog" || currentPath == "/blog/[slug]" ? 2 : 0}
-                pr={currentPath == "/blog" || currentPath == "/blog/[slug]" ? 2 : 0}
-                rounded="md"
                 textDecoration={
                   currentPath == "/blog" || currentPath == "/blog/[slug]" ? "overline" : "none"
                 }
@@ -228,13 +211,9 @@ const Navigation = () => {
             </NextLink>
           </Box>
 
-          <Box height="80px" p={2} boxShadow={"base"} borderWidth="1px">
+          <Box height="30px" p={2}>
             <NextLink href={"/contact"}>
               <Text
-                p={currentPath == "/contact" ? 1 : 0}
-                pl={currentPath == "/contact" ? 2 : 0}
-                pr={currentPath == "/contact" ? 2 : 0}
-                rounded="md"
                 textDecoration={currentPath == "/contact" ? "overline" : "none"}
                 textDecorationThickness={3}
                 textDecorationColor={linkUpperLineColor}
@@ -244,14 +223,11 @@ const Navigation = () => {
             </NextLink>
           </Box>
 
-          <Box height="80px" p={2} borderWidth="1px" boxShadow={"base"}>
+          <Box height="30px" p={2}>
             <NextLink href={"/guests"}>
               <Text
-                p={currentPath == "/guests" ? 1 : 0}
-                pl={currentPath == "/guests" ? 2 : 0}
-                pr={currentPath == "/guests" ? 2 : 0}
-                rounded="md"
                 textDecoration={currentPath == "/guests" ? "overline" : "none"}
+                textDecorationThickness={3}
                 textDecorationColor={linkUpperLineColor}
               >
                 Guests
