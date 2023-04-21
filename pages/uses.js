@@ -33,7 +33,7 @@ const Uses = () => {
             (ORM), Neon (Serverless Postgres), Next Auth ( for authentication) and hosted proudly on
             Vercel.
           </Box>
-          <SimpleGrid columns={{ base: 2, md: 6, lg: 6 }} gap={5} p={5}>
+          <SimpleGrid columns={{ base: 2, md: 6, lg: 6 }} gap={5} p={5} spacingY={50}>
             <Image
               src={useColorModeValue("/chakra-light.svg", "/chakra-dark.svg")}
               width={100}
@@ -67,7 +67,7 @@ const Uses = () => {
             />
           </SimpleGrid>
         </Box>
-        <Divider py={5} />
+        <Divider py={2} />
         <Box padding={5}>
           As a software professional, I use a lot of technologies and gadgets. After getting
           inspiration from &nbsp;
@@ -98,8 +98,7 @@ const Uses = () => {
               </ListItem>
               <ListItem>I am using PHP Storm for php/ Laravel development.</ListItem>
               <ListItem> iTerm </ListItem>
-              <ListItem> Hyper Terminal </ListItem>
-              <ListItem>Recently I came across Warp Terminal and features are amazing.</ListItem>
+              <ListItem>Warp Terminal</ListItem>
             </OrderedList>
           </Box>
 
