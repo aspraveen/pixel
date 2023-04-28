@@ -59,15 +59,12 @@ const BlogPostsByCategory = ({ posts, category, categories }) => {
               <Heading as="h2" fontSize={["xl", "xl", "2xl"]} mt={3}>
                 {post.title}
               </Heading>
-
               <Text fontSize={["sm", "lg", "lg"]}>{post.intro}</Text>
-
               <NextLink href={`/blog/${post.slug}`} passHref legacyBehavior>
                 <Button size="xs" rightIcon={<HiArrowRight />} variant="outline" mr={[2, 5, 5]}>
                   Read More
                 </Button>
               </NextLink>
-
               <Flex gap={2} mt={2}>
                 <Badge colorScheme={"orange"}>{post.views} Views</Badge>
                 <Badge>{post.likes} Likes</Badge>
@@ -95,12 +92,14 @@ const BlogPostsByCategory = ({ posts, category, categories }) => {
           </Heading>
           <Wrap spacing={"2px"} align="center">
             {categories.map((item) => (
-              <WrapItem>
+              <WrapItem key={item.id}>
                 <Badge
                   variant="outline"
                   colorScheme={item.name === category ? "orange" : "gray"}
                   mx={1}
                   my={1}
+                  fontFamily={"montserrat"}
+                  fontWeight={"hairline"}
                 >
                   <Link href={`/blog/category/${item.name}`}>{item.name}</Link>
                 </Badge>
@@ -137,6 +136,7 @@ export async function getServerSideProps({ params, res }) {
       views: true,
       likes: true,
       slug: true,
+      id: true,
       user: {
         select: {
           name: true,
@@ -145,6 +145,7 @@ export async function getServerSideProps({ params, res }) {
       category: {
         select: {
           name: true,
+          id: true,
         },
       },
     },

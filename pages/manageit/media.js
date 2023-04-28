@@ -1,4 +1,4 @@
-import { Container, Text, Flex, Button } from "@chakra-ui/react"
+import { Container, Flex, Button } from "@chakra-ui/react"
 import Header from "../../components/Header"
 import UploadImage from "../../components/manageit/UploadImage"
 import ListImages from "../../components/manageit/ListImages"

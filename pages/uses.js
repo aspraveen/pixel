@@ -38,32 +38,38 @@ const Uses = () => {
               src={useColorModeValue("/chakra-light.svg", "/chakra-dark.svg")}
               width={100}
               height={50}
+              alt="chakra ui"
             />
             <Image
               src={useColorModeValue("/next-dark.svg", "/next-light.svg")}
               width={100}
               height={50}
+              alt="next js"
             />
 
             <Image
               src={useColorModeValue("/prisma-dark.svg", "/prisma-white.svg")}
               width={100}
               height={50}
+              alt="prisma ORM"
             />
             <Image
               src={useColorModeValue("/neon-light.svg", "/neon-dark.svg")}
               width={100}
               height={50}
+              alt="Neon db"
             />
             <Image
               src={useColorModeValue("/vercel-dark.png", "/vercel-light.png")}
               width={100}
               height={50}
+              alt="vercel"
             />
             <Image
               src={useColorModeValue("/nauth-light.png", "/nauth-dark.png")}
               width={100}
               height={50}
+              alt="Auth"
             />
           </SimpleGrid>
         </Box>
@@ -96,7 +102,9 @@ const Uses = () => {
               <ListItem>
                 Visual Studio Code is my default text editor. I love the plugin ecosystem of VSCode
               </ListItem>
-              <ListItem>I am using PHP Storm for php/ Laravel development.</ListItem>
+              <ListItem>PHP Storm for PHP / Laravel development.</ListItem>
+              <ListItem>PyCharm</ListItem>
+              <ListItem>Android Studio</ListItem>
               <ListItem> iTerm </ListItem>
               <ListItem>Warp Terminal</ListItem>
             </OrderedList>

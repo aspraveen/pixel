@@ -41,6 +41,7 @@ const EditNote = (props) => {
         isClosable: true,
       })
       setNoteToEdit(undefined) // to reset the call otherwise add notes showing edit of previously selected note.
+      props.closeModal("edit")
     } else {
       toast({
         title: "Sorry",
@@ -74,6 +75,7 @@ const EditNote = (props) => {
         isClosable: true,
       })
       setNoteToEdit(undefined) // to reset the call otherwise add notes showing edit of previously selected note.
+      props.closeModal("edit")
     } else {
       toast({
         title: "Sorry",
@@ -93,7 +95,6 @@ const EditNote = (props) => {
         method: "GET",
       })
       const selectedNote = await details.json()
-      console.log("🚀 ~ file: EditNote.js:19 ~ fetchData ~ selectedNote", selectedNote)
       setInputField({
         transDate: selectedNote.transDate,
         title: selectedNote.title,
@@ -141,7 +142,7 @@ const EditNote = (props) => {
           ></Textarea>
           <Input
             step={"0.001"}
-            value={inputField.amount}
+            value={inputField.amount == null ? "" : inputField.amount}
             placeholder="0.000"
             type={"number"}
             name="amount"
@@ -173,7 +174,6 @@ const EditNote = (props) => {
           >
             <option>Benefit</option>
             <option>City Bank</option>
-            <option>CrediMax Danat</option>
             <option>CrediMax Prepaid</option>
             <option>Federal</option>
             <option>ICICI</option>

@@ -6,7 +6,6 @@ import {
   OrderedList,
   UnorderedList,
   ListItem,
-  Text,
 } from "@chakra-ui/react"
 
 const BlockquoteStyle = {

@@ -61,7 +61,10 @@ export default function PostDetails({ post, categories }) {
     console.log(updateLikeResult)
   }
 
-  const { data, error } = useSWR("post", fetcher, { fallbackData: post, keepPreviousData: true })
+  const { data, error, isLoading } = useSWR("post", fetcher, {
+    fallbackData: post,
+    keepPreviousData: true,
+  })
   if (error) {
     return (
       <Container maxW="container.xl">
@@ -72,7 +75,7 @@ export default function PostDetails({ post, categories }) {
       </Container>
     )
   }
-  if (!data) {
+  if (isLoading) {
     return (
       <Container maxW="container.xl">
         <Header />
@@ -174,13 +177,15 @@ export default function PostDetails({ post, categories }) {
               Blog Categories
             </Heading>
             <Wrap spacing={"2px"} align="center">
-              {categories.map((item) => (
-                <WrapItem>
+              {categories.map((item, key) => (
+                <WrapItem key={key}>
                   <Badge
                     variant="outline"
                     colorScheme={item.name === data.category.name ? "orange" : "gray"}
                     mx={1}
                     my={1}
+                    fontFamily={"montserrat"}
+                    fontWeight={"hairline"}
                   >
                     <NextLink href={`/blog/category/${item.name}`}>{item.name}</NextLink>
                   </Badge>
@@ -209,6 +214,13 @@ export async function getStaticProps({ params }) {
   data = JSON.parse(JSON.stringify(data))
   const categories = await prisma.category.findMany()
   const categories_data = JSON.parse(JSON.stringify(categories))
+  /*
+  this was added to avoid the issue that if url does not exists return 404
+  added on 21 Apr 2023
+  */
+  if (!data) {
+    return { notFound: true }
+  }
   return {
     props: {
       post: data,

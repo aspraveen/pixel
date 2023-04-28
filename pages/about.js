@@ -30,7 +30,7 @@ const About = () => {
               whileTap={{ scale: 0.8 }}
               mb={5}
             >
-              <Heading size={["md", "lg", "lg"]}>
+              <Heading as={"h2"} size={["md", "lg", "lg"]}>
                 <Highlight
                   query="Praveen's Blog"
                   styles={{

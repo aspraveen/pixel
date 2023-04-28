@@ -11,7 +11,7 @@ import {
   useToast,
 } from "@chakra-ui/react"
 
-import { useState } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { FaMinus, FaPlus } from "react-icons/fa"
 
 const Addnotes = (props) => {
@@ -109,6 +109,22 @@ const Addnotes = (props) => {
   }
 
   const diaryDate = new Date(transDate).toDateString()
+  // added on 21 Apr 2023, to add key board shortcut.
+  const handleKeyPress = useCallback(
+    (e) => {
+      if (e.ctrlKey && e.key == "n") {
+        handleAddBox()
+      }
+    },
+    [inputFields],
+  )
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyPress)
+    return () => {
+      document.removeEventListener("keydown", handleKeyPress)
+    }
+  }, [handleKeyPress])
 
   return (
     <Box>
@@ -119,7 +135,7 @@ const Addnotes = (props) => {
         </Flex>
         <Wrap spacing={5}>
           {inputFields.map((inputField, index) => (
-            <WrapItem>
+            <WrapItem key={index}>
               <Box key={index} p={2} width={{ lg: "400px" }}>
                 <Input
                   placeholder="Enter Title"
@@ -168,7 +184,6 @@ const Addnotes = (props) => {
                 >
                   <option>Benefit</option>
                   <option>City Bank</option>
-                  <option>CrediMax Danat</option>
                   <option>CrediMax Prepaid</option>
                   <option>Federal</option>
                   <option>ICICI</option>

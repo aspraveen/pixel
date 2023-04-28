@@ -55,15 +55,12 @@ export default function Post({ posts, categories }) {
                 <Heading as="h2" fontSize={["xl", "xl", "2xl"]} mt={3}>
                   {post.title}
                 </Heading>
-
                 <Text fontSize={["sm", "lg", "lg"]}>{post.intro}</Text>
-
                 <NextLink href={`blog/${post.slug}`} passHref legacyBehavior>
                   <Button size="xs" rightIcon={<HiArrowRight />} variant="outline" mr={[2, 5, 5]}>
                     Read More
                   </Button>
                 </NextLink>
-
                 <Flex gap={2} mt={2}>
                   <Badge colorScheme={"orange"}>{post.views} Views</Badge>
                   <Badge>{post.likes} Likes</Badge>
@@ -92,7 +89,14 @@ export default function Post({ posts, categories }) {
             <Wrap spacing={"2px"} align="center">
               {categories.map((category) => (
                 <WrapItem key={category.id}>
-                  <Badge variant="outline" colorScheme="gray" mx={1} my={1}>
+                  <Badge
+                    variant="outline"
+                    colorScheme="gray"
+                    mx={1}
+                    my={1}
+                    fontFamily={"montserrat"}
+                    fontWeight={"hairline"}
+                  >
                     <NextLink href={`/blog/category/${category.name}`}>{category.name}</NextLink>
                   </Badge>
                 </WrapItem>
@@ -119,6 +123,7 @@ export async function getStaticProps() {
       views: true,
       likes: true,
       slug: true,
+      id: true,
       user: {
         select: {
           name: true,

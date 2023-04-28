@@ -58,8 +58,38 @@ const handler = async (req, res) => {
           where: { id: parseInt(note), userId },
         })
         //data = { msg: "ok" }
+      } else if (type == "history") {
+        let historyMonth = new Date(selectedDate).getMonth() + 1
+        let historyDay = new Date(selectedDate).getDate()
+        data =
+          await prisma.$queryRaw`SELECT * FROM pixel."Diary" WHERE "userId"=${userId} AND EXTRACT(MONTH FROM "transDate")=${historyMonth} AND EXTRACT(DAY FROM "transDate")=${historyDay}`
+      } else if (type == "expenses") {
+        let expMonth = new Date(selectedDate).getMonth() + 1
+        let expYear = new Date(selectedDate).getFullYear()
+        data =
+          await prisma.$queryRaw`SELECT * FROM pixel."Diary" WHERE "userId"=${userId} AND "amount" IS NOT NULL AND EXTRACT(MONTH FROM "transDate")=${expMonth} AND EXTRACT (YEAR FROM "transDate")=${expYear} ORDER BY "transDate"`
+      } else if (type == "search") {
+        const { searchkey } = req.query
+        console.log("🚀 ~ file: diary.js:73 ~ handler ~ searchkey:", searchkey)
+        data = await prisma.diary.findMany({
+          where: {
+            OR: [
+              {
+                details: {
+                  contains: searchkey,
+                },
+              },
+              {
+                title: {
+                  contains: searchkey,
+                },
+              },
+            ],
+          },
+        })
       }
       //console.log(data)
+      console.log(`GET API Called ${selectedDate} +++` + new Date().toLocaleTimeString(), type)
       res.status(200).json(data)
     }
   } else if (req.method == "PUT") {

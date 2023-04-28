@@ -27,7 +27,7 @@ const Guests = () => {
     return data
   }
 
-  const { data, error, mutate } = useSWR("guestentries", fetcher)
+  const { data, error, mutate, isLoading } = useSWR("guestentries", fetcher)
   if (error) {
     return (
       <>
@@ -47,7 +47,7 @@ const Guests = () => {
       </>
     )
   }
-  if (!data) {
+  if (isLoading) {
     return (
       <>
         <Seo title="Guest Book,If you like this website. Please leave a message." />
@@ -81,7 +81,7 @@ const Guests = () => {
           body: JSON.stringify(postPayLoad),
         })
         const result = await response.json()
-        console.log("🚀 ~ file: guests.js ~ line 87 ~ unpublish ~ result", result.msg)
+        //console.log("🚀 ~ file: guests.js ~ line 87 ~ unpublish ~ result", result.msg)
         if (result.msg == "done") {
           mutate()
         }
@@ -132,10 +132,9 @@ const Guests = () => {
 
                 <HStack>
                   <WrapItem>
-                    <WrapItem>
-                      <Avatar size="xs" name={entry.user.name} src={entry.user.image} />{" "}
-                    </WrapItem>
+                    <Avatar size="xs" name={entry.user.name} src={entry.user.image} />{" "}
                   </WrapItem>
+
                   <Text
                     fontSize={["xs", "xs", "xs"]}
                     color="gray.500"

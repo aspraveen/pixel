@@ -1,17 +1,24 @@
-import { Box, useColorModeValue } from "@chakra-ui/react"
-import { useState } from "react"
+import { Badge, Box, Center, Divider, useColorModeValue } from "@chakra-ui/react"
 
 const TotalExpense = ({ totalExpense }) => {
   return (
-    <Box
-      p={2}
-      bgColor={useColorModeValue("gray.600", "orange.600")}
-      color={useColorModeValue("gray.200", "gray.100")}
-      rounded={"md"}
-    >
-      Total Spend <br />
-      {totalExpense}
-    </Box>
+    <>
+      <Divider my={5} />
+      <Box
+        width={["160px", null, "160px"]}
+        p={2}
+        color={useColorModeValue("purple.500", "purple.100")}
+        borderBottomWidth={4}
+        fontSize={"xl"}
+        borderBottomColor={"purple.200"}
+        rounded={"md"}
+      >
+        <Badge variant={"outline"} colorScheme="purple" mr={3}>
+          Total
+        </Badge>
+        {totalExpense}
+      </Box>
+    </>
   )
 }
 export default TotalExpense

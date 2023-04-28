@@ -11,7 +11,7 @@ const Spotify = () => {
     const data = await response.json()
     return data
   }
-  const { data, error } = useSWR("spotify", fetcher, { refreshInterval: 180000 })
+  const { data, error, isLoading } = useSWR("spotify", fetcher, { refreshInterval: 180000 })
   if (error) {
     return (
       <Box
@@ -30,7 +30,7 @@ const Spotify = () => {
       </Box>
     )
   }
-  if (!data) {
+  if (isLoading) {
     return (
       <Box
         boxShadow="base"
@@ -50,40 +50,61 @@ const Spotify = () => {
     )
   }
   const audioType = data.audioType == "track" ? "song" : "podcast"
-  return (
-    <Box
-      boxShadow={"base"}
-      borderWidth="1px"
-      borderColor={themeColor}
-      borderRadius="lg"
-      p={3}
-      width="90%"
-      my={2}
-    >
-      <Flex gap={3} alignItems="center">
-        <FaSpotify size={30} color="#f5ad42" />
-        <Box>
-          <Text fontSize={["xs", null, "sm"]} color={themeColor}>
-            {data.isPlaying
-              ? `Listening to ${audioType}`
-              : "I'm presently not listening to Spotify."}
-          </Text>
-
-          <Link href={data.isPlaying ? data.trackUrl : ""} target="_blank">
-            <Text
-              fontSize={["xs", null, "sm"]}
-              color={useColorModeValue("orange.300", "orange.100")}
-              fontWeight="bold"
-            >
-              {data.isPlaying && data.title}
+  if (data.isPlaying) {
+    return (
+      <Box
+        boxShadow={"base"}
+        borderWidth="1px"
+        borderColor={themeColor}
+        borderRadius="lg"
+        p={3}
+        width="90%"
+        my={2}
+      >
+        <Flex gap={3} alignItems="center">
+          <FaSpotify size={30} color="#f5ad42" />
+          <Box>
+            <Text fontSize={["xs", null, "sm"]} color={themeColor}>
+              {`Listening to ${audioType}`}
             </Text>
-          </Link>
-          <Text fontSize={["xs", null, "sm"]} color={themeColor}>
-            {data.isPlaying && data.album}
-          </Text>
-        </Box>
-      </Flex>
-    </Box>
-  )
+
+            <Link href={data.trackUrl} target="_blank">
+              <Text
+                fontSize={["xs", null, "sm"]}
+                color={useColorModeValue("orange.300", "orange.100")}
+                fontWeight="bold"
+              >
+                {data.title}
+              </Text>
+            </Link>
+            <Text fontSize={["xs", null, "sm"]} color={themeColor}>
+              {data.album}
+            </Text>
+          </Box>
+        </Flex>
+      </Box>
+    )
+  } else {
+    return (
+      <Box
+        boxShadow={"base"}
+        borderWidth="1px"
+        borderColor={themeColor}
+        borderRadius="lg"
+        p={3}
+        width="90%"
+        my={2}
+      >
+        <Flex gap={3} alignItems="center">
+          <FaSpotify size={30} color="#f5ad42" />
+          <Box>
+            <Text fontSize={["xs", null, "sm"]} color={themeColor}>
+              Presently Not Listening Spotify
+            </Text>
+          </Box>
+        </Flex>
+      </Box>
+    )
+  }
 }
 export default Spotify

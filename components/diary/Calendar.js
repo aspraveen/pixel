@@ -17,9 +17,7 @@ const Days = (props) => {
         w={5}
         alignItems={"center"}
         color={useColorModeValue("gray.600", "gray.100")}
-        onClick={(e) => handleClick(e)}
         key={"j" + j}
-        _hover={{ backgroundColor: "orange.600", cursor: "pointer" }}
       >
         &nbsp;
       </GridItem>,
@@ -28,6 +26,7 @@ const Days = (props) => {
   for (let i = 1; i <= numOfDays; i++) {
     days.push(
       <GridItem
+        rounded={"full"}
         fontSize={"xx-small"}
         p={1}
         w={5}
@@ -36,9 +35,11 @@ const Days = (props) => {
         onClick={(e) => handleClick(e)}
         data-day={i}
         key={"i" + i}
-        _hover={{ backgroundColor: "orange.600", cursor: "pointer" }}
+        _hover={{ backgroundColor: useColorModeValue("cyan.200", "cyan.600"), cursor: "pointer" }}
         backgroundColor={
-          i == props.default ? "orange.400" : useColorModeValue("gray.300", "gray.600")
+          i == props.default
+            ? useColorModeValue("orange.200", "orange.600")
+            : useColorModeValue("gray.100", "gray.600")
         }
       >
         {i}
@@ -46,7 +47,7 @@ const Days = (props) => {
     )
   }
   return (
-    <Grid templateColumns="repeat(7,1fr)" gap={1}>
+    <Grid templateColumns="repeat(7,1fr)" gap={1} textTransform={"uppercase"}>
       <GridItem fontSize={"xx-small"}>Sun</GridItem>
       <GridItem fontSize={"xx-small"}>Mon</GridItem>
       <GridItem fontSize={"xx-small"}>Tue</GridItem>
@@ -179,14 +180,15 @@ const Calendar = (props) => {
 
   return (
     <Box
-      width={"220px"}
+      width={"300px"}
       height={"240px"}
       boxShadow={"base"}
-      borderColor={useColorModeValue("gray.300", "gray.600")}
+      borderColor={useColorModeValue("purple.200", "purple.600")}
       borderWidth={"1px"}
-      p={2}
+      borderBottomWidth={5}
       pl={4}
       ml={{ base: "40px", md: 0 }}
+      rounded={"xl"}
     >
       <Flex py={2} gap={1}>
         <Years onChange={handleYearChange} default={selectedYear} />

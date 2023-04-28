@@ -2,6 +2,11 @@ import { useSession, signIn, signOut } from "next-auth/react"
 import { Avatar, Box, Button, Flex, Heading, Spacer, useColorModeValue } from "@chakra-ui/react"
 import ColorModeSwitch from "./ColorModeSwitch"
 import Link from "next/link"
+import { CalendarIcon } from "@chakra-ui/icons"
+const FirstName = ({ name }) => {
+  let fnameArray = name.split(" ")
+  return fnameArray[0]
+}
 const LoginStatus = (props) => {
   const session = useSession()
   const boxBgColor = useColorModeValue("gray.50", "gray.600")
@@ -46,12 +51,16 @@ const LoginStatus = (props) => {
             color="gray.400"
             fontFamily="Open Sans"
           >
-            {userName}
+            <FirstName name={userName} />
           </Heading>
           <Spacer />
           <Button colorScheme="gray" variant="outline" size="xs" onClick={() => signOut()}>
             Sign Out
           </Button>
+          <Spacer />
+          <Link href="/diary">
+            <CalendarIcon />
+          </Link>
           <Spacer />
           <ColorModeSwitch zIndex="50" />
         </Flex>
