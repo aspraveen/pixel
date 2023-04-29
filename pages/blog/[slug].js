@@ -204,6 +204,7 @@ export async function getStaticProps({ params }) {
   let data = await prisma.post.findFirst({
     where: {
       slug: slug,
+      status: 1,
     },
     include: {
       user: true,

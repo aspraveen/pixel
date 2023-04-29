@@ -115,7 +115,6 @@ export async function getStaticProps() {
     where: {
       status: 1,
     },
-
     select: {
       publishedAt: true,
       title: true,
