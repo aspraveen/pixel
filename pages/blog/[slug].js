@@ -230,7 +230,11 @@ export async function getStaticProps({ params }) {
 }
 
 export async function getStaticPaths() {
-  const data = await prisma.post.findMany()
+  const data = await prisma.post.findMany({
+    where: {
+      status: 1,
+    },
+  })
   const paths = data.map((item) => ({
     params: {
       slug: item.slug,
