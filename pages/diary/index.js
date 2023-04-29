@@ -18,7 +18,7 @@ import {
   VStack,
 } from "@chakra-ui/react"
 import Header from "../../components/diary/Header"
-import { useState, useEffect, createContext, useRef } from "react"
+import { useState, useEffect, createContext, useRef, useCallback } from "react"
 import Display from "../../components/diary/Display"
 import Calendar from "../../components/diary/Calendar"
 import Addnotes from "../../components/diary/Addnotes"
@@ -142,6 +142,24 @@ const index = () => {
   const { isOpen: searchIsOpen, onOpen: searchOnOpen, onClose: searchOnClose } = useDisclosure()
   const [noteToEdit, setNoteToEdit] = useState()
   const dataRefresh = useRef(null)
+  const handleKeypress = useCallback((e) => {
+    if (e.ctrlKey && e.key == "s") {
+      searchOnOpen()
+    } else if (e.ctrlKey && e.key == "n") {
+      addOnOpen()
+    } else if (e.ctrlKey && e.key == "h") {
+      historyOnOpen()
+    } else if (e.ctrlKey && e.key == "e") {
+      expOnOpen()
+    }
+  })
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeypress)
+    return () => {
+      document.removeEventListener("keydown", handleKeypress)
+    }
+  }, [handleKeypress])
 
   const closeModal = (modal) => {
     //console.log("🚀 ~ file: index.js:43 ~ closeModal ~ modal:", modal)
@@ -234,7 +252,6 @@ const index = () => {
             <ModalOverlay />
             <ModalContent>
               <ModalHeader>
-                {" "}
                 <Box
                   fontFamily={"montserrat"}
                   color={"gray.300"}

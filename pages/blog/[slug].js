@@ -16,14 +16,14 @@ import { useRouter } from "next/router"
 import Header from "../../components/Header"
 import RenderContents from "../../components/RenderContents"
 import { prisma } from "../../util/db"
-import useSWR from "swr"
+//import useSWR from "swr"
 import { useEffect } from "react"
 import { HiHeart, HiChevronDoubleLeft } from "react-icons/hi"
 import NextLink from "next/link"
 import Footer from "../../components/Footer"
 import Seo from "../../components/Seo"
 
-export default function PostDetails({ post, categories }) {
+export default function PostDetails({ data, categories }) {
   const router = useRouter()
   const randomPosition = Math.round(Math.random() * (2100 - 1200) + 1200)
   const avatarSize = useBreakpointValue({ base: "xs", md: "lg" })
@@ -44,24 +44,23 @@ export default function PostDetails({ post, categories }) {
   //record the count
   useEffect(() => {
     const asyncFn = async () => {
+      let updateViewResult = ""
       try {
         const updateView = await fetch(`/api/post-update-fields?postId=${post.id}&fieldType=view`)
-        const updateViewResult = await updateView.json()
+        updateViewResult = await updateView.json()
         console.log(updateViewResult)
-      } catch (ex) {
-        console.log(updateViewResult)
-      }
+      } catch (ex) {}
     }
     asyncFn()
   }, [])
 
   const likeit = async () => {
-    const updateLike = await fetch(`/api/post-update-fields?postId=${post.id}&fieldType=like`)
+    const updateLike = await fetch(`/api/post-update-fields?postId=${data.id}&fieldType=like`)
     const updateLikeResult = await updateLike.json()
     console.log(updateLikeResult)
   }
-
-  const { data, error, isLoading } = useSWR("post", fetcher, {
+  //disabled SWR reloading because of additional loading.
+  /*const { data, error, isLoading } = useSWR("post", fetcher, {
     fallbackData: post,
     keepPreviousData: true,
   })
@@ -84,7 +83,7 @@ export default function PostDetails({ post, categories }) {
         </Box>
       </Container>
     )
-  }
+  }*/
 
   return (
     <>
@@ -223,7 +222,7 @@ export async function getStaticProps({ params }) {
   }
   return {
     props: {
-      post: data,
+      data: data,
       categories: categories_data,
     },
     revalidate: 10,
