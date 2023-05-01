@@ -8,6 +8,7 @@ import {
   useColorModeValue,
   Button,
   Text,
+  Spinner,
 } from "@chakra-ui/react"
 import Header from "../components/Header"
 import Footer from "../components/Footer"
@@ -56,8 +57,13 @@ const Guests = () => {
 
           <Flex>
             <Box w={{ base: "98%", md: "75%" }} mt={10} p={[2, 5, 5]}>
-              <Sign />
-              .....
+              <Spinner
+                thickness="4px"
+                speed="0.65s"
+                emptyColor="orange.200"
+                color="orange.500"
+                size="xl"
+              />
             </Box>
             <RightDesign />
           </Flex>
