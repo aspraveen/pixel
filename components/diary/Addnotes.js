@@ -112,7 +112,7 @@ const Addnotes = (props) => {
   // added on 21 Apr 2023, to add key board shortcut.
   const handleKeyPress = useCallback(
     (e) => {
-      if (e.ctrlKey && e.key == "n") {
+      if (e.ctrlKey && e.key == "N") {
         handleAddBox()
       }
     },

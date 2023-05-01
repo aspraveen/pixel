@@ -1,10 +1,49 @@
-import { Input, Box, Textarea, Button, useToast, Center } from "@chakra-ui/react"
+import { Input, Box, Textarea, Button, useToast, Center, IconButton } from "@chakra-ui/react"
 import { useEffect, useState, useContext } from "react"
 import { NoteContext } from "../../pages/diary"
+import { DeleteIcon } from "@chakra-ui/icons"
+
+const ConfirmationBox = ({ note, closeModal }) => {
+  const toast = useToast()
+  const handleDelete = async (e) => {
+    const url = `/api/diary/?id=${note}`
+    const response = await fetch(url, {
+      method: "DELETE",
+    })
+    const result = await response.json()
+    if (response.status == "200") {
+      toast({
+        title: "Transaction Deleted",
+        description: "We've removed the transaction",
+        status: "success",
+        duration: 9000,
+        isClosable: true,
+      })
+      closeModal("edit")
+    } else {
+      toast({
+        title: "Sorry",
+        description: result.msg,
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      })
+    }
+  }
+  return (
+    <Box bgColor={"pink.50"} rounded={"lg"} color={"pink.500"} py={10} px={5}>
+      Confirm Deletion of this note.{" "}
+      <Button colorScheme="pink" onClick={handleDelete}>
+        I'm Sure
+      </Button>
+    </Box>
+  )
+}
 
 const EditNote = (props) => {
   const [noteToEdit, setNoteToEdit] = useContext(NoteContext)
   const toast = useToast()
+  const [confirmDelete, setConfirmDelete] = useState(false)
   const [inputField, setInputField] = useState({
     transDate: "",
     title: "",
@@ -21,37 +60,10 @@ const EditNote = (props) => {
   const handleChangeInput = (e) => {
     setInputField({ ...inputField, [e.target.name]: e.target.value })
   }
-  const handleDelete = async (e) => {
-    const deletePayLoad = {
-      id: props.note,
-    }
-    const url = "/api/diary"
-    const response = await fetch(url, {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(deletePayLoad),
-    })
-    const result = await response.json()
-    if (response.status == "200") {
-      toast({
-        title: "Transaction Deleted",
-        description: "We've removed the transaction",
-        status: "success",
-        duration: 9000,
-        isClosable: true,
-      })
-      setNoteToEdit(undefined) // to reset the call otherwise add notes showing edit of previously selected note.
-      props.closeModal("edit")
-    } else {
-      toast({
-        title: "Sorry",
-        description: result.msg,
-        status: "error",
-        duration: 9000,
-        isClosable: true,
-      })
-    }
+  const confirmDeletion = () => {
+    setConfirmDelete(true)
   }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     const putPayLoad = {
@@ -206,16 +218,11 @@ const EditNote = (props) => {
             onChange={(e) => handleChangeInput(e)}
             my={1}
           ></Input>
-          <Button type="submit">Save</Button>
+          <Button type="submit">Save</Button>{" "}
+          <IconButton onClick={confirmDeletion} icon={<DeleteIcon />} />
         </Box>
       </form>
-      <Box py={10} border={"1px"} borderColor="red.100">
-        <Center>
-          <Button colorScheme={"red"} size="sm" onClick={() => handleDelete()}>
-            Delete
-          </Button>
-        </Center>
-      </Box>
+      {confirmDelete && <ConfirmationBox note={props.note} closeModal={props.closeModal} />}
     </>
   )
 }

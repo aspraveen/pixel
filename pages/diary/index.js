@@ -143,13 +143,13 @@ const index = () => {
   const [noteToEdit, setNoteToEdit] = useState()
   const dataRefresh = useRef(null)
   const handleKeypress = useCallback((e) => {
-    if (e.ctrlKey && e.key == "s") {
+    if (e.ctrlKey && e.key == "S") {
       searchOnOpen()
-    } else if (e.ctrlKey && e.key == "n") {
+    } else if (e.ctrlKey && e.key == "N") {
       addOnOpen()
-    } else if (e.ctrlKey && e.key == "h") {
+    } else if (e.ctrlKey && e.key == "H") {
       historyOnOpen()
-    } else if (e.ctrlKey && e.key == "e") {
+    } else if (e.ctrlKey && e.key == "E") {
       expOnOpen()
     }
   })
@@ -267,7 +267,7 @@ const index = () => {
               </ModalBody>
               <ModalFooter>
                 <span>
-                  <Kbd>Ctrl</Kbd>+<Kbd>n</Kbd>
+                  <Kbd>Ctrl</Kbd>+<Kbd>N</Kbd>
                 </span>
                 &nbsp; or + button for adding multiple notes.
               </ModalFooter>

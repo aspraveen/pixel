@@ -110,14 +110,13 @@ const handler = async (req, res) => {
         }
       }
     }
-  } else if (req.method == "PUT") {
+  } else if (req.method === "PUT") {
     if (!session) {
       res.status(401).json({ msg: "Not Authenticated" })
     } else {
       let { userId } = session
       const reqPayLoad = req.body
       const { inputField: selectedNote } = reqPayLoad //destructuring inputField as selectedNote to simplify
-      console.log("🚀 ~ file: diary.js:119 ~ handler ~ selectedNote:", selectedNote.id)
 
       //update data on prisma
       try {
@@ -154,25 +153,25 @@ const handler = async (req, res) => {
         res.status(400).json({ msg: err })
       }
     }
-  } else if (req.method == "DELETE") {
+  } else if (req.method === "DELETE") {
+    const { id } = req.query
     if (!session) {
       res.status(401).json({ msg: "Not Authenticated" })
     } else {
       let { userId } = session
-      const reqPayLoad = req.body
-      const { id } = reqPayLoad
+
       //delete data on prisma
       //check if this transaction is owned by user
       //this was added/changed on 4th Feb as prima delete all records for user in diary when the note id was null
       try {
         const noteToDelete = await prisma.diary.findUnique({
-          where: { id },
+          where: { id: parseInt(id) },
         })
 
-        if (noteToDelete.userId == userId) {
+        if (noteToDelete && noteToDelete.userId == userId) {
           try {
             const deleteNote = await prisma.diary.delete({
-              where: { id },
+              where: { id: parseInt(id) },
             })
             res.status(200).json({ msg: "ok" })
           } catch (err) {
