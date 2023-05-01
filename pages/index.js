@@ -23,7 +23,7 @@ const IndexPage = (props) => {
   )
 }
 export const getServerSideProps = async ({ res }) => {
-  res.setHeader("Cache-Control", "public,s-maxage=10, stale-while-revalidate=59")
+  res.setHeader("Cache-Control", "public,s-maxage=1200, stale-while-revalidate=800")
   const randomFace = Math.floor(Math.random() * 8 + 1)
   return {
     props: {
