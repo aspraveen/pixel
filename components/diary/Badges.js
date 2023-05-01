@@ -6,17 +6,42 @@ const Badges = ({ data, type }) => {
   if (type == "tags") {
     if (data.indexOf(",") > 0) {
       let wordsArray = data.split(",")
+      let badgeColors = [
+        "pink",
+        "orange",
+        "green",
+        "blue",
+        "purple",
+        "orange",
+        "green",
+        "blue",
+        "purple",
+        "gray",
+        "pink",
+        "orange",
+        "green",
+        "blue",
+        "purple",
+        "orange",
+        "green",
+        "blue",
+        "purple",
+        "gray",
+      ]
       return wordsArray.map((item, index) => (
         <Box
           key={index}
           borderWidth={1}
-          borderColor={"blue.300"}
-          color={"blue.400"}
+          borderColor={useColorModeValue(`${badgeColors[index]}.100`, `${badgeColors[index]}.400`)}
+          color={useColorModeValue(`${badgeColors[index]}.500`, `${badgeColors[index]}.50`)}
           fontSize={"xs"}
           rounded={"md"}
           p={1}
           textAlign={"center"}
-          backgroundColor={useColorModeValue("blue.50", "blue.800")}
+          backgroundColor={useColorModeValue(
+            `${badgeColors[index]}.50`,
+            `${badgeColors[index]}.700`,
+          )}
         >
           {item}
         </Box>
@@ -55,7 +80,7 @@ const Badges = ({ data, type }) => {
     return (
       <Box
         borderWidth={1}
-        borderColor={useColorModeValue("purple.300", "purple.400")}
+        borderColor={useColorModeValue("purple.100", "purple.400")}
         bgColor={useColorModeValue("purple.50", "purple.700")}
         color={useColorModeValue("purple.600", "gray.100")}
         fontSize={"xs"}

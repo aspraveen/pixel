@@ -28,7 +28,7 @@ const searchDiary = (url, { arg }) => {
 const SearchResults = ({ data }) => {
   return (
     <SimpleGrid columns={[1, null, 4]} spacing={5}>
-      {data.map((item, index) => (
+      {data.map((item) => (
         <Box
           fontSize={"md"}
           color={"gray.400"}
@@ -53,7 +53,6 @@ const SearchResults = ({ data }) => {
           </Box>
           <Divider my={5} />
           <SimpleGrid columns={[2, null, 3]} spacing={1}>
-            <Badges data={item.amount} type={"impact"} />
             <Badges data={item.amount} type={"amount"} />
             <Badges data={item.people} type={"people"} />
             <Badges data={item.places} type={"places"} />

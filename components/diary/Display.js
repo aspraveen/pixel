@@ -7,9 +7,10 @@ import {
   Stack,
   Skeleton,
   Divider,
-  Center,
+  Flex,
 } from "@chakra-ui/react"
 import { FaEdit } from "react-icons/fa"
+import { TfiNotepad } from "react-icons/tfi"
 import { RepeatIcon } from "@chakra-ui/icons"
 import { forwardRef, memo, useContext, useImperativeHandle } from "react"
 import useSWR from "swr"
@@ -18,7 +19,6 @@ import ClearHTML from "./ClearHTML"
 import Badges from "./Badges"
 import TotalExpense from "./TotalExpense"
 import DiaryDate from "./DiaryDate"
-import Image from "next/image"
 const SelectNote = ({ note }) => {
   const [noteToEdit, setNoteToEdit] = useContext(NoteContext)
 
@@ -56,19 +56,15 @@ const DisplayDiary = (props) => {
           >
             <DiaryDate date={props.diaryDate} page={"display"} />
           </Box>
-          <Box p={2} width={"100%"}>
-            <Center>
-              <Box padding="6" boxShadow="sm" color={"gray.500"}>
-                <Image src={"/nodata.svg"} height={300} width={400} alt={"nodata"}></Image>
-                <Box
-                  fontSize={["sm", null, "xl"]}
-                  color={useColorModeValue("gray.300", "gray.500")}
-                  mt={2}
-                >
-                  Nothing added for this date
-                </Box>
+          <Box width={"100%"}>
+            <Box padding="3" boxShadow="sm" color={"gray.500"}>
+              <Box color={useColorModeValue("gray.300", "gray.500")}>
+                <Flex alignItems={"center"}>
+                  <TfiNotepad size={100} />
+                  <Box fontSize={["sm", null, "xl"]}> it's empty!</Box>
+                </Flex>
               </Box>
-            </Center>
+            </Box>
           </Box>
         </VStack>
       </Box>
@@ -88,7 +84,7 @@ const DisplayDiary = (props) => {
             <DiaryDate date={props.diaryDate} page={"display"} />
           </Box>
           <Box>
-            {data.map((entry, index) => (
+            {data.map((entry) => (
               <Box
                 key={entry.id}
                 p={3}
@@ -109,7 +105,6 @@ const DisplayDiary = (props) => {
                 </Box>
                 <Divider my={5} />
                 <SimpleGrid columns={[3, null, 5]} spacing={1}>
-                  <Badges data={entry.amount} type={"impact"} />
                   <Badges data={entry.amount} type={"amount"} />
                   <Badges data={entry.people} type={"people"} />
                   <Badges data={entry.places} type={"places"} />
@@ -129,6 +124,10 @@ const DisplayDiary = (props) => {
 const fetcher = async (url) => {
   const response = await fetch(`${url}`)
   const data = await response.json()
+
+  if (response.status === 400) {
+    throw new Error(data.msg) // Throw the error
+  }
   if (data.msg == "Not Authenticated") {
     throw new Error("User Not authenticated")
   }
@@ -143,6 +142,7 @@ const Display = forwardRef((props, ref) => {
       revalidateIfStale: false,
       revalidateOnFocus: false,
       revalidateOnReconnect: false,
+      errorRetryCount: 2,
     },
   )
   useImperativeHandle(ref, () => ({
@@ -155,7 +155,18 @@ const Display = forwardRef((props, ref) => {
   }
 
   if (error) {
-    return <Box>{error.message}</Box>
+    return (
+      <Box
+        fontSize={"sm"}
+        color={"gray.300"}
+        p={5}
+        borderWidth={1}
+        borderColor={"gray.200"}
+        rounded={"md"}
+      >
+        {error.message}
+      </Box>
+    )
   }
   if (isLoading) {
     return (
@@ -174,7 +185,6 @@ const Display = forwardRef((props, ref) => {
       <>
         <DisplayDiary data={data} diaryDate={selectedDate} />
         {totalExpense > 0 && <TotalExpense totalExpense={totalExpense} />}
-
         <Box textAlign={"right"} mt={5}>
           <IconButton
             variant="outline"

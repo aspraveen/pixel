@@ -38,7 +38,7 @@ const Days = (props) => {
         _hover={{ backgroundColor: useColorModeValue("cyan.200", "cyan.600"), cursor: "pointer" }}
         backgroundColor={
           i == props.default
-            ? useColorModeValue("orange.200", "orange.600")
+            ? useColorModeValue("purple.200", "purple.600")
             : useColorModeValue("gray.100", "gray.600")
         }
       >
@@ -90,8 +90,10 @@ const Months = (props) => {
       size={"xs"}
       color={"gray.300"}
       py={2}
-      borderColor={useColorModeValue("gray.300", "gray.600")}
+      borderColor={useColorModeValue("purple.100", "purple.600")}
       onChange={(e) => handleOnChange(e.target.selectedIndex)}
+      width={100}
+      pl={5}
     >
       {monthValues.map((value, key) =>
         key + 1 == props.default ? (
@@ -136,8 +138,9 @@ const Years = (props) => {
       size={"xs"}
       color={"gray.300"}
       py={2}
-      borderColor={useColorModeValue("gray.300", "gray.600")}
+      borderColor={useColorModeValue("purple.100", "purple.600")}
       onChange={(e) => handleChange(e.target.value)}
+      width={100}
     >
       {years}
     </Select>

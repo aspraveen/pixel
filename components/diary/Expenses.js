@@ -97,7 +97,7 @@ const Expenses = (props) => {
             </Thead>
             <Tbody>
               {data.map((expense, sl) => (
-                <Tr key={sl}>
+                <Tr key={expense.id}>
                   <Td>{sl + 1}</Td>
                   <Td>
                     <ExpenseDay date={expense.transDate} />

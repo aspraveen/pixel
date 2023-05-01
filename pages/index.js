@@ -4,7 +4,7 @@ import Header from "../components/Header"
 import Hero from "../components/Hero"
 import Seo from "../components/Seo"
 
-const IndexPage = () => {
+const IndexPage = (props) => {
   return (
     <>
       <Seo
@@ -16,11 +16,20 @@ const IndexPage = () => {
 
       <Container maxW="container.xl">
         <Header />
-        <Hero />
+        <Hero face={props.randomFace} />
         <Footer />
       </Container>
     </>
   )
+}
+export const getServerSideProps = async ({ res }) => {
+  res.setHeader("Cache-Control", "public,s-maxage=10, stale-while-revalidate=59")
+  const randomFace = Math.floor(Math.random() * 8 + 1)
+  return {
+    props: {
+      randomFace: randomFace,
+    },
+  }
 }
 
 export default IndexPage

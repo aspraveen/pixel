@@ -18,13 +18,13 @@ const RenderContents = ({ details }) => {
     //console.log(JSON.stringify(item))
     switch (item.type) {
       case "image":
-        return <Image src={item.url} />
+        return <Image src={item.url} key={key} />
       case "list-item":
-        return <ListItem> {item.children[0].text}</ListItem>
+        return <ListItem key={key}> {item.children[0].text}</ListItem>
       case "numbered-list":
-        return <OrderedList> {item.children[0].text}</OrderedList>
+        return <OrderedList key={key}> {item.children[0].text}</OrderedList>
       case "bulleted-list":
-        return <UnorderedList> {item.children[0].text}</UnorderedList>
+        return <UnorderedList key={key}> {item.children[0].text}</UnorderedList>
       case "heading-one":
         return (
           <Heading as="h1" size="3xl" key={key}>

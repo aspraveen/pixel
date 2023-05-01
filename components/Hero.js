@@ -1,27 +1,10 @@
 import { Flex, Box, Heading, useColorModeValue, Link, Text } from "@chakra-ui/react"
 import NextImage from "next/image"
 import { motion } from "framer-motion"
-//import create from "zustand"
-//import { persist } from "zustand/middleware"
 import Spotify from "./Spotify"
 
-const Hero = () => {
+const Hero = ({ face }) => {
   const gradient = useColorModeValue("linear(to-r,orange,red )", "linear(to-r, #ff7b00, #ecca2f )")
-  /*const useStore = create(
-    persist(
-      (set) => ({
-        randomNumber: Math.floor(Math.random() * 8 + 1),
-      }),
-      {
-        name: "random-face",
-        getStorage: () => sessionStorage,
-      },
-    ),
-  )
-  const randomNumber = useStore((state) => state.randomNumber)
-*/
-  const randomNumber = 1
-
   const MotionBox = motion(Box)
   return (
     <Flex
@@ -82,7 +65,7 @@ const Hero = () => {
       </MotionBox>
       <Box>
         <NextImage
-          src={`/assets/face${randomNumber}.png`}
+          src={`/assets/face${face}.png`}
           width={400}
           height={400}
           alt={"praveen avatar"}

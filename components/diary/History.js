@@ -42,7 +42,6 @@ const ShowDataForYear = ({ data, year }) => {
           </Box>
           <Divider my={5} />
           <SimpleGrid columns={[2, null, 3]} spacing={1}>
-            <Badges data={item.amount} type={"impact"} />
             <Badges data={item.amount} type={"amount"} />
             <Badges data={item.people} type={"people"} />
             <Badges data={item.places} type={"places"} />
