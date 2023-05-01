@@ -78,6 +78,7 @@ const handler = async (req, res) => {
           console.log("🚀 ~ file: diary.js:73 ~ handler ~ searchkey:", searchkey)
           data = await prisma.diary.findMany({
             where: {
+              userId,
               OR: [
                 {
                   details: {
@@ -101,11 +102,9 @@ const handler = async (req, res) => {
         res.status(200).json(data)
       } catch (err) {
         if (err instanceof Prisma.PrismaClientValidationError) {
-          res
-            .status(400)
-            .json({
-              msg: `An Error occurred with validation. Please check format of date ${selectedDate}`,
-            })
+          res.status(400).json({
+            msg: `An Error occurred with validation. Please check format of date ${selectedDate}`,
+          })
         } else {
           res.status(400).json({ msg: `Unknown Error Occurred.` })
         }
@@ -115,26 +114,41 @@ const handler = async (req, res) => {
     if (!session) {
       res.status(401).json({ msg: "Not Authenticated" })
     } else {
+      let { userId } = session
       const reqPayLoad = req.body
       const { inputField: selectedNote } = reqPayLoad //destructuring inputField as selectedNote to simplify
+      console.log("🚀 ~ file: diary.js:119 ~ handler ~ selectedNote:", selectedNote.id)
+
       //update data on prisma
       try {
-        const editNote = await prisma.diary.update({
+        const noteToEdit = await prisma.diary.findUnique({
           where: { id: selectedNote.id },
-          data: {
-            transDate: selectedNote.transDate,
-            title: selectedNote.title,
-            details: selectedNote.details,
-            amount: selectedNote.amount,
-            tags: selectedNote.tags,
-            places: selectedNote.places,
-            people: selectedNote.people,
-            category: selectedNote.category,
-            currency: selectedNote.currency,
-            paymentMethod: selectedNote.paymentMethod,
-          },
         })
-        res.status(200).json({ msg: "ok" })
+        if (noteToEdit.userId == userId) {
+          try {
+            const editNote = await prisma.diary.update({
+              where: { id: selectedNote.id },
+              data: {
+                transDate: selectedNote.transDate,
+                title: selectedNote.title,
+                details: selectedNote.details,
+                amount: selectedNote.amount,
+                tags: selectedNote.tags,
+                places: selectedNote.places,
+                people: selectedNote.people,
+                category: selectedNote.category,
+                currency: selectedNote.currency,
+                paymentMethod: selectedNote.paymentMethod,
+              },
+            })
+            res.status(200).json({ msg: "ok" })
+          } catch (err) {
+            console.log(err)
+            res.status(400).json({ msg: err })
+          }
+        } else {
+          res.status(400).json({ msg: "Permission Denied" })
+        }
       } catch (err) {
         console.log(err)
         res.status(400).json({ msg: err })
