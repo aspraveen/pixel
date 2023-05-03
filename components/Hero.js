@@ -63,7 +63,7 @@ const Hero = ({ face }) => {
           </Box>
         </Box>
       </MotionBox>
-      <Box>
+      <Box textAlign={"center"} px={5}>
         <NextImage
           src={`/assets/face${face}.png`}
           width={400}

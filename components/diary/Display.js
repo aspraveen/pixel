@@ -9,8 +9,7 @@ import {
   Divider,
   Flex,
 } from "@chakra-ui/react"
-import { FaEdit } from "react-icons/fa"
-import { TfiNotepad } from "react-icons/tfi"
+import { FaEdit, FaSmileBeam } from "react-icons/fa"
 import { RepeatIcon } from "@chakra-ui/icons"
 import { forwardRef, memo, useContext, useImperativeHandle } from "react"
 import useSWR from "swr"
@@ -60,8 +59,10 @@ const DisplayDiary = (props) => {
             <Box padding="3" boxShadow="sm" color={"gray.500"}>
               <Box color={useColorModeValue("gray.300", "gray.500")}>
                 <Flex alignItems={"center"}>
-                  <TfiNotepad size={100} />
-                  <Box fontSize={["sm", null, "xl"]}> it's empty!</Box>
+                  <FaSmileBeam size={50} />
+                  <Box fontSize={["sm", null, "xl"]} ml={2}>
+                    it's empty!
+                  </Box>
                 </Flex>
               </Box>
             </Box>

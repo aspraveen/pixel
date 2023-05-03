@@ -45,11 +45,9 @@ export default function PostDetails({ data, categories }) {
   useEffect(() => {
     const asyncFn = async () => {
       let updateViewResult = ""
-      try {
-        const updateView = await fetch(`/api/post-update-fields?postId=${post.id}&fieldType=view`)
-        updateViewResult = await updateView.json()
-        console.log(updateViewResult)
-      } catch (ex) {}
+      const updateView = await fetch(`/api/post-update-fields?postId=${data.id}&fieldType=view`)
+      updateViewResult = await updateView.json()
+      console.log(updateViewResult)
     }
     asyncFn()
   }, [])

@@ -8,16 +8,16 @@ import {
   keyframes,
   usePrefersReducedMotion,
   Image,
+  Badge,
 } from "@chakra-ui/react"
 import NextLink from "next/link"
 import { useDisclosure } from "@chakra-ui/react"
-import { HamburgerIcon, ChevronLeftIcon } from "@chakra-ui/icons"
+import { HamburgerIcon } from "@chakra-ui/icons"
 import LoginStatus from "./LoginStatus"
 import { useRouter } from "next/router"
 
 const Navigation = () => {
   const { isOpen, onToggle } = useDisclosure(false)
-  const stackBorderColor = useColorModeValue("white", "gray.600")
   const menuBgColor = useColorModeValue("gray.100", "gray.800")
   const router = useRouter()
   const currentPath = router.pathname
@@ -161,43 +161,46 @@ const Navigation = () => {
           </center>
         </Box>
         <SimpleGrid columns={{ base: 1, md: 1, lg: 1 }} spacing={10} py={5} px={10}>
-          <Box height="30px" p={2}>
+          <Box height="30px" p={2} textAlign={"center"}>
             <NextLink href={"/"}>
               <Text
                 textDecoration={currentPath == "/" ? "overline" : "none"}
                 textDecorationThickness={3}
                 textDecorationColor={linkUpperLineColor}
+                fontSize={"xl"}
               >
                 Home
               </Text>
             </NextLink>
           </Box>
 
-          <Box height="30px" p={2}>
+          <Box height="30px" p={2} textAlign={"center"}>
             <NextLink href={"/about"}>
               <Text
                 textDecoration={currentPath == "/about" ? "overline" : "none"}
                 textDecorationThickness={3}
                 textDecorationColor={linkUpperLineColor}
+                fontSize={"xl"}
               >
                 About
               </Text>
             </NextLink>
           </Box>
 
-          <Box height="30px" p={2}>
+          <Box height="30px" p={2} textAlign={"center"}>
             <NextLink href={"/uses"}>
               <Text
                 textDecoration={currentPath == "/uses" ? "overline" : "none"}
                 textDecorationThickness={3}
                 textDecorationColor={linkUpperLineColor}
+                fontSize={"xl"}
               >
                 Uses
               </Text>
             </NextLink>
           </Box>
 
-          <Box height="30px" p={2}>
+          <Box height="30px" p={2} textAlign={"center"}>
             <NextLink href={"/blog"}>
               <Text
                 textDecoration={
@@ -205,30 +208,33 @@ const Navigation = () => {
                 }
                 textDecorationThickness={3}
                 textDecorationColor={linkUpperLineColor}
+                fontSize={"xl"}
               >
                 Blog
               </Text>
             </NextLink>
           </Box>
 
-          <Box height="30px" p={2}>
+          <Box height="30px" p={2} textAlign={"center"}>
             <NextLink href={"/contact"}>
               <Text
                 textDecoration={currentPath == "/contact" ? "overline" : "none"}
                 textDecorationThickness={3}
                 textDecorationColor={linkUpperLineColor}
+                fontSize={"xl"}
               >
                 Contact
               </Text>
             </NextLink>
           </Box>
 
-          <Box height="30px" p={2}>
+          <Box height="30px" p={2} textAlign={"center"}>
             <NextLink href={"/guests"}>
               <Text
                 textDecoration={currentPath == "/guests" ? "overline" : "none"}
                 textDecorationThickness={3}
                 textDecorationColor={linkUpperLineColor}
+                fontSize={"xl"}
               >
                 Guests
               </Text>
@@ -236,18 +242,10 @@ const Navigation = () => {
           </Box>
         </SimpleGrid>
         <Center>
-          <Box
-            borderRadius={"full"}
-            height={90}
-            width={90}
-            borderWidth={"2px"}
-            py={6}
-            px={6}
-            onClick={onToggle}
-            borderColor={"orange.200"}
-          >
-            <Image src={"/favicon-32x32.png"} animation={animation} />
-            <Text fontSize={"x-small"}>CLOSE</Text>
+          <Box onClick={onToggle} mt={10}>
+            <Badge ml="1" fontSize="2xl" colorScheme="purple">
+              CLOSE
+            </Badge>
           </Box>
         </Center>
       </Box>

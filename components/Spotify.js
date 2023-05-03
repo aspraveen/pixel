@@ -92,14 +92,13 @@ const Spotify = () => {
         borderColor={themeColor}
         borderRadius="lg"
         p={3}
-        width="90%"
         my={2}
       >
         <Flex gap={3} alignItems="center">
           <FaSpotify size={30} color="#f5ad42" />
           <Box>
             <Text fontSize={["xs", null, "sm"]} color={themeColor}>
-              Presently Not Listening Spotify
+              I'm presently not listening to Spotify
             </Text>
           </Box>
         </Flex>
