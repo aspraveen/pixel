@@ -163,12 +163,10 @@ export default function PostDetails({ data, categories }) {
               base: "none",
               md: "block",
             }}
-            backgroundImage={"url('/assets/vvvortex.svg')"}
-            backgroundSize={randomPosition}
             height={"vh"}
             rounded="lg"
-            backgroundPosition={(50, -100)}
             px={3}
+            boxShadow={"xs"}
           >
             <Heading as="h4" fontSize={["lg", "lg", "lg"]} py={5}>
               Blog Categories

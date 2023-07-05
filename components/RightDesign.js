@@ -1,7 +1,7 @@
 import { Box } from "@chakra-ui/react"
 
 const RightDesign = ({ categories, title, content, height }) => {
-  const randomPosition = Math.round(Math.random() * (2100 - 1200) + 1200)
+  //const randomPosition = Math.round(Math.random() * (2100 - 1200) + 5200)
   return (
     <Box
       width="25%"
@@ -9,11 +9,7 @@ const RightDesign = ({ categories, title, content, height }) => {
         base: "none",
         md: "block",
       }}
-      backgroundImage={"url('/assets/vvvortex.svg')"}
-      backgroundSize={randomPosition}
-      height={height ? height : "vh"}
-      rounded="lg"
-      backgroundPosition={(50, -100)}
+      boxShadow={"xs"}
     >
       {title}
       {content}
@@ -21,13 +17,3 @@ const RightDesign = ({ categories, title, content, height }) => {
   )
 }
 export default RightDesign
-
-export async function getStaticProps() {
-  let topCategories = await prisma.category.findMany()
-  let topCategories_data = JSON.parse(JSON.stringify(topCategories))
-  return {
-    props: {
-      categories: topCategories_data,
-    },
-  }
-}

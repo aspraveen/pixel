@@ -103,9 +103,9 @@ const Uses = () => {
                 Visual Studio Code is my default text editor. I love the plugin ecosystem of VSCode
               </ListItem>
               <ListItem>PHP Storm for PHP / Laravel development.</ListItem>
-              <ListItem>PyCharm</ListItem>
+              <ListItem>PyCharm for python</ListItem>
               <ListItem>Android Studio</ListItem>
-              <ListItem> iTerm </ListItem>
+              <ListItem>iTerm</ListItem>
               <ListItem>Warp Terminal</ListItem>
             </OrderedList>
           </Box>
@@ -127,7 +127,7 @@ const Uses = () => {
               </ListItem>
               <ListItem>Iphone 13</ListItem>
               <ListItem>Ipad 7</ListItem>
-              <ListItem>Apple Watch Series 5</ListItem>
+              <ListItem>Apple Watch</ListItem>
               <ListItem>LG - 24" External Monitor</ListItem>
               <ListItem>Apple Magic Keyboard</ListItem>
               <ListItem>Apple Magic Trackpad</ListItem>
@@ -146,10 +146,9 @@ const Uses = () => {
             </Heading>
             <OrderedList mt={2}>
               <ListItem>Docker </ListItem>
-              <ListItem>Vagrant</ListItem>
               <ListItem>VMware Fusion</ListItem>
-              <ListItem>GIT / GIT Desktop</ListItem>
-              <ListItem>Ubuntu / Fedora / Windows 10 on (VM Ware Fusion)</ListItem>
+              <ListItem>GIT and GIT Desktop</ListItem>
+              <ListItem>Ubuntu / Fedora / Windows 11</ListItem>
             </OrderedList>
           </Box>
 
@@ -167,8 +166,7 @@ const Uses = () => {
               <ListItem>AWS </ListItem>
               <ListItem>Google Cloud</ListItem>
               <ListItem>Oracle Cloud</ListItem>
-              <ListItem>Scaleway</ListItem>
-              <ListItem>BuyVM</ListItem>
+              <ListItem>DigitalOcean</ListItem>
             </OrderedList>
           </Box>
 
@@ -222,8 +220,8 @@ const Uses = () => {
               Other Apps
             </Heading>
             <OrderedList mt={2}>
+              <ListItem>Obsidian - I have moved to obsidian for my primary note taking.</ListItem>
               <ListItem>Notion - to schedule my tasks and notes taking </ListItem>
-              <ListItem>Evernote - I am a long time premium user of Evernote. </ListItem>
               <ListItem>Alfred - Cannot imagine a mac without Alfred</ListItem>
               <ListItem>Bartender - I don't like the huge number of icons on the bar</ListItem>
               <ListItem>Table Plus - For database management</ListItem>

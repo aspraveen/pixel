@@ -7,12 +7,11 @@ import {
   Center,
   keyframes,
   usePrefersReducedMotion,
-  Image,
-  Badge,
+  Button,
 } from "@chakra-ui/react"
 import NextLink from "next/link"
 import { useDisclosure } from "@chakra-ui/react"
-import { HamburgerIcon } from "@chakra-ui/icons"
+import { HamburgerIcon, UpDownIcon } from "@chakra-ui/icons"
 import LoginStatus from "./LoginStatus"
 import { useRouter } from "next/router"
 
@@ -145,10 +144,10 @@ const Navigation = () => {
           xl: "transparent",
         }}
         opacity={{
-          base: 0.95,
-          md: 0.95,
-          lg: 0.95,
-          xl: 0.95,
+          base: 0.98,
+          md: 0.98,
+          lg: 0.98,
+          xl: 0.98,
         }}
         backgroundSize={[2200, 3500]}
         backgroundRepeat={"no-repeat"}
@@ -161,80 +160,94 @@ const Navigation = () => {
           </center>
         </Box>
         <SimpleGrid columns={{ base: 1, md: 1, lg: 1 }} spacing={10} py={5} px={10}>
-          <Box height="30px" p={2} textAlign={"center"}>
+          <Box height="10px" pb={2} textAlign={"center"}>
             <NextLink href={"/"}>
               <Text
-                textDecoration={currentPath == "/" ? "overline" : "none"}
                 textDecorationThickness={3}
                 textDecorationColor={linkUpperLineColor}
                 fontSize={"xl"}
+                borderBottom={"1px"}
+                borderBottomColor={currentPath == "/" ? "purple.300" : "orange.300"}
+                borderBottomStyle={"dotted"}
               >
                 Home
               </Text>
             </NextLink>
           </Box>
 
-          <Box height="30px" p={2} textAlign={"center"}>
+          <Box height="10px" pb={2} textAlign={"center"}>
             <NextLink href={"/about"}>
               <Text
-                textDecoration={currentPath == "/about" ? "overline" : "none"}
                 textDecorationThickness={3}
                 textDecorationColor={linkUpperLineColor}
                 fontSize={"xl"}
+                borderBottom={"1px"}
+                borderBottomColor={currentPath == "/about" ? "purple.300" : "orange.300"}
+                borderBottomStyle={"dotted"}
               >
                 About
               </Text>
             </NextLink>
           </Box>
 
-          <Box height="30px" p={2} textAlign={"center"}>
+          <Box height="10px" p={2} textAlign={"center"}>
             <NextLink href={"/uses"}>
               <Text
-                textDecoration={currentPath == "/uses" ? "overline" : "none"}
                 textDecorationThickness={3}
                 textDecorationColor={linkUpperLineColor}
                 fontSize={"xl"}
+                borderBottom={"1px"}
+                borderBottomColor={currentPath == "/uses" ? "purple.300" : "orange.300"}
+                borderBottomStyle={"dotted"}
               >
                 Uses
               </Text>
             </NextLink>
           </Box>
 
-          <Box height="30px" p={2} textAlign={"center"}>
+          <Box height="10px" p={2} textAlign={"center"}>
             <NextLink href={"/blog"}>
               <Text
-                textDecoration={
-                  currentPath == "/blog" || currentPath == "/blog/[slug]" ? "overline" : "none"
-                }
                 textDecorationThickness={3}
                 textDecorationColor={linkUpperLineColor}
                 fontSize={"xl"}
+                borderBottom={"1px"}
+                borderBottomColor={
+                  currentPath == "/blog" || currentPath == "/blog/[slug]"
+                    ? "purple.300"
+                    : "orange.300"
+                }
+                borderBottomStyle={"dotted"}
               >
                 Blog
               </Text>
             </NextLink>
           </Box>
 
-          <Box height="30px" p={2} textAlign={"center"}>
+          <Box height="10px" p={2} textAlign={"center"}>
             <NextLink href={"/contact"}>
               <Text
-                textDecoration={currentPath == "/contact" ? "overline" : "none"}
                 textDecorationThickness={3}
                 textDecorationColor={linkUpperLineColor}
                 fontSize={"xl"}
+                borderBottom={"1px"}
+                borderBottomColor={currentPath == "/contact" ? "purple.300" : "orange.300"}
+                borderBottomStyle={"dotted"}
               >
                 Contact
               </Text>
             </NextLink>
           </Box>
 
-          <Box height="30px" p={2} textAlign={"center"}>
+          <Box height="10px" p={2} textAlign={"center"}>
             <NextLink href={"/guests"}>
               <Text
-                textDecoration={currentPath == "/guests" ? "overline" : "none"}
                 textDecorationThickness={3}
                 textDecorationColor={linkUpperLineColor}
                 fontSize={"xl"}
+                borderBottom={"1px"}
+                borderBottomColor={currentPath == "/guests" ? "purple.300" : "orange.300"}
+                borderBottomStyle={"dotted"}
               >
                 Guests
               </Text>
@@ -242,11 +255,18 @@ const Navigation = () => {
           </Box>
         </SimpleGrid>
         <Center>
-          <Box onClick={onToggle} mt={10}>
-            <Badge ml="1" fontSize="2xl" colorScheme="purple">
-              CLOSE
-            </Badge>
-          </Box>
+          <Button
+            onClick={onToggle}
+            mt={10}
+            leftIcon={<UpDownIcon />}
+            colorScheme="orange"
+            variant="solid"
+            borderBottom={"1px"}
+            borderBottomColor={"orange.300"}
+            borderBottomStyle={"dotted"}
+          >
+            Close
+          </Button>
         </Center>
       </Box>
     </>
