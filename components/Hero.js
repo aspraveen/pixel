@@ -42,12 +42,11 @@ const Hero = ({ face }) => {
           </Text>
           and I work as a Technical Consultant, Application Developer, and DevOps Engineer.
           <Box mt={5}>
-            Since the year 2000 ("the dot-com era"), I have worked with a couple of companies to
-            improve their web and e-commerce platforms. My main tech stack includes Python (Django),
-            PHP (especially Laravel), MySQL, and Postgres. I have also worked with ASP.net and SQL
-            Server for some projects. Additionally, I enjoy architecting and managing solutions on
-            the cloud, especially AWS. In my current work, I mainly focus on ORACLE-based
-            technologies.
+            Since the year 2000 ("the dot-com era"), I have worked with many clients to design and
+            build their web and e-commerce platforms. My main technical stack includes Python, PHP
+            (I am a big fan of Laravel), MySQL, and Postgres. I have also worked with ASP.net and
+            SQL Server for couple of projects. Additionally, I enjoy architecting solutions on the
+            cloud, especially AWS. In my current work, I mainly focus on ORACLE-based technologies.
           </Box>
           <Box mt={5}>
             In order to thrive in today's dynamic and constantly changing IT landscape, I try to
