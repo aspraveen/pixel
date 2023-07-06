@@ -42,18 +42,17 @@ const Hero = ({ face }) => {
           </Text>
           and I work as a Technical Consultant, Application Developer, and DevOps Engineer.
           <Box mt={5}>
-            Since the year 2000 ("the dot-com era"), I have worked with many clients to design and
-            build their web and e-commerce platforms. My main technical stack includes Python, PHP
-            (I am a big fan of Laravel), MySQL, and Postgres. I have also worked with ASP.net and
-            SQL Server for couple of projects. Additionally, I enjoy architecting solutions on the
-            cloud, especially AWS. In my current work, I mainly focus on ORACLE-based technologies.
+            Since the year 2000 ("the dot-com era"), I have worked on many web and e-commerce
+            related projects using technologies such as Python, PHP ( Presently I am a big fan of
+            Laravel), MySQL and Postgres. I have also worked with ASP.net C# and SQL Server for few
+            clients. Additionally, I enjoy architecting solutions on the cloud, especially AWS.
           </Box>
           <Box mt={5}>
-            In order to thrive in today's dynamic and constantly changing IT landscape, I try to
-            experiment with new technologies whenever I get an opportunity. This has led the way to
-            redevelop and migrate this website from WordPress to JAMstack (React.js, Next.js, Prima
-            & Chakra UI). I am also exploring WEB 3.0 and Chat GPT-related technologies whenever I
-            have some free time.
+            In order to thrive in today's dynamic IT landscape, I try to experiment with new
+            technologies whenever I get an opportunity. This has led the way to redevelop and
+            migrate this website from WordPress to JAMstack (React.js, Next.js, Prima & Chakra UI).
+            I am also exploring WEB 3.0, Machine Learning & Artificial Intelligence related
+            technologies whenever I find some free time.
           </Box>
           <Box mt={5}>
             If I am not doing any IT related stuff, you can find me watching NETFLIX, browsing
