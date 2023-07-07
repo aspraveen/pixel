@@ -36,21 +36,21 @@ const Hero = ({ face }) => {
         </Heading>
         <Box mt={5}>
           <Box mt={5}>
-            Since the year 2000 ("the dot-com era"), I have worked on many web and e-commerce
-            related projects using technologies such as Python, PHP ( Presently I am a big fan of
-            Laravel), MySQL and Postgres. I have also worked with ASP.net C# and SQL Server for few
+            Since the year 2000 (the dot-com era), I have worked on many web and e-commerce related
+            projects using technologies such as Python, PHP (presently I am a big fan of Laravel),
+            MySQL, and PostgreSQL. I have also worked with ASP.NET C# and SQL Server for a few
             clients. At present, I enjoy architecting solutions on the cloud.
           </Box>
           <Box mt={5}>
             In order to thrive in today's dynamic IT landscape, I try to experiment with new
-            technologies whenever I get an opportunity which in turn lead the way to redevelop and
-            migrate this blog from WordPress to JAMstack (React.js, Next.js, Prima & Chakra UI). I
-            am also exploring WEB 3.0, Machine Learning & Artificial Intelligence whenever I find
-            some free time.
+            technologies whenever I get the opportunity. This led me to redevelop and migrate this
+            blog from WordPress to JAMstack (React.js, Next.js, Prisma, and Chakra UI). I am also
+            exploring WEB 3.0, machine learning, and artificial intelligence whenever I find some
+            free time.
           </Box>
           <Box mt={5}>
-            If I am not doing any IT related stuff, you can find me watching NETFLIX, browsing
-            Twitter or Listening to Podcasts or music.
+            If I am not doing anything IT-related, you can find me watching Netflix, browsing
+            Twitter, listening to podcasts, or listening to music.
           </Box>
           <Box mt={5}>
             Please follow me on
@@ -65,7 +65,7 @@ const Hero = ({ face }) => {
                 Twitter
               </Link>
             </Button>
-            for the tips and tricks I pick up while exploring new technologies.
+            for tips and tricks I pick up while exploring new technologies.
           </Box>
         </Box>
       </MotionBox>
