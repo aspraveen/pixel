@@ -1,4 +1,4 @@
-import { Flex, Box, Heading, useColorModeValue, Link, Text, HStack, Button } from "@chakra-ui/react"
+import { Flex, Box, Heading, useColorModeValue, Link, Button, VStack } from "@chakra-ui/react"
 import { FaTwitter } from "react-icons/fa"
 import NextImage from "next/image"
 import { motion } from "framer-motion"
@@ -26,33 +26,27 @@ const Hero = ({ face }) => {
         p={2}
         rounded={"lg"}
       >
-        <Heading fontSize={["3xl", "5xl", "6xl"]} bgGradient={gradient} bgClip="text" mt={10}>
-          Technical Consultant, Application Developer &amp; DevOps Engineer.
+        <Heading
+          fontSize={["3xl", "5xl", "5xl"]}
+          bgGradient={gradient}
+          bgClip="text"
+          mt={[3, null, 7]}
+        >
+          Hello! 👋 My name is Praveen and I am a Cloud Solutions Architect.
         </Heading>
         <Box mt={5}>
-          Hello! 👋 My name is
-          <Text
-            fontWeight={"bold"}
-            color={useColorModeValue("orange.300", "orange.100")}
-            as="span"
-            px={1}
-            textTransform="uppercase"
-          >
-            Praveen
-          </Text>
-          and I work as a Technical Consultant, Application Developer, and DevOps Engineer.
           <Box mt={5}>
             Since the year 2000 ("the dot-com era"), I have worked on many web and e-commerce
             related projects using technologies such as Python, PHP ( Presently I am a big fan of
             Laravel), MySQL and Postgres. I have also worked with ASP.net C# and SQL Server for few
-            clients. Additionally, I enjoy architecting solutions on the cloud, especially AWS.
+            clients. At present, I enjoy architecting solutions on the cloud.
           </Box>
           <Box mt={5}>
             In order to thrive in today's dynamic IT landscape, I try to experiment with new
-            technologies whenever I get an opportunity. This has led the way to redevelop and
-            migrate this website from WordPress to JAMstack (React.js, Next.js, Prima & Chakra UI).
-            I am also exploring WEB 3.0, Machine Learning & Artificial Intelligence related
-            technologies whenever I find some free time.
+            technologies whenever I get an opportunity which in turn lead the way to redevelop and
+            migrate this blog from WordPress to JAMstack (React.js, Next.js, Prima & Chakra UI). I
+            am also exploring WEB 3.0, Machine Learning & Artificial Intelligence whenever I find
+            some free time.
           </Box>
           <Box mt={5}>
             If I am not doing any IT related stuff, you can find me watching NETFLIX, browsing
@@ -75,7 +69,7 @@ const Hero = ({ face }) => {
           </Box>
         </Box>
       </MotionBox>
-      <Box textAlign={"center"} px={5}>
+      <VStack>
         <NextImage
           src={`/assets/face${face}.png`}
           width={400}
@@ -83,7 +77,7 @@ const Hero = ({ face }) => {
           alt={"praveen avatar"}
         ></NextImage>
         <Spotify />
-      </Box>
+      </VStack>
     </Flex>
   )
 }

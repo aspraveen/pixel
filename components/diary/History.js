@@ -6,11 +6,24 @@ import {
   Divider,
   SimpleGrid,
   Heading,
+  Badge,
 } from "@chakra-ui/react"
 import ClearHTML from "./ClearHTML"
 import useSWR from "swr"
 import Badges from "./Badges"
-
+//component to display day of week
+const DayOfWeek = ({ date, year }) => {
+  let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+  let oldDate = new Date(date).getDate().toString().padStart(2, "0")
+  let oldMonth = new Date(date).getMonth() + 1
+  oldMonth = oldMonth.toString().padStart(2, "0")
+  let dayName = days[new Date(`${year}/${oldMonth}/${oldDate}`).getDay()]
+  return (
+    <Badge>
+      {oldDate}/{oldMonth}/{year}, {dayName}
+    </Badge>
+  )
+}
 //component to display data for the year
 const yearFilter = (transYear) => {
   let dateVal = transYear.split("-")
@@ -101,7 +114,9 @@ const History = (props) => {
         <Box>
           {years.map((year) => (
             <Box color={"gray.300"} fontFamily={"montserrat"} fontSize={"3xl"} key={year}>
-              <Box py={2}> {year} </Box>
+              <Box py={2}>
+                {year} <DayOfWeek date={selectedDate} year={year} />
+              </Box>
               <ShowDataForYear data={data} year={year} />
               <Divider py={2} />
             </Box>

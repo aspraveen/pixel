@@ -8,6 +8,16 @@ import {
   Skeleton,
   Divider,
   Flex,
+  Table,
+  Thead,
+  Tbody,
+  Tfoot,
+  Tr,
+  Th,
+  Td,
+  TableCaption,
+  TableContainer,
+  Tooltip,
 } from "@chakra-ui/react"
 import { FaEdit, FaSmileBeam } from "react-icons/fa"
 import { RepeatIcon } from "@chakra-ui/icons"
@@ -16,8 +26,23 @@ import useSWR from "swr"
 import { NoteContext } from "../../pages/diary"
 import ClearHTML from "./ClearHTML"
 import Badges from "./Badges"
-import TotalExpense from "./TotalExpense"
 import DiaryDate from "./DiaryDate"
+const Description = ({ title, details }) => {
+  title = title.replaceAll("<br/>", ".")
+  details = details.replaceAll("<br/>", ".")
+  let shortDetails = title.substr(0, 25)
+  return (
+    <Box>
+      <Tooltip hasArrow label={details} bg={useColorModeValue("purple.600", "purple.100")}>
+        {shortDetails}
+      </Tooltip>
+    </Box>
+  )
+}
+const TotalForMonth = ({ data }) => {
+  let totalExpense = data.reduce((total, item) => total + Number(item.amount), 0).toFixed(3)
+  return totalExpense
+}
 const SelectNote = ({ note }) => {
   const [noteToEdit, setNoteToEdit] = useContext(NoteContext)
 
@@ -41,6 +66,9 @@ const SelectNote = ({ note }) => {
 
 const DisplayDiary = (props) => {
   const data = props.data
+  const notes = data.filter((note) => note.amount === null)
+  const expenses = data.filter((note) => note.amount != null)
+
   if (Object.keys(data).length == 0) {
     return (
       <Box>
@@ -85,7 +113,7 @@ const DisplayDiary = (props) => {
             <DiaryDate date={props.diaryDate} page={"display"} />
           </Box>
           <Box>
-            {data.map((entry) => (
+            {notes.map((entry) => (
               <Box
                 key={entry.id}
                 p={3}
@@ -106,7 +134,6 @@ const DisplayDiary = (props) => {
                 </Box>
                 <Divider my={5} />
                 <SimpleGrid columns={[3, null, 5]} spacing={1}>
-                  <Badges data={entry.amount} type={"amount"} />
                   <Badges data={entry.people} type={"people"} />
                   <Badges data={entry.places} type={"places"} />
                   <Badges data={entry.tags} type={"tags"} />
@@ -117,6 +144,50 @@ const DisplayDiary = (props) => {
               </Box>
             ))}
           </Box>
+          <Divider py={5} />
+          <TableContainer width={"100%"}>
+            <Table variant={"simple"} colorScheme="purple">
+              <TableCaption>Expenses List</TableCaption>
+              <Thead>
+                <Tr>
+                  <Th>SL</Th>
+                  <Th>Edit</Th>
+                  <Th>Title</Th>
+                  <Th>Severity</Th>
+                  <Th>Amount</Th>
+                </Tr>
+              </Thead>
+              <Tbody>
+                {expenses.map((expense, sl) => (
+                  <Tr key={expense.id}>
+                    <Td>{sl + 1}</Td>
+                    <Td>
+                      <SelectNote note={expense.id} />
+                    </Td>
+                    <Td>
+                      <Description title={expense.title} details={expense.details} />
+                    </Td>
+                    <Td>
+                      <Box>
+                        <Badges data={expense.amount} type={"impact"} />
+                      </Box>
+                    </Td>
+                    <Td>{expense.amount}</Td>
+                  </Tr>
+                ))}
+              </Tbody>
+              <Tfoot>
+                <Tr>
+                  <Th colSpan={4}></Th>
+                  <Th>
+                    <Box fontSize={"lg"} color={"purple.400"}>
+                      <TotalForMonth data={data} />
+                    </Box>
+                  </Th>
+                </Tr>
+              </Tfoot>
+            </Table>
+          </TableContainer>
         </VStack>
       </Box>
     )
@@ -181,11 +252,10 @@ const Display = forwardRef((props, ref) => {
     )
   }
   if (data) {
-    let totalExpense = data.reduce((total, item) => total + Number(item.amount), 0).toFixed(3)
     return (
       <>
         <DisplayDiary data={data} diaryDate={selectedDate} />
-        {totalExpense > 0 && <TotalExpense totalExpense={totalExpense} />}
+
         <Box textAlign={"right"} mt={5}>
           <IconButton
             variant="outline"

@@ -58,10 +58,10 @@ const Spotify = () => {
         borderColor={themeColor}
         borderRadius="lg"
         p={3}
-        width="90%"
+        width={"90%"}
         my={2}
       >
-        <Flex gap={3} alignItems="center">
+        <Flex gap={6} alignItems="center">
           <FaSpotify size={30} color="#f5ad42" />
           <Box>
             <Text fontSize={["xs", null, "sm"]} color={themeColor}>
@@ -93,10 +93,11 @@ const Spotify = () => {
         borderRadius="lg"
         p={3}
         my={2}
+        width={"80%"}
       >
-        <Flex gap={3} alignItems="center">
+        <Flex gap={6} alignItems="center" alignContent={"stretch"}>
           <FaSpotify size={30} color="#f5ad42" />
-          <Box>
+          <Box width={"200px"}>
             <Text fontSize={["xs", null, "sm"]} color={themeColor}>
               I'm presently not listening to Spotify
             </Text>
