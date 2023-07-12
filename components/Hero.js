@@ -1,4 +1,4 @@
-import { Flex, Box, Heading, useColorModeValue, Link, Button, VStack } from "@chakra-ui/react"
+import { Flex, Box, useColorModeValue, Link, Button, VStack, HStack, Text } from "@chakra-ui/react"
 import { FaTwitter } from "react-icons/fa"
 import NextImage from "next/image"
 import { motion } from "framer-motion"
@@ -7,6 +7,48 @@ import Spotify from "./Spotify"
 const Hero = ({ face }) => {
   const gradient = useColorModeValue("linear(to-r,orange,red )", "linear(to-r, #ff7b00, #ecca2f )")
   const MotionBox = motion(Box)
+  const heading = "Hello! My name is Praveen. I am a Cloud Solutions Architect"
+  const MotionHStack = motion(HStack)
+  const MotionText = motion(Text)
+  const MotionRight = motion(VStack)
+  const headingArrival = {
+    initial: {
+      opacity: 0,
+    },
+    animate: {
+      opacity: 1,
+      transition: {
+        delay: 0.5,
+        staggerChildren: 0.09,
+      },
+    },
+  }
+  const wordDisplay = {
+    initial: {
+      opacity: 0,
+      y: 50,
+    },
+    animate: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 1,
+      },
+    },
+  }
+  const rightDisplay = {
+    initial: {
+      opacity: 0,
+      y: -100,
+    },
+    animate: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: 1,
+      },
+    },
+  }
   return (
     <Flex
       alignItems={"center"}
@@ -26,14 +68,24 @@ const Hero = ({ face }) => {
         p={2}
         rounded={"lg"}
       >
-        <Heading
-          fontSize={["3xl", "5xl", "5xl"]}
+        <MotionHStack
+          fontSize={["3xl", "6xl", "6xl"]}
+          fontFamily={"Inter"}
           bgGradient={gradient}
           bgClip="text"
           mt={[3, null, 7]}
+          wrap={"wrap"}
+          lineHeight={"1em"}
+          variants={headingArrival}
+          initial={"initial"}
+          animate={"animate"}
         >
-          Hello! 👋 My name is Praveen and I am a Cloud Solutions Architect.
-        </Heading>
+          {heading.split(" ").map((word, index) => (
+            <MotionText key={index} variants={wordDisplay}>
+              {word}&nbsp;
+            </MotionText>
+          ))}
+        </MotionHStack>
         <Box mt={5}>
           <Box mt={5}>
             Since the year 2000 (the dot-com era), I have worked on many web and e-commerce related
@@ -69,7 +121,7 @@ const Hero = ({ face }) => {
           </Box>
         </Box>
       </MotionBox>
-      <VStack>
+      <MotionRight variants={rightDisplay} initial={"initial"} animate={"animate"}>
         <NextImage
           src={`/assets/face${face}.png`}
           width={400}
@@ -77,7 +129,7 @@ const Hero = ({ face }) => {
           alt={"praveen avatar"}
         ></NextImage>
         <Spotify />
-      </VStack>
+      </MotionRight>
     </Flex>
   )
 }

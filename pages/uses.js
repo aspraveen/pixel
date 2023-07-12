@@ -13,11 +13,26 @@ import Footer from "../components/Footer"
 import Seo from "../components/Seo"
 import Link from "next/link"
 import Image from "next/image"
+import { motion } from "framer-motion"
 
 const Uses = () => {
   const hoverBg = useColorModeValue("gray.200", "gray.600")
   const boxBgColor = useColorModeValue("orange.50", "gray.500")
   const boxHeadingColor = useColorModeValue("gray.600", "orange.400")
+  const MotionSimpleGrid = motion(SimpleGrid)
+  const gridAnimation = {
+    initial: {
+      opacity: 0,
+      x: -200,
+    },
+    animate: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        delay: 0.5,
+      },
+    },
+  }
   return (
     <>
       <Seo
@@ -33,7 +48,15 @@ const Uses = () => {
             (ORM), Neon (Serverless Postgres), Next Auth ( for authentication) and hosted proudly on
             Vercel.
           </Box>
-          <SimpleGrid columns={{ base: 2, md: 6, lg: 6 }} gap={5} p={5} spacingY={50}>
+          <MotionSimpleGrid
+            columns={{ base: 2, md: 6, lg: 6 }}
+            gap={5}
+            p={5}
+            spacingY={50}
+            variants={gridAnimation}
+            initial={"initial"}
+            animate={"animate"}
+          >
             <Image
               src={useColorModeValue("/chakra-light.svg", "/chakra-dark.svg")}
               width={100}
@@ -71,7 +94,7 @@ const Uses = () => {
               height={50}
               alt="Auth"
             />
-          </SimpleGrid>
+          </MotionSimpleGrid>
         </Box>
         <Divider py={2} />
         <Box padding={5}>
