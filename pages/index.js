@@ -9,20 +9,18 @@ const IndexPage = (props) => {
     <>
       <Seo
         title="Welcome to PixelDigit - Praveen's Blog"
-        description="I'm Praveen and I work as a software engineer as well as a technical consultant. Over the
-          last 18 years, I have worked on several projects focusing on business improvements,
-          customer service and value delivery."
+        description="Praveen have worked on many web and e-commerce related projects using technologies such as Python, PHP (Laravel), MySQL, and PostgreSQL. Praveen have also worked with ASP.NET C# and SQL Server for a few clients. At present, Praveen enjoy architecting solutions on the cloud."
       />
 
       <Container maxW="container.xl">
         <Header />
-        <Hero face={props.randomFace} />
+        <Hero />
         <Footer />
       </Container>
     </>
   )
 }
-export const getServerSideProps = async ({ res }) => {
+/*export const getServerSideProps = async ({ res }) => {
   res.setHeader("Cache-Control", "public,s-maxage=1200, stale-while-revalidate=800")
   //const randomFace = Math.floor(Math.random() * 8 + 1)
   const randomFace = new Date().getDay() + 1 //each day different face
@@ -31,6 +29,5 @@ export const getServerSideProps = async ({ res }) => {
       randomFace: randomFace,
     },
   }
-}
-
+}*/
 export default IndexPage

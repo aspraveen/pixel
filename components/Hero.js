@@ -1,6 +1,5 @@
 import { Flex, Box, useColorModeValue, Link, Button, VStack, HStack, Text } from "@chakra-ui/react"
 import { FaTwitter } from "react-icons/fa"
-import NextImage from "next/image"
 import { motion } from "framer-motion"
 import Spotify from "./Spotify"
 
@@ -88,10 +87,10 @@ const Hero = ({ face }) => {
         </MotionHStack>
         <Box mt={5}>
           <Box mt={5}>
-            Since the year 2000 (the dot-com era), I have worked on many web and e-commerce related
-            projects using technologies such as Python, PHP (presently I am a big fan of Laravel),
-            MySQL, and PostgreSQL. I have also worked with ASP.NET C# and SQL Server for a few
-            clients. At present, I enjoy architecting solutions on the cloud.
+            Since the year 2000 (the dot-com era), I have worked on many web and e-commerce projects
+            using technologies such as Python, PHP, MySQL, and PostgreSQL. I am a big fan of Laravel
+            since I started working with it. I have also worked with ASP.NET C# and SQL Server for a
+            few clients. At present, I enjoy architecting solutions on the cloud.
           </Box>
           <Box mt={5}>
             In order to thrive in today's dynamic IT landscape, I try to experiment with new
@@ -122,12 +121,6 @@ const Hero = ({ face }) => {
         </Box>
       </MotionBox>
       <MotionRight variants={rightDisplay} initial={"initial"} animate={"animate"}>
-        <NextImage
-          src={`/assets/face${face}.png`}
-          width={400}
-          height={400}
-          alt={"praveen avatar"}
-        ></NextImage>
         <Spotify />
       </MotionRight>
     </Flex>
