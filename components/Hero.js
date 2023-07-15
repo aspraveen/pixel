@@ -6,7 +6,7 @@ import Spotify from "./Spotify"
 const Hero = ({ face }) => {
   const gradient = useColorModeValue("linear(to-r,orange,red )", "linear(to-r, #ff7b00, #ecca2f )")
   const MotionBox = motion(Box)
-  const heading = "Hello! My name is Praveen. I am a Cloud Solutions Architect"
+  const heading = "Hello! My name is Praveen and I am a Cloud Architect"
   const MotionHStack = motion(HStack)
   const MotionText = motion(Text)
   const MotionRight = motion(VStack)
@@ -87,10 +87,14 @@ const Hero = ({ face }) => {
         </MotionHStack>
         <Box mt={5}>
           <Box mt={5}>
-            Since the year 2000 (the dot-com era), I have worked on many web and e-commerce projects
-            using technologies such as Python, PHP, MySQL, and PostgreSQL. I am a big fan of Laravel
-            since I started working with it. I have also worked with ASP.NET C# and SQL Server for a
-            few clients. At present, I enjoy architecting solutions on the cloud.
+            Since the year 2000 (the dot-com era), I have worked on many web and e-commerce
+            projects. My primary technological stack includes Python, PHP, MySQL, Oracle, and
+            PostgreSQL. I am a big fan of Laravel since I started working with it. I have also
+            worked with ASP.NET C# and SQL Server for a few clients.
+          </Box>
+          <Box mt={5}>
+            Currently, my main focus is helping companies and enterprises develop, implement, and
+            manage their cloud architecture.
           </Box>
           <Box mt={5}>
             In order to thrive in today's dynamic IT landscape, I try to experiment with new
