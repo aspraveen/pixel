@@ -5,7 +5,6 @@ const nextConfig = {
     domains: ["s3.amazonaws.com"],
   },
   experimental: {
-    appDir: true,
     scrollRestoration: true,
   },
 }

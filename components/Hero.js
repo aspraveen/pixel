@@ -1,5 +1,4 @@
 import { Flex, Box, useColorModeValue, Link, Button, VStack, HStack, Text } from "@chakra-ui/react"
-import { FaTwitter } from "react-icons/fa"
 import { motion } from "framer-motion"
 import Spotify from "./Spotify"
 
@@ -109,15 +108,9 @@ const Hero = ({ face }) => {
           </Box>
           <Box mt={5}>
             Please follow me on
-            <Button
-              colorScheme="twitter"
-              leftIcon={<FaTwitter />}
-              size={"sm"}
-              mx={1}
-              variant={"outline"}
-            >
-              <Link href={"https://twitter.com/aspraveen"} target="_blank">
-                Twitter
+            <Button colorScheme="purple" size={"sm"} mx={1} variant={"outline"}>
+              <Link href={"https://x.com/aspraveen"} target="_blank">
+                Twitter (X)
               </Link>
             </Button>
             for tips and tricks I pick up while exploring new technologies.

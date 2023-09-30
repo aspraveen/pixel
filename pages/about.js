@@ -8,12 +8,14 @@ import {
   Badge,
   List,
   ListItem,
+  ListIcon,
 } from "@chakra-ui/react"
 import NextImage from "next/image"
 import Header from "../components/Header"
 import { motion } from "framer-motion"
 import Footer from "../components/Footer"
 import Seo from "../components/Seo"
+import { CheckCircleIcon } from "@chakra-ui/icons"
 
 const About = () => {
   const MotionBox = motion(Box)
@@ -136,35 +138,47 @@ const About = () => {
               </Text>
             </Box>
             <List spacing={1}>
-              <ListItem>
+              <ListItem sty>
                 <Heading as="h4" size="sm" pb={2} pt={2}>
                   Oracle
                 </Heading>
-                Oracle Cloud Infrastructure - Certified Architect Associate
+                <List spacing={1}>
+                  <ListItem>
+                    <ListIcon as={CheckCircleIcon} color="orange.300" />
+                    Oracle APEX Cloud Developer Professional.
+                  </ListItem>
+                  <ListItem>
+                    <ListIcon as={CheckCircleIcon} color="orange.300" />
+                    Oracle Cloud Infrastructure - Certified Architect Associate
+                  </ListItem>
+                </List>
               </ListItem>
               <ListItem>
                 <Heading as="h4" size="sm" pb={2} pt={2}>
                   Google, Inc
                 </Heading>
-                Associate Cloud Engineer - Google Cloud
+                <ListIcon as={CheckCircleIcon} color="orange.300" /> Associate Cloud Engineer -
+                Google Cloud
               </ListItem>
-
               <ListItem>
                 <Heading as="h4" size="sm" pb={2} pt={2}>
                   Amazon Web Services
                 </Heading>
+                <ListIcon as={CheckCircleIcon} color="orange.300" />
                 AWS Certified Solutions Architect (SAA)
               </ListItem>
               <ListItem>
                 <Heading as="h4" size="sm" pb={2} pt={2}>
                   NIT Calicut
                 </Heading>
+                <ListIcon as={CheckCircleIcon} color="orange.300" />
                 Cyber Security &amp; Ethical Hacking
               </ListItem>
               <ListItem>
                 <Heading as="h4" size="sm" pb={2} pt={2}>
                   Clarient Technolgies, USA
                 </Heading>
+                <ListIcon as={CheckCircleIcon} color="orange.300" />
                 E-Commerce Specialist
               </ListItem>
             </List>
