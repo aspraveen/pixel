@@ -110,7 +110,7 @@ const Hero = ({ face }) => {
             Please follow me on
             <Button colorScheme="purple" size={"sm"} mx={1} variant={"outline"}>
               <Link href={"https://x.com/aspraveen"} target="_blank">
-                Twitter (X)
+                X / (Twitter)
               </Link>
             </Button>
             for tips and tricks I pick up while exploring new technologies.
