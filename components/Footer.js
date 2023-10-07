@@ -11,7 +11,7 @@ import {
 } from "@chakra-ui/react"
 import Link from "next/link"
 import { FaGithub, FaInstagram, FaLinkedin, FaSpotify } from "react-icons/fa"
-import { RiTwitterXLine } from "react-icons/ri"
+import { RiTwitterXLine, RiThreadsFill } from "react-icons/ri"
 
 const Footer = () => {
   const currentYear = new Date().getFullYear()
@@ -64,6 +64,7 @@ const Footer = () => {
             justify={{ base: "center", md: "right" }}
             align={{ base: "center", md: "center" }}
             h={100}
+            color={"gray.500"}
           >
             <Stack
               direction={"row"}
@@ -89,6 +90,9 @@ const Footer = () => {
               </Link>
               <Link href={"https://instagram.com/"} target="_blank">
                 <FaInstagram />
+              </Link>
+              <Link href={"https://www.threads.net/@praveen.as"} target="_blank">
+                <RiThreadsFill />
               </Link>
             </Stack>
           </Container>
