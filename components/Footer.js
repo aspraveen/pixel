@@ -10,7 +10,8 @@ import {
   Flex,
 } from "@chakra-ui/react"
 import Link from "next/link"
-import { FaGithub, FaInstagram, FaLinkedin, FaSpotify, FaTwitter } from "react-icons/fa"
+import { FaGithub, FaInstagram, FaLinkedin, FaSpotify } from "react-icons/fa"
+import { RiTwitterXLine } from "react-icons/ri"
 
 const Footer = () => {
   const currentYear = new Date().getFullYear()
@@ -78,7 +79,7 @@ const Footer = () => {
                 <FaSpotify />
               </Link>
               <Link href={"https://twitter.com/aspraveen"} target="_blank">
-                <FaTwitter />
+                <RiTwitterXLine />
               </Link>
               <Link href={"https://linkedin.com/"} target="_blank">
                 <FaLinkedin />

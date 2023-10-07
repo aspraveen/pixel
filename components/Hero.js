@@ -1,6 +1,7 @@
 import { Flex, Box, useColorModeValue, Link, Button, VStack, HStack, Text } from "@chakra-ui/react"
 import { motion } from "framer-motion"
 import Spotify from "./Spotify"
+import { RiTwitterXLine } from "react-icons/ri"
 
 const Hero = ({ face }) => {
   const gradient = useColorModeValue("linear(to-r,orange,red )", "linear(to-r, #ff7b00, #ecca2f )")
@@ -108,9 +109,18 @@ const Hero = ({ face }) => {
           </Box>
           <Box mt={5}>
             Please follow me on
-            <Button colorScheme="purple" size={"sm"} mx={1} variant={"outline"}>
-              <Link href={"https://x.com/aspraveen"} target="_blank">
-                X / (Twitter)
+            <Button
+              borderColor={"orange.300"}
+              size={"xs"}
+              mx={1}
+              variant={"outline"}
+              rounded={"md"}
+              leftIcon={<RiTwitterXLine />}
+              fontWeight={"normal"}
+              color={"orange.400"}
+            >
+              <Link href={"https://twitter.com/aspraveen"} target="_blank">
+                Twitter
               </Link>
             </Button>
             for tips and tricks I pick up while exploring new technologies.

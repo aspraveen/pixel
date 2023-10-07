@@ -54,7 +54,13 @@ const LoginStatus = (props) => {
             <FirstName name={userName} />
           </Heading>
           <Spacer />
-          <Button colorScheme="gray" variant="outline" size="xs" onClick={() => signOut()}>
+          <Button
+            colorScheme="gray"
+            variant="outline"
+            size="xs"
+            onClick={() => signOut()}
+            fontWeight={"normal"}
+          >
             Sign Out
           </Button>
           <Spacer />
@@ -90,7 +96,13 @@ const LoginStatus = (props) => {
             Guest
           </Heading>
           <Spacer />
-          <Button colorScheme="gray" variant="outline" size="xs" onClick={() => signIn()}>
+          <Button
+            colorScheme="gray"
+            variant="outline"
+            size="xs"
+            onClick={() => signIn()}
+            fontWeight={"normal"}
+          >
             Sign In
           </Button>
           <Spacer />
