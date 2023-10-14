@@ -109,6 +109,7 @@ const History = (props) => {
     }, [])
     //sort years
     years.sort()
+    years.reverse()
     return (
       <>
         <Box>
