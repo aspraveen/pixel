@@ -64,7 +64,7 @@ const Footer = () => {
             justify={{ base: "center", md: "right" }}
             align={{ base: "center", md: "center" }}
             h={100}
-            color={"gray.500"}
+            color={"orange.400"}
           >
             <Stack
               direction={"row"}

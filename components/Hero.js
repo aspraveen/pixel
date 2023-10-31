@@ -6,7 +6,7 @@ import { RiTwitterXLine } from "react-icons/ri"
 const Hero = ({ face }) => {
   const gradient = useColorModeValue("linear(to-r,orange,red )", "linear(to-r, #ff7b00, #ecca2f )")
   const MotionBox = motion(Box)
-  const heading = "Hello! My name is Praveen and I am a Cloud Architect"
+  const heading = "Hello! I am Praveen, a Cloud Architect."
   const MotionHStack = motion(HStack)
   const MotionText = motion(Text)
   const MotionRight = motion(VStack)
@@ -68,13 +68,13 @@ const Hero = ({ face }) => {
         rounded={"lg"}
       >
         <MotionHStack
-          fontSize={["3xl", "6xl", "6xl"]}
+          fontSize={["4xl", "6xl", "6xl"]}
           fontFamily={"Inter"}
           bgGradient={gradient}
           bgClip="text"
-          mt={[3, null, 7]}
+          my={[5, 9, 9]}
           wrap={"wrap"}
-          lineHeight={"1em"}
+          lineHeight={["0.7", "0.8", "0.8"]}
           variants={headingArrival}
           initial={"initial"}
           animate={"animate"}
@@ -87,14 +87,14 @@ const Hero = ({ face }) => {
         </MotionHStack>
         <Box mt={5}>
           <Box mt={5}>
-            Since the year 2000 (the dot-com era), I have worked on many web and e-commerce
-            projects. My primary technological stack includes Python, PHP, MySQL, Oracle, and
-            PostgreSQL. I am a big fan of Laravel since I started working with it. I have also
-            worked with ASP.NET C# and SQL Server for a few clients.
+            Since the turn of the millennium, during the dot-com era, I have been actively involved
+            in numerous web and e-commerce projects. My core technology stack comprises Python, PHP,
+            MySQL, Oracle, and PostgreSQL. I developed a strong affinity for Laravel since my
+            initial engagement with the framework. Furthermore, I've gained experience in utilizing
+            ASP.NET C# and SQL Server for select projects.
           </Box>
           <Box mt={5}>
-            Currently, my main focus is helping companies and enterprises develop, implement, and
-            manage their cloud architecture.
+            Currently, my main focus is on helping companies and enterprises migrate to the cloud.
           </Box>
           <Box mt={5}>
             In order to thrive in today's dynamic IT landscape, I try to experiment with new
@@ -110,14 +110,13 @@ const Hero = ({ face }) => {
           <Box mt={5}>
             Please follow me on
             <Button
-              borderColor={"orange.300"}
               size={"xs"}
               mx={1}
-              variant={"outline"}
+              variant={"solid"}
               rounded={"md"}
               leftIcon={<RiTwitterXLine />}
               fontWeight={"normal"}
-              color={"orange.400"}
+              color={"gray.500"}
             >
               <Link href={"https://twitter.com/aspraveen"} target="_blank">
                 Twitter
