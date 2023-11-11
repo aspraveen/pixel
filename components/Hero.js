@@ -109,7 +109,7 @@ const Hero = ({ face }) => {
               src={useColorModeValue(`/assets/white-af.jpg`, `/assets/black-af.jpg`)}
               width={ImageWidth}
               height={ImageHeight}
-              alt={"praveen avatar"}
+              alt={"praveen the Cloud Architect"}
             ></Image>
           </Box>
 
