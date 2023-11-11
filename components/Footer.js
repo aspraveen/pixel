@@ -8,6 +8,7 @@ import {
   Image,
   keyframes,
   Flex,
+  useColorModeValue,
 } from "@chakra-ui/react"
 import Link from "next/link"
 import { FaGithub, FaInstagram, FaLinkedin, FaSpotify } from "react-icons/fa"
@@ -21,18 +22,15 @@ const Footer = () => {
   to { transform: rotate(360deg); }
 `
   const animation = prefersReducedMotion ? undefined : `${spin} infinite 20s linear`
+  const gradient = useColorModeValue(
+    "linear(to-r, gray.100, orange.100, yellow.200)",
+    "linear(to-r, gray.600, yellow.600, gray.700)",
+  )
   return (
     <>
       <Divider mt={10}></Divider>
 
-      <Container
-        maxW="container.xl"
-        py={2}
-        backgroundImage={"url('/assets/vvvortex.svg')"}
-        backgroundSize={1200}
-        backgroundRepeat={"no-repeat"}
-        backgroundPosition={(20, 0)}
-      >
+      <Container maxW="container.xl" py={2} bgGradient={gradient} borderRadius={"lg"}>
         <Flex direction={{ base: "column-reverse", md: "row" }}>
           <Container
             as={Stack}

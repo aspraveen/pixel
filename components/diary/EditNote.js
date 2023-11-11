@@ -185,7 +185,7 @@ const EditNote = (props) => {
             value={inputField.paymentMethod}
           >
             <option>Benefit</option>
-            <option>City Bank</option>
+            <option>AUB Masterk</option>
             <option>CrediMax Prepaid</option>
             <option>Federal</option>
             <option>ICICI</option>

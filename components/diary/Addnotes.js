@@ -183,7 +183,7 @@ const Addnotes = (props) => {
                   color="orange.300"
                 >
                   <option>Benefit</option>
-                  <option>City Bank</option>
+                  <option>AUB Master</option>
                   <option>CrediMax Prepaid</option>
                   <option>Federal</option>
                   <option>ICICI</option>
