@@ -119,7 +119,8 @@ const Hero = ({ face }) => {
             whileTap={{ scale: 0.8 }}
             p={2}
             height={["auto", "auto", 400]}
-            overflow={"scroll"}
+            overflowY={"scroll"}
+            overflowX={"hidden"}
           >
             <Box>
               Hello! I am Praveen, a Cloud Architect.Since the turn of the millennium, during the
