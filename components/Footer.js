@@ -23,8 +23,8 @@ const Footer = () => {
 `
   const animation = prefersReducedMotion ? undefined : `${spin} infinite 20s linear`
   const gradient = useColorModeValue(
-    "linear(to-r, gray.100, orange.100, yellow.200)",
-    "linear(to-r, gray.600, yellow.600, gray.700)",
+    "linear(to-r, gray.50, orange.50, gray.50)",
+    "linear(to-r, gray.800, gray.700, gray.800)",
   )
   return (
     <>
@@ -62,7 +62,7 @@ const Footer = () => {
             justify={{ base: "center", md: "right" }}
             align={{ base: "center", md: "center" }}
             h={100}
-            color={"orange.400"}
+            color={"black.300"}
           >
             <Stack
               direction={"row"}
