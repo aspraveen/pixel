@@ -104,14 +104,14 @@ const Hero = ({ face }) => {
           }}
           gao={5}
         >
-          <Box flexShrink={0}>
-            <Image
-              src={useColorModeValue(`/assets/white-af.jpg`, `/assets/black-af.jpg`)}
-              width={ImageWidth}
-              height={ImageHeight}
-              alt={"praveen the Cloud Architect"}
-            ></Image>
-          </Box>
+          <Box
+            flexShrink={0}
+            width={["90%", 400, 400, 400]}
+            height={[200, 400, 400, 400]}
+            backgroundSize={800}
+            backgroundImage={"url('/assets/vvvortex.svg')"}
+            backgroundPosition={(-100, -150)}
+          ></Box>
 
           <MotionBox
             transition={{ ease: "easeOut", duration: 2 }}

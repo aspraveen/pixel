@@ -9,8 +9,9 @@ import {
   List,
   ListItem,
   ListIcon,
+  useColorModeValue,
 } from "@chakra-ui/react"
-import NextImage from "next/image"
+import Image from "next/image"
 import Header from "../components/Header"
 import { motion } from "framer-motion"
 import Footer from "../components/Footer"
@@ -49,12 +50,12 @@ const About = () => {
                 </Highlight>
               </Heading>
             </MotionBox>
-            <NextImage
-              src={"/assets/developer.svg"}
-              height={200}
+            <Image
+              src={useColorModeValue(`/assets/white-af.jpg`, `/assets/black-af.jpg`)}
               width={400}
-              alt={"developer"}
-            ></NextImage>
+              height={400}
+              alt={"praveen the Cloud Architect"}
+            ></Image>
             <Text lineHeight={"180%"}>
               <Text fontSize={["lg", "xl", "2xl"]} fontWeight="bold" mt={10} color={"orange.300"}>
                 Idea behind the name.
