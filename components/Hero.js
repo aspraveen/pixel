@@ -108,27 +108,31 @@ const Hero = ({ face }) => {
             flexShrink={0}
             width={["90%", 400, 400, 400]}
             height={[200, 400, 400, 400]}
-            backgroundSize={800}
+            backgroundSize={700}
             backgroundImage={"url('/assets/vvvortex.svg')"}
-            backgroundPosition={(-100, -150)}
+            backgroundPosition={(-100, -120)}
           ></Box>
 
           <MotionBox
             transition={{ ease: "easeOut", duration: 2 }}
             whileHover={{ y: -10 }}
             whileTap={{ scale: 0.8 }}
-            p={2}
+            px={2}
             height={["auto", "auto", 400]}
             overflowY={"scroll"}
             overflowX={"hidden"}
+            my={[5, 0, 0, 0]}
           >
             <Box>
-              Hello! I am Praveen, a Cloud Architect.Since the turn of the millennium, during the
-              dot-com era, I have been actively involved in numerous web and e-commerce projects. My
-              core technology stack comprises Python, PHP, MySQL, Oracle, and PostgreSQL. I
-              developed a strong affinity for Laravel since my initial engagement with the
-              framework. Furthermore, I've gained experience in utilizing ASP.NET C# and SQL Server
-              for select projects.
+              Hello! I am
+              <Text as="span" fontWeight={"bold"} color={"orange.300"}>
+                Praveen
+              </Text>
+              , a Cloud Architect. Since the turn of the millennium, during the dot-com era, I have
+              been actively involved in numerous web and e-commerce projects. My core technology
+              stack comprises Python, PHP, MySQL, Oracle, and PostgreSQL. I developed a strong
+              affinity for Laravel since my initial engagement with the framework. Furthermore, I've
+              gained experience in utilizing ASP.NET C# and SQL Server for select projects.
             </Box>
             <Box mt={5}>
               Currently, my main focus is on helping companies and enterprises migrate to the cloud.
@@ -149,11 +153,11 @@ const Hero = ({ face }) => {
               <Button
                 size={"xs"}
                 mx={1}
-                variant={"solid"}
+                variant={"outline"}
                 rounded={"md"}
                 leftIcon={<RiTwitterXLine />}
                 fontWeight={"normal"}
-                color={"gray.500"}
+                color={"orange.300"}
               >
                 <Link href={"https://twitter.com/aspraveen"} target="_blank">
                   Twitter

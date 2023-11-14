@@ -55,9 +55,8 @@ const BlogPosts = () => {
             </Text>
           </Box>
           <Box>
-            <Text fontStyle={"italic"} color="gray.500">
+            <Text fontStyle={"italic"} color="gray.500" fontSize={["xs", "xs", "sm"]}>
               {new Date(post.publishedAt).toLocaleDateString("en-us", {
-                weekday: "long",
                 year: "numeric",
                 month: "short",
                 day: "numeric",
@@ -89,18 +88,6 @@ const LatestPosts = () => {
     <Box width={["100%", "98%", "98%", 400]} verticalAlign={"top"}>
       <Box>
         <BlogPosts />
-        <Box>
-          <Link href={`blog/`}>
-            <Button
-              size={["sm", "lg", "lg"]}
-              rightIcon={<HiArrowRight />}
-              variant="outline"
-              mr={[2, 5, 5]}
-            >
-              View all posts
-            </Button>
-          </Link>
-        </Box>
       </Box>
       <Spotify />
     </Box>

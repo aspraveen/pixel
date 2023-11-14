@@ -1,4 +1,4 @@
-import { Box, Flex, Text, useColorModeValue, Button } from "@chakra-ui/react"
+import { Box, Flex, Text, useColorModeValue, Button, Center } from "@chakra-ui/react"
 import Link from "next/link"
 import { FaSpotify } from "react-icons/fa"
 import useSWR from "swr"
@@ -101,27 +101,29 @@ const Spotify = () => {
         width={"100%"}
         my={2}
       >
-        <Box fontSize={["xs", null, "sm"]} color={themeColor}>
-          Please follow me on Spotify for favourite Podcasts and Music.
-        </Box>
-        <Button
-          size={"lg"}
-          mx={1}
-          variant={"ghost"}
-          rounded={"md"}
-          leftIcon={<FaSpotify />}
-          fontWeight={"normal"}
-          color={"orange.400"}
-        >
-          <Link
-            href={
-              "https://open.spotify.com/user/rbbpft1sq5iohjqdr2zqx0i8z?si=c8107cce8e9b4c28&nd=1"
-            }
-            target="_blank"
+        <Center>
+          <Box fontSize={["xs", null, "sm"]} color={themeColor}>
+            Please visit my Spotify for details.
+          </Box>
+          <Button
+            size={"lg"}
+            mx={1}
+            variant={"ghost"}
+            rounded={"md"}
+            leftIcon={<FaSpotify />}
+            fontWeight={"normal"}
+            color={"orange.400"}
           >
-            Spotify
-          </Link>
-        </Button>
+            <Link
+              href={
+                "https://open.spotify.com/user/rbbpft1sq5iohjqdr2zqx0i8z?si=c8107cce8e9b4c28&nd=1"
+              }
+              target="_blank"
+            >
+              Spotify
+            </Link>
+          </Button>
+        </Center>
       </Box>
     )
   }

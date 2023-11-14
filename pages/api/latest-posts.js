@@ -27,7 +27,7 @@ const handler = async (req, res) => {
       orderBy: {
         publishedAt: "desc",
       },
-      take: 2,
+      take: 3,
     })
     res.status(200).json(posts)
   } catch (err) {
