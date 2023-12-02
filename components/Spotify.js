@@ -103,7 +103,7 @@ const Spotify = () => {
       >
         <Center>
           <Box fontSize={["xs", null, "sm"]} color={themeColor}>
-            Please visit my Spotify for details.
+            Presently I am not listening Spotify.
           </Box>
           <Button
             size={"lg"}
