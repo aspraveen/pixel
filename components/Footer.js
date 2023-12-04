@@ -11,7 +11,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react"
 import Link from "next/link"
-import { FaGithub, FaInstagram, FaLinkedin, FaSpotify } from "react-icons/fa"
+import { FaGithub, FaInstagram, FaLinkedin, FaSpotify, FaTiktok } from "react-icons/fa"
 import { RiTwitterXLine, RiThreadsFill } from "react-icons/ri"
 
 const Footer = () => {
@@ -86,11 +86,14 @@ const Footer = () => {
               <Link href={"https://github.com/aspraveen"} target="_blank">
                 <FaGithub />
               </Link>
-              <Link href={"https://instagram.com/"} target="_blank">
+              <Link href={"https://instagram.com/praveen.as"} target="_blank">
                 <FaInstagram />
               </Link>
               <Link href={"https://www.threads.net/@praveen.as"} target="_blank">
                 <RiThreadsFill />
+              </Link>
+              <Link href={"https://www.tiktok.com/@praveenisgreat"} target="_blank">
+                <FaTiktok />
               </Link>
             </Stack>
           </Container>

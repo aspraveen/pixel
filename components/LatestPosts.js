@@ -45,24 +45,22 @@ const BlogPosts = () => {
     )
   }
   return data.map((post, sl) => (
-    <>
-      <Box key={post.id} p={2} mb={5} boxShadow={"base"}>
+    <Box key={sl}>
+      <Box p={2} mb={5} boxShadow={"base"}>
         <Flex alignItems={"center"} gap={3}>
           <Avatar name={post.user.name} size={avatarSize} bg="orange.500"></Avatar>
-          <Box>
-            <Text fontSize={["xs", "xs", "md"]} color="gray.400" fontFamily="Open Sans">
-              {post.user.name}
-            </Text>
-          </Box>
-          <Box>
-            <Text fontStyle={"italic"} color="gray.500" fontSize={["xs", "xs", "sm"]}>
-              {new Date(post.publishedAt).toLocaleDateString("en-us", {
-                year: "numeric",
-                month: "short",
-                day: "numeric",
-              })}
-            </Text>
-          </Box>
+
+          <Text fontSize={["xs", "xs", "md"]} color="gray.400" fontFamily="Open Sans">
+            {post.user.name}
+          </Text>
+
+          <Text fontStyle={"italic"} color="gray.500" fontSize={["xs", "xs", "sm"]}>
+            {new Date(post.publishedAt).toLocaleDateString("en-us", {
+              year: "numeric",
+              month: "short",
+              day: "numeric",
+            })}
+          </Text>
         </Flex>
         <Heading as="h2" fontSize={["lg", "lg", "lg"]} mt={3}>
           {post.title}
@@ -79,16 +77,15 @@ const BlogPosts = () => {
           <Badge colorScheme={"cyan"}>{post.category.name}</Badge>
         </Flex>
       </Box>
-    </>
+    </Box>
   ))
 }
 
 const LatestPosts = () => {
   return (
     <Box width={["100%", "98%", "98%", 400]} verticalAlign={"top"}>
-      <Box>
-        <BlogPosts />
-      </Box>
+      <BlogPosts />
+
       <Spotify />
     </Box>
   )
