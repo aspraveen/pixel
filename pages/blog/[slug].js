@@ -11,6 +11,7 @@ import {
   Wrap,
   WrapItem,
   useBreakpointValue,
+  Stack,
 } from "@chakra-ui/react"
 import { useRouter } from "next/router"
 import Header from "../../components/Header"
@@ -88,7 +89,7 @@ export default function PostDetails({ data, categories }) {
       <Seo title={data.title} />
       <Container maxW="container.xl">
         <Header />
-        <Flex gap={2}>
+        <Stack direction={['column-reverse', 'row']}>
           <Box w={{ base: "98%", md: "70%" }} mt={5}>
             <Flex align="center">
               <Box fontSize={["sm", "md", "md"]} fontStyle="italic" color="gray.500">
@@ -158,15 +159,15 @@ export default function PostDetails({ data, categories }) {
           </Box>
 
           <Box
-            width="25%"
-            display={{
-              base: "none",
-              md: "block",
-            }}
-            height={"vh"}
-            rounded="lg"
-            px={3}
-            boxShadow={"xs"}
+        width={["90%", "25%", "25%"]}
+        height={"vh"}
+        rounded="lg"
+        px={3}
+        boxShadow={"xs"}
+        backgroundImage={"url('/assets/vvvortex.svg')"}
+      backgroundSize={randomPosition}
+      backgroundPosition={(50, -100)}
+      pb={5}
           >
             <Heading as="h4" fontSize={["lg", "lg", "lg"]} py={5}>
               Blog Categories
@@ -188,7 +189,7 @@ export default function PostDetails({ data, categories }) {
               ))}
             </Wrap>
           </Box>
-        </Flex>
+        </Stack>
         <Footer />
       </Container>
     </>

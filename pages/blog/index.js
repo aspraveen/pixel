@@ -10,6 +10,7 @@ import {
   Button,
   Wrap,
   WrapItem,
+  Stack,
 } from "@chakra-ui/react"
 import Header from "../../components/Header"
 import NextLink from "next/link"
@@ -30,7 +31,7 @@ export default function Post({ posts, categories }) {
       />
       <Container maxW="container.xl">
         <Header />
-        <Flex>
+        <Stack  direction={['column-reverse', 'row']}>
           <Box w={{ base: "98%", md: "75%" }} mt={10} p={[2, 5, 5]}>
             {posts.map((post) => (
               <Box key={post.id} p={2} mb={5} boxShadow={"base"}>
@@ -71,15 +72,15 @@ export default function Post({ posts, categories }) {
           </Box>
 
           <Box
-            width="25%"
-            display={{
-              base: "none",
-              md: "block",
-            }}
+            width={["90%", "25%", "25%"]}
             height={"vh"}
             rounded="lg"
             px={3}
             boxShadow={"xs"}
+            backgroundImage={"url('/assets/vvvortex.svg')"}
+          backgroundSize={randomPosition}
+          backgroundPosition={(50, -100)}
+          pb={5}
           >
             <Heading as="h4" fontSize={["lg", "lg", "lg"]} py={5}>
               Blog Categories
@@ -101,7 +102,7 @@ export default function Post({ posts, categories }) {
               ))}
             </Wrap>
           </Box>
-        </Flex>
+        </Stack>
         <Footer />
       </Container>
     </>
