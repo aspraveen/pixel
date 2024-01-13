@@ -29,6 +29,8 @@ const handler = async (req, res) => {
       },
       take: 2,
     })
+    // Set Cache-Control header
+    res.setHeader('Cache-Control', 's-maxage=10800, stale-while-revalidate');
     res.status(200).json(posts)
   } catch (err) {
     res.status(400).json({ msg: `Unknown Error Occurred.` })

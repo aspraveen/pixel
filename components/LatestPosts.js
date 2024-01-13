@@ -17,7 +17,6 @@ import Link from "next/link"
 import { HiArrowRight } from "react-icons/hi"
 
 const BlogPosts = () => {
-  const hoverBg = useColorModeValue("orange.200", "orange.600")
   const avatarSize = useBreakpointValue({ base: "xs", md: "sm" })
 
   const fetcher = async (url) => {
