@@ -80,14 +80,14 @@ const About = () => {
                 <Heading as="h4" size="sm" pb={2} pt={2}>
                   2019 to present
                 </Heading>
-                Back to Bahrain.. and joined back my old employer as the Senior Systems Analyst.
+                Working as Senior Systems Analyst with one of the leading business conglomerate in Kingdom of Bahrain.
               </ListItem>
               <ListItem>
                 <Heading as="h4" size="sm" pb={2} pt={2}>
                   2016 to 2019
                 </Heading>
-                Moved to Dubai ( UAE ) to join Loyalty Systems provider ‘Bebuzzd’ as their Senior
-                System Analyst.
+                Joined Loyalty Systems provider ‘Bebuzzd’ Dubai (UAE) as their Senior
+                Solutions Architect
               </ListItem>
               <ListItem>
                 <Heading as="h4" size="sm" pb={2} pt={2}>
