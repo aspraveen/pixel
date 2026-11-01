@@ -84,4 +84,5 @@ const ListImages = forwardRef((props, ref) => {
     </>
   )
 })
+ListImages.displayName = "ListImages"
 export default ListImages

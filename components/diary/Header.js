@@ -1,3 +1,4 @@
+import { keyframes } from "@emotion/react"
 import {
   Container,
   Flex,
@@ -5,7 +6,6 @@ import {
   Box,
   Image,
   usePrefersReducedMotion,
-  keyframes,
 } from "@chakra-ui/react"
 import Link from "next/link"
 import ColorModeSwitch from "../ColorModeSwitch"

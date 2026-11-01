@@ -15,7 +15,7 @@ import { useState, useEffect, useCallback } from "react"
 import { FaMinus, FaPlus } from "react-icons/fa"
 
 const Addnotes = (props) => {
-  const [transDate, setTransDate] = useState(props.selectedDate)
+  const [transDate] = useState(props.selectedDate)
   const [inputFields, setInputFields] = useState([
     {
       title: "",
@@ -85,7 +85,7 @@ const Addnotes = (props) => {
     }
   }
 
-  const handleAddBox = (props) => {
+  const handleAddBox = () => {
     setInputFields([
       ...inputFields,
       {

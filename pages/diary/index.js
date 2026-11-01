@@ -129,7 +129,7 @@ const ExpForMonth = ({ date }) => {
     </>
   )
 }
-const index = () => {
+const Diary = () => {
   const dateString = new Date()
   const [selectedDate, setSelectedDate] = useState(dateString.toISOString().slice(0, 10))
   const handleSelectedDate = (dateFromCalenderComponent) => {
@@ -352,7 +352,7 @@ const index = () => {
     </NoteContext.Provider>
   )
 }
-export default index
+export default Diary
 export async function getServerSideProps(context) {
   const session = await getServerSession(context.req, context.res, authOptions)
   if (!session) {

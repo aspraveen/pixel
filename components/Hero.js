@@ -6,22 +6,18 @@ import {
   Button,
   HStack,
   Text,
-  useBreakpointValue,
 } from "@chakra-ui/react"
 import { motion } from "framer-motion"
 import { RiTwitterXLine } from "react-icons/ri"
 import LatestPosts from "./LatestPosts"
-import Image from "next/image"
 
-const Hero = ({ face }) => {
+const Hero = () => {
   const gradient = useColorModeValue("linear(to-r,orange,red )", "linear(to-r, #ff7b00, #ecca2f )")
   const MotionBox = motion(Box)
   const heading =
     "Experienced Cloud Architect specializing in Web, E-commerce, and Cloud Migration."
   const MotionHStack = motion(HStack)
   const MotionText = motion(Text)
-  const ImageWidth = 400 //useBreakpointValue({ base: 200, md: 200, lg: 300, xl: 300 })
-  const ImageHeight = 400 //useBreakpointValue({ base: 350, md: 350, lg: 550, xl: 550 })
 
   const headingArrival = {
     initial: {
@@ -45,19 +41,6 @@ const Hero = ({ face }) => {
       y: 0,
       transition: {
         duration: 1,
-      },
-    },
-  }
-  const rightDisplay = {
-    initial: {
-      opacity: 0,
-      y: -100,
-    },
-    animate: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        delay: 1,
       },
     },
   }
@@ -131,14 +114,14 @@ const Hero = ({ face }) => {
               , a Cloud Architect. Since the turn of the millennium, during the dot-com era, I have
               been actively involved in numerous web and e-commerce projects. My core technology
               stack comprises Python, PHP, MySQL, Oracle, and PostgreSQL. I developed a strong
-              affinity for Laravel since my initial engagement with the framework. Furthermore, I've
+              affinity for Laravel since my initial engagement with the framework. Furthermore, I&apos;ve
               gained experience in utilizing ASP.NET C# and SQL Server for select projects.
             </Box>
             <Box mt={5}>
               Currently, my main focus is on helping companies and enterprises migrate to the cloud.
             </Box>
             <Box mt={5}>
-              In order to thrive in today's dynamic IT landscape, I try to experiment with new
+              In order to thrive in today&apos;s dynamic IT landscape, I try to experiment with new
               technologies whenever I get the opportunity. This led me to redevelop and migrate this
               blog from WordPress to JAMstack (React.js, Next.js, Prisma, and Chakra UI). I am also
               exploring WEB 3.0, machine learning, and artificial intelligence whenever I find some

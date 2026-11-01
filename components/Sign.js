@@ -15,6 +15,7 @@ import { useState, useEffect } from "react"
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3"
 
 const Sign = () => {
+  // eslint-disable-next-line no-unused-vars
   const { executeRecaptcha } = useGoogleReCaptcha()
   const [message, SetMessage] = useState()
   const [alertMsg, setAlertMsg] = useState()

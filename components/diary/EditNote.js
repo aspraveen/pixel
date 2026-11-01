@@ -1,11 +1,11 @@
-import { Input, Box, Textarea, Button, useToast, Center, IconButton } from "@chakra-ui/react"
+import { Input, Box, Textarea, Button, useToast, IconButton } from "@chakra-ui/react"
 import { useEffect, useState, useContext } from "react"
 import { NoteContext } from "../../pages/diary"
 import { DeleteIcon } from "@chakra-ui/icons"
 
 const ConfirmationBox = ({ note, closeModal }) => {
   const toast = useToast()
-  const handleDelete = async (e) => {
+  const handleDelete = async () => {
     const url = `/api/diary/?id=${note}`
     const response = await fetch(url, {
       method: "DELETE",
@@ -34,14 +34,14 @@ const ConfirmationBox = ({ note, closeModal }) => {
     <Box bgColor={"pink.50"} rounded={"lg"} color={"pink.500"} py={10} px={5}>
       Confirm Deletion of this note.{" "}
       <Button colorScheme="pink" onClick={handleDelete}>
-        I'm Sure
+        I&apos;m Sure
       </Button>
     </Box>
   )
 }
 
 const EditNote = (props) => {
-  const [noteToEdit, setNoteToEdit] = useContext(NoteContext)
+  const [, setNoteToEdit] = useContext(NoteContext)
   const toast = useToast()
   const [confirmDelete, setConfirmDelete] = useState(false)
   const [inputField, setInputField] = useState({

@@ -1,4 +1,4 @@
-import { useColorMode, useColorModeValue, IconButton, IconButtonProps } from "@chakra-ui/react"
+import { useColorMode, useColorModeValue, IconButton } from "@chakra-ui/react"
 import { SunIcon, MoonIcon } from "@chakra-ui/icons"
 const ColorModeSwitch = (props) => {
   const { toggleColorMode } = useColorMode()

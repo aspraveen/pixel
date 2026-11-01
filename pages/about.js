@@ -45,7 +45,7 @@ const About = () => {
                     rounded: "full",
                   }}
                 >
-                  Praveen's Blog, a.k.a PixelDigit is an attempt to share my thoughts and ideas with
+                  Praveen&apos;s Blog, a.k.a PixelDigit is an attempt to share my thoughts and ideas with
                   you.
                 </Highlight>
               </Heading>

@@ -2,6 +2,8 @@ import { authOptions } from "/pages/api/auth/[...nextauth]"
 import { getServerSession } from "next-auth"
 import { prisma } from "../../util/db"
 import sg from "@sendgrid/mail"
+// reCAPTCHA check is disabled below; kept for re-enabling
+// eslint-disable-next-line no-unused-vars
 const verifyCaptchaToken = async (token) => {
   let result
   const secretKey = process.env.RECAPTCHA_SITE_SECRET
@@ -29,6 +31,7 @@ const handler = async (req, res) => {
     } else {
       const { userId } = session
       const reqPayLoad = req.body
+      // eslint-disable-next-line no-unused-vars
       const { message, token } = reqPayLoad
       let score = "0"
       //verify token
@@ -39,7 +42,7 @@ const handler = async (req, res) => {
       // }
       try {
         //add entry to guest book
-        const addComment = await prisma.guestBook.create({
+        await prisma.guestBook.create({
           data: { comment: message, userId: userId, captchaScore: score, ip },
         })
         //find signed user details
@@ -96,7 +99,7 @@ const handler = async (req, res) => {
       //check if the entry belongs to user or not
       const checkOwner = await prisma.guestBook.findUnique({ where: { id } })
       if (checkOwner.userId == userId) {
-        const unpublish = await prisma.guestBook.update({
+        await prisma.guestBook.update({
           where: { id: id },
           data: { status: false, ip },
         })
@@ -106,6 +109,7 @@ const handler = async (req, res) => {
       }
     }
   } else if (req.method === "DELETE") {
+    res.status(405).json({ msg: "method not allowed" })
   } else if (req.method === "GET") {
     const getComments = await prisma.guestBook.findMany({
       where: {

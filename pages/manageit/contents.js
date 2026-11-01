@@ -13,13 +13,12 @@ import {
 import Header from "../../components/Header"
 import { RichTextBlock } from "../../components/manageit/RichTextBlock"
 import Link from "next/link"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { useRouter } from "next/router"
 import { prisma } from "../../util/db"
 import { authOptions } from "../api/auth/[...nextauth]"
 import { getServerSession } from "next-auth"
 
-const { log } = console
 
 const Contents = ({ categories, session }) => {
   const router = useRouter()
@@ -86,7 +85,9 @@ const Contents = ({ categories, session }) => {
             onChange={({ target }) => setCategory(target?.value)}
           >
             {categories.map((category) => (
-              <option value={category.id}>{category.name}</option>
+              <option key={category.id} value={category.id}>
+                {category.name}
+              </option>
             ))}
           </Select>
           <Input

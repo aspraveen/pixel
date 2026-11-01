@@ -18,7 +18,7 @@ import Header from "../../components/Header"
 import { prisma } from "../../util/db"
 import { authOptions } from "../api/auth/[...nextauth]"
 
-const listContents = ({ posts, session }) => {
+const listContents = ({ posts }) => {
   return (
     <>
       <Container maxW="container.xl">

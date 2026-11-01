@@ -1,3 +1,4 @@
+import { keyframes } from "@emotion/react"
 import {
   Container,
   Divider,
@@ -6,7 +7,6 @@ import {
   usePrefersReducedMotion,
   Stack,
   Image,
-  keyframes,
   Flex,
   useColorModeValue,
 } from "@chakra-ui/react"

@@ -11,7 +11,7 @@ const post = async (req, res) => {
     if (req.method === "POST") {
       //insert to prisma
       try {
-        const addPost = await prisma.post.create({
+        await prisma.post.create({
           data: {
             title: title,
             slug: slug,
@@ -30,7 +30,7 @@ const post = async (req, res) => {
       }
     } else if (req.method === "PUT") {
       try {
-        const editPost = await prisma.post.update({
+        await prisma.post.update({
           where: {
             id: id,
           },
@@ -51,7 +51,7 @@ const post = async (req, res) => {
       }
     } else if (req.method === "DELETE") {
       try {
-        const deletePost = await prisma.post.delete({
+        await prisma.post.delete({
           where: {
             id: id,
           },

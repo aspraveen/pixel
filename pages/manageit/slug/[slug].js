@@ -7,12 +7,11 @@ import { useEffect, useState } from "react"
 import { useRouter } from "next/router"
 import { getServerSession } from "next-auth"
 import { authOptions } from "../../api/auth/[...nextauth]"
-const editContent = ({ post, categories }) => {
+const EditContent = ({ post, categories }) => {
   const router = useRouter()
   const [id, setId] = useState()
   const [title, setTitle] = useState()
   const [slug, setSlug] = useState()
-  const [details, setDetails] = useState()
   const [intro, setIntro] = useState()
   const [status, setStatus] = useState(2)
   const [publishedAt, setPublishedAt] = useState()
@@ -74,7 +73,7 @@ const editContent = ({ post, categories }) => {
       method: "DELETE",
       body: JSON.stringify(postPayLoad),
     })
-    const result = await response.json()
+    await response.json()
     //  if (result.msg == "done") {
     router.push("/manageit/list-contents")
     //  }
@@ -83,9 +82,13 @@ const editContent = ({ post, categories }) => {
     <Container maxW="container.xl">
       <Header />
       <h2>Contents</h2>
-      <Select placeholder="select category" onChange={({ target }) => setCategory(target?.value)}>
+      <Select
+        placeholder="select category"
+        value={category ?? ""}
+        onChange={({ target }) => setCategory(target?.value)}
+      >
         {categories.map((item) => (
-          <option value={item.id} selected={item.id === category ? "selected" : "false"}>
+          <option key={item.id} value={item.id}>
             {item.name}
           </option>
         ))}
@@ -176,4 +179,4 @@ export async function getServerSideProps({ req, res, params }) {
     }
   }
 }
-export default editContent
+export default EditContent

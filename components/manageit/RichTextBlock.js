@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react"
 import isHotkey from "is-hotkey"
 import { Editable, withReact, Slate, ReactEditor } from "slate-react"
-import { Editor, Transforms, createEditor, Node } from "slate"
+import { Editor, Transforms, createEditor } from "slate"
 import { withHistory } from "slate-history"
 import { Box } from "@chakra-ui/react"
 import { Element, Leaf, toggleMark, Toolbar } from "./RichTextComponents"
@@ -49,7 +49,7 @@ let initialValue = [
   },
 ]
 
-export const RichTextBlock = ({}) => {
+export const RichTextBlock = () => {
   const [value, setValue] = useState(initialValue)
   useEffect(() => {
     const contents = localStorage.getItem("content")
@@ -61,7 +61,7 @@ export const RichTextBlock = ({}) => {
   const editor = useMemo(() => withHistory(withReact(createEditor())), [])
 
   //focus selection
-  const [focused, setFocused] = React.useState(false)
+  const [, setFocused] = React.useState(false)
   const savedSelection = React.useRef(editor.selection)
 
   const onFocus = React.useCallback(() => {
