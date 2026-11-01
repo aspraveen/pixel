@@ -2,6 +2,7 @@ import {
   Box,
   VStack,
   SimpleGrid,
+  useColorMode,
   useColorModeValue,
   IconButton,
   Stack,
@@ -44,7 +45,7 @@ const TotalForMonth = ({ data }) => {
   return totalExpense
 }
 const SelectNote = ({ note }) => {
-  const [noteToEdit, setNoteToEdit] = useContext(NoteContext)
+  const [, setNoteToEdit] = useContext(NoteContext)
 
   const handleClick = (note) => {
     setNoteToEdit(note)
@@ -65,6 +66,8 @@ const SelectNote = ({ note }) => {
 }
 
 const DisplayDiary = (props) => {
+  const { colorMode } = useColorMode()
+  const mode = (light, dark) => (colorMode === "dark" ? dark : light)
   const data = props.data
   const notes = data.filter((note) => note.amount === null)
   const expenses = data.filter((note) => note.amount != null)
@@ -79,17 +82,17 @@ const DisplayDiary = (props) => {
             rounded={"md"}
             fontSize={["lg", null, "xl"]}
             borderBottom={"4px"}
-            borderColor={useColorModeValue("gray.200", "gray.600")}
+            borderColor={mode("gray.200", "gray.600")}
           >
             <DiaryDate date={props.diaryDate} page={"display"} />
           </Box>
           <Box width={"100%"}>
             <Box padding="3" boxShadow="sm" color={"gray.500"}>
-              <Box color={useColorModeValue("gray.300", "gray.500")}>
+              <Box color={mode("gray.300", "gray.500")}>
                 <Flex alignItems={"center"}>
                   <FaSmileBeam size={50} />
                   <Box fontSize={["sm", null, "xl"]} ml={2}>
-                    it's empty!
+                    it&apos;s empty!
                   </Box>
                 </Flex>
               </Box>
@@ -108,7 +111,7 @@ const DisplayDiary = (props) => {
             rounded={"md"}
             fontSize={["lg", null, "xl"]}
             borderBottom={"4px"}
-            borderColor={useColorModeValue("gray.200", "gray.600")}
+            borderColor={mode("gray.200", "gray.600")}
           >
             <DiaryDate date={props.diaryDate} page={"display"} />
           </Box>
@@ -123,13 +126,13 @@ const DisplayDiary = (props) => {
                 boxShadow={"base"}
               >
                 <Box
-                  color={useColorModeValue("gray.500", "whiteAlpha.600")}
+                  color={mode("gray.500", "whiteAlpha.600")}
                   fontFamily="Inter"
                   fontWeight={"light"}
                 >
                   <ClearHTML details={entry.title} />
                 </Box>
-                <Box color={useColorModeValue("gray.500", "whiteAlpha.600")} lineHeight={"6"}>
+                <Box color={mode("gray.500", "whiteAlpha.600")} lineHeight={"6"}>
                   <ClearHTML details={entry.details} />
                 </Box>
                 <Divider my={5} />
@@ -269,4 +272,5 @@ const Display = forwardRef((props, ref) => {
     )
   }
 })
+Display.displayName = "Display"
 export default memo(Display)

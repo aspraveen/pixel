@@ -35,7 +35,7 @@ const handler = async (req, res) => {
         } = post //object destructuring
         //add to database
         try {
-          const data = await prisma.media.create({
+          await prisma.media.create({
             data: {
               name: req.query.attname,
               fileName: fileName,
@@ -83,11 +83,11 @@ const handler = async (req, res) => {
           },
         })
         try {
-          const deleteImage = await client.send(new DeleteObjectCommand(fileParams))
+          await client.send(new DeleteObjectCommand(fileParams))
           // if deleted from s3 then delete form database
           //delete from database
           try {
-            const doDelete = await prisma.media.delete({
+            await prisma.media.delete({
               where: {
                 id: parseInt(req.query.todeleteid),
               },

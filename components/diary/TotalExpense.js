@@ -1,4 +1,4 @@
-import { Badge, Box, Center, Divider, useColorModeValue } from "@chakra-ui/react"
+import { Badge, Box, Divider, useColorModeValue } from "@chakra-ui/react"
 
 const TotalExpense = ({ totalExpense }) => {
   return (

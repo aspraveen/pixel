@@ -12,14 +12,14 @@ const handler = async (req, res) => {
       const reqPayLoad = req.body
       const { transDate, inputFields } = reqPayLoad
       let newData = []
-      const data = inputFields.map((data, index) => {
+      inputFields.forEach((data) => {
         data["transDate"] = new Date(transDate).toISOString()
         data["userId"] = userId
         newData.push(data)
       })
       //add data to prisma
       try {
-        const addRecords = await prisma.diary.createMany({
+        await prisma.diary.createMany({
           data: newData,
         })
         res.status(200).json({ msg: "ok" })
@@ -37,12 +37,6 @@ const handler = async (req, res) => {
       let data = []
       try {
         if (type == "display") {
-          const transDate =
-            new Date(selectedDate).getFullYear() +
-            "-" +
-            (new Date(selectedDate).getMonth() + 1) +
-            "-" +
-            new Date(selectedDate).getDate()
           const formattedDate = `${selectedDate}T00:00:00.000Z`
 
           //console.log("🚀 ~ file: diary.js:46 ~ handler ~ transDate", transDate)
@@ -125,7 +119,7 @@ const handler = async (req, res) => {
         })
         if (noteToEdit.userId == userId) {
           try {
-            const editNote = await prisma.diary.update({
+            await prisma.diary.update({
               where: { id: selectedNote.id },
               data: {
                 transDate: selectedNote.transDate,
@@ -170,7 +164,7 @@ const handler = async (req, res) => {
 
         if (noteToDelete && noteToDelete.userId == userId) {
           try {
-            const deleteNote = await prisma.diary.delete({
+            await prisma.diary.delete({
               where: { id: parseInt(id) },
             })
             res.status(200).json({ msg: "ok" })

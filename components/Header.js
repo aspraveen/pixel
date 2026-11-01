@@ -1,10 +1,9 @@
-import { Box, Flex, useColorModeValue, Divider, Spacer, useDisclosure } from "@chakra-ui/react"
+import { Box, Flex, useColorModeValue, Divider } from "@chakra-ui/react"
 import NextImage from "next/image"
 import Navigation from "./Navigation"
 import Link from "next/link"
 const Header = () => {
   const logo = useColorModeValue("/assets/pixeldigit-dark.png", "/assets/pixeldigit-light.png")
-  const { isOpen, onToggle } = useDisclosure()
   return (
     <>
       <Flex justify={"space-between"} gap={2} alignItems="flex-start">

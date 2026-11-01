@@ -146,12 +146,12 @@ const Uses = () => {
             <OrderedList mt={2}>
               <ListItem>
                 14″ MacBook Pro M1, 16 GB Ram - Lovely machine, I brought it after going through so
-                many reviews and was about to buy M2 pro. Till then was using 13" Macbook pro.
+                many reviews and was about to buy M2 pro. Till then was using 13&quot; Macbook pro.
               </ListItem>
               <ListItem>Iphone 13</ListItem>
               <ListItem>Ipad 7</ListItem>
               <ListItem>Apple Watch</ListItem>
-              <ListItem>LG - 24" External Monitor</ListItem>
+              <ListItem>LG - 24&quot; External Monitor</ListItem>
               <ListItem>Apple Magic Keyboard</ListItem>
               <ListItem>Apple Magic Trackpad</ListItem>
             </OrderedList>
@@ -246,7 +246,7 @@ const Uses = () => {
               <ListItem>Obsidian - I have moved to obsidian for my primary note taking.</ListItem>
               <ListItem>Notion - to schedule my tasks and notes taking </ListItem>
               <ListItem>Alfred - Cannot imagine a mac without Alfred</ListItem>
-              <ListItem>Bartender - I don't like the huge number of icons on the bar</ListItem>
+              <ListItem>Bartender - I don&apos;t like the huge number of icons on the bar</ListItem>
               <ListItem>Table Plus - For database management</ListItem>
             </OrderedList>
           </Box>

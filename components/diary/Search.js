@@ -26,13 +26,14 @@ const searchDiary = (url, { arg }) => {
 }
 
 const SearchResults = ({ data }) => {
+  const cardBg = useColorModeValue("gray.50", "gray.600")
   return (
     <SimpleGrid columns={[1, null, 4]} spacing={5}>
       {data.map((item) => (
         <Box
           fontSize={"md"}
           color={"gray.400"}
-          backgroundColor={useColorModeValue("gray.50", "gray.600")}
+          backgroundColor={cardBg}
           p={5}
           rounded={"md"}
           key={item.id}
@@ -78,7 +79,9 @@ const Search = () => {
   return (
     <>
       <InputGroup mt={20} mb={10}>
-        <InputLeftElement pointerEvents="none" children={<SearchIcon color="gray.200" />} />
+        <InputLeftElement pointerEvents="none">
+          <SearchIcon color="gray.200" />
+        </InputLeftElement>
         <Input
           type="text"
           onChange={(e) => {
@@ -92,7 +95,7 @@ const Search = () => {
             size="sm"
             onClick={async () => {
               try {
-                const result = await trigger({ type: "search", searchkey: searchKey })
+                await trigger({ type: "search", searchkey: searchKey })
               } catch (e) {
                 console.log("🚀 ~ file: Search.js:43 ~ ", e)
               }

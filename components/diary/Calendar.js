@@ -1,7 +1,9 @@
-import { Box, Flex, Select, useColorModeValue, Grid, GridItem } from "@chakra-ui/react"
+import { Box, Flex, Select, useColorMode, useColorModeValue, Grid, GridItem } from "@chakra-ui/react"
 import { useState, useEffect } from "react"
 
 const Days = (props) => {
+  const { colorMode } = useColorMode()
+  const mode = (light, dark) => (colorMode === "dark" ? dark : light)
   const handleClick = (e) => {
     props.onChange(e.target.getAttribute("data-day"))
   }
@@ -16,7 +18,7 @@ const Days = (props) => {
         p={1}
         w={5}
         alignItems={"center"}
-        color={useColorModeValue("gray.600", "gray.100")}
+        color={mode("gray.600", "gray.100")}
         key={"j" + j}
       >
         &nbsp;
@@ -31,15 +33,15 @@ const Days = (props) => {
         p={1}
         w={5}
         alignItems={"center"}
-        color={useColorModeValue("gray.600", "gray.100")}
+        color={mode("gray.600", "gray.100")}
         onClick={(e) => handleClick(e)}
         data-day={i}
         key={"i" + i}
-        _hover={{ backgroundColor: useColorModeValue("cyan.200", "cyan.600"), cursor: "pointer" }}
+        _hover={{ backgroundColor: mode("cyan.200", "cyan.600"), cursor: "pointer" }}
         backgroundColor={
           i == props.default
-            ? useColorModeValue("purple.200", "purple.600")
-            : useColorModeValue("gray.100", "gray.600")
+            ? mode("purple.200", "purple.600")
+            : mode("gray.100", "gray.600")
         }
       >
         {i}

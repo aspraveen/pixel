@@ -27,7 +27,6 @@ import {
   useSlateStatic
   } from "slate-react";
   import { Editor, Transforms, Element as SlateElement } from "slate";
-  import { HistoryEditor } from "slate-history";
   import isUrl from "is-url"
   import imageExtensions from "image-extensions"
 
@@ -243,7 +242,7 @@ const LIST_TYPES = [ "numbered-list", "bulleted-list" ];
   };
 
   export const Leaf = ({ attributes, children, leaf }) => {
-    const { colorMode, toggleColorMode } = useColorMode();
+    const { colorMode } = useColorMode();
 
     if (leaf.bold) {
       children = <strong>{children}</strong>;

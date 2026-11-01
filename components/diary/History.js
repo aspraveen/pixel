@@ -31,13 +31,14 @@ const yearFilter = (transYear) => {
 }
 const ShowDataForYear = ({ data, year }) => {
   data = data.filter((element) => yearFilter(element.transDate) == year)
+  const cardBg = useColorModeValue("gray.50", "gray.600")
   return (
     <SimpleGrid columns={[1, null, 5]} spacing={5}>
-      {data.map((item, index) => (
+      {data.map((item) => (
         <Box
           fontSize={"md"}
           color={"gray.400"}
-          backgroundColor={useColorModeValue("gray.50", "gray.600")}
+          backgroundColor={cardBg}
           p={5}
           rounded={"md"}
           key={item.id}
@@ -66,21 +67,21 @@ const ShowDataForYear = ({ data, year }) => {
   )
 }
 
+const fetcher = async (url) => {
+  const response = await fetch(`${url}`)
+  const data = await response.json()
+  if (data.msg == "Not Authenticated") {
+    throw new Error("User Not authenticated")
+  }
+  return data
+}
 const History = (props) => {
   let selectedDate = props.selectedDate
+  const { data, error, isLoading } = useSWR(
+    selectedDate != undefined ? `api/diary/?type=history&selectedDate=${selectedDate}` : null,
+    fetcher,
+  )
   if (selectedDate != undefined) {
-    const fetcher = async (url) => {
-      const response = await fetch(`${url}`)
-      const data = await response.json()
-      if (data.msg == "Not Authenticated") {
-        throw new Error("User Not authenticated")
-      }
-      return data
-    }
-    const { data, error, isLoading } = useSWR(
-      `api/diary/?type=history&selectedDate=${selectedDate}`,
-      fetcher,
-    )
     if (error) {
       return <Box>{error.message}</Box>
     }

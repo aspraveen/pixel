@@ -31,7 +31,7 @@ const handler = async (req, res) => {
       if (checkIfViewed == 0) {
         //update view
         try {
-          const updateCount = await prisma.post.update({
+          await prisma.post.update({
             where: {
               id: postId,
             },
@@ -41,7 +41,7 @@ const handler = async (req, res) => {
           })
           //track it
           try {
-            const trackIt = await prisma.tracker.create({
+            await prisma.tracker.create({
               data: {
                 postId: postId,
                 activity: "view",
@@ -87,7 +87,7 @@ const handler = async (req, res) => {
       if (checkIfLiked == 0) {
         //update view
         try {
-          const updateCount = await prisma.post.update({
+          await prisma.post.update({
             where: {
               id: postId,
             },
@@ -97,7 +97,7 @@ const handler = async (req, res) => {
           })
           //track it
           try {
-            const trackIt = await prisma.tracker.create({
+            await prisma.tracker.create({
               data: {
                 postId: postId,
                 activity: "like",

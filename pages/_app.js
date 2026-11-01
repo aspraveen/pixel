@@ -8,7 +8,7 @@ import "../styles/globals.css"
 import { Analytics } from "@vercel/analytics/react"
 import Seo from "../components/Seo"
 
-function MyApp({ Component, pageProps, router }) {
+function MyApp({ Component, pageProps }) {
   return (
     <SessionProvider session={pageProps.session}>
       <ChakraProvider theme={theme}>

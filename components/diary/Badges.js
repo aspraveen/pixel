@@ -1,5 +1,7 @@
-import { Box, useColorModeValue } from "@chakra-ui/react"
+import { Box, useColorMode } from "@chakra-ui/react"
 const Badges = ({ data, type }) => {
+  const { colorMode } = useColorMode()
+  const mode = (light, dark) => (colorMode === "dark" ? dark : light)
   if (data == null || data == "") {
     return ""
   }
@@ -32,13 +34,13 @@ const Badges = ({ data, type }) => {
         <Box
           key={index}
           borderWidth={1}
-          borderColor={useColorModeValue(`${badgeColors[index]}.100`, `${badgeColors[index]}.400`)}
-          color={useColorModeValue(`${badgeColors[index]}.500`, `${badgeColors[index]}.50`)}
+          borderColor={mode(`${badgeColors[index]}.100`, `${badgeColors[index]}.400`)}
+          color={mode(`${badgeColors[index]}.500`, `${badgeColors[index]}.50`)}
           fontSize={"xs"}
           rounded={"md"}
           p={1}
           textAlign={"center"}
-          backgroundColor={useColorModeValue(
+          backgroundColor={mode(
             `${badgeColors[index]}.50`,
             `${badgeColors[index]}.700`,
           )}
@@ -56,7 +58,7 @@ const Badges = ({ data, type }) => {
           rounded={"md"}
           p={1}
           textAlign={"center"}
-          backgroundColor={useColorModeValue("purple.50", "purple.800")}
+          backgroundColor={mode("purple.50", "purple.800")}
         >
           {data}
         </Box>
@@ -80,9 +82,9 @@ const Badges = ({ data, type }) => {
     return (
       <Box
         borderWidth={1}
-        borderColor={useColorModeValue("purple.100", "purple.400")}
-        bgColor={useColorModeValue("purple.50", "purple.700")}
-        color={useColorModeValue("purple.600", "gray.100")}
+        borderColor={mode("purple.100", "purple.400")}
+        bgColor={mode("purple.50", "purple.700")}
+        color={mode("purple.600", "gray.100")}
         fontSize={"xs"}
         rounded={"md"}
         p={1}

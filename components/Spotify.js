@@ -6,6 +6,7 @@ import useSWR from "swr"
 const Spotify = () => {
   //spotify color #1ED760
   const themeColor = useColorModeValue("orange.300", "orange.500")
+  const titleColor = useColorModeValue("orange.300", "orange.100")
 
   const fetcher = async () => {
     const response = await fetch("/api/spotify")
@@ -25,7 +26,7 @@ const Spotify = () => {
           width="100%"
         >
           <Text fontSize={["xs", null, "sm"]} color={themeColor}>
-            Sorry, I couldn't get details from Spotify.
+            Sorry, I couldn&apos;t get details from Spotify.
           </Text>
         </Box>
       </>
@@ -77,7 +78,7 @@ const Spotify = () => {
             <Link href={data.trackUrl} target="_blank">
               <Text
                 fontSize={["xs", null, "sm"]}
-                color={useColorModeValue("orange.300", "orange.100")}
+                color={titleColor}
                 fontWeight="bold"
               >
                 {data.title}

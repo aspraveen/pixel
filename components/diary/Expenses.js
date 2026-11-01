@@ -1,6 +1,5 @@
 import {
   Box,
-  Flex,
   useColorModeValue,
   Stack,
   Skeleton,
@@ -51,21 +50,21 @@ const TotalForMonth = ({ data }) => {
   let totalExpense = data.reduce((total, item) => total + Number(item.amount), 0).toFixed(3)
   return totalExpense
 }
+const fetcher = async (url) => {
+  const response = await fetch(`${url}`)
+  const data = await response.json()
+  if (data.msg == "Not Authenticated") {
+    throw new Error("User Not authenticated")
+  }
+  return data
+}
 const Expenses = (props) => {
   let selectedDate = props.selectedDate
+  const { data, error, isLoading } = useSWR(
+    selectedDate != undefined ? `api/diary/?type=expenses&selectedDate=${selectedDate}` : null,
+    fetcher,
+  )
   if (selectedDate != undefined) {
-    const fetcher = async (url) => {
-      const response = await fetch(`${url}`)
-      const data = await response.json()
-      if (data.msg == "Not Authenticated") {
-        throw new Error("User Not authenticated")
-      }
-      return data
-    }
-    const { data, error, isLoading } = useSWR(
-      `api/diary/?type=expenses&selectedDate=${selectedDate}`,
-      fetcher,
-    )
     if (error) {
       return <Box>{error.message}</Box>
     }

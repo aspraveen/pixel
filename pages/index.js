@@ -4,7 +4,7 @@ import Header from "../components/Header"
 import Hero from "../components/Hero"
 import Seo from "../components/Seo"
 
-const IndexPage = (props) => {
+const IndexPage = () => {
   return (
     <>
       <Seo

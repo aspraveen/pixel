@@ -1,6 +1,8 @@
-import { Box, Flex, useColorModeValue } from "@chakra-ui/react"
+import { Box, Flex, useColorMode } from "@chakra-ui/react"
 import NthNumber from "./NthNumber"
 const DiaryDate = ({ date, page }) => {
+  const { colorMode } = useColorMode()
+  const mode = (light, dark) => (colorMode === "dark" ? dark : light)
   let day = new Date(date).getDate()
   let month = new Date(date).getMonth()
   let year = new Date(date).getFullYear()
@@ -33,8 +35,8 @@ const DiaryDate = ({ date, page }) => {
         </Box>
         <Box
           ml={2}
-          bgColor={useColorModeValue("purple.200", "purple.600")}
-          color={useColorModeValue("black", "white")}
+          bgColor={mode("purple.200", "purple.600")}
+          color={mode("black", "white")}
           rounded={"md"}
           fontSize={"sm"}
           p={1}
@@ -43,8 +45,8 @@ const DiaryDate = ({ date, page }) => {
         </Box>
         <Box
           ml={2}
-          bgColor={useColorModeValue("orange.200", "orange.400")}
-          color={useColorModeValue("black", "white")}
+          bgColor={mode("orange.200", "orange.400")}
+          color={mode("black", "white")}
           rounded={"md"}
           fontSize={"sm"}
           p={1}
@@ -65,20 +67,20 @@ const DiaryDate = ({ date, page }) => {
         </Box>
         <Box
           ml={2}
-          color={useColorModeValue("black", "white")}
+          color={mode("black", "white")}
           rounded={"md"}
           fontSize={"sm"}
           p={1}
           borderWidth={1}
-          borderColor={useColorModeValue("purple.200", "purple.600")}
+          borderColor={mode("purple.200", "purple.600")}
         >
           {year}
         </Box>
         <Box
           ml={2}
           borderWidth={1}
-          borderColor={useColorModeValue("blue.200", "blue.600")}
-          color={useColorModeValue("black", "white")}
+          borderColor={mode("blue.200", "blue.600")}
+          color={mode("black", "white")}
           rounded={"md"}
           fontSize={"sm"}
           p={1}

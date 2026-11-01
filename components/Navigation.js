@@ -5,8 +5,6 @@ import {
   Box,
   SimpleGrid,
   Center,
-  keyframes,
-  usePrefersReducedMotion,
   Button,
 } from "@chakra-ui/react"
 import NextLink from "next/link"
@@ -21,12 +19,6 @@ const Navigation = () => {
   const router = useRouter()
   const currentPath = router.pathname
   const linkUpperLineColor = "orange.300"
-  const prefersReducedMotion = usePrefersReducedMotion()
-  const spin = keyframes`
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-`
-  const animation = prefersReducedMotion ? undefined : `${spin} infinite 20s linear`
 
   return (
     <>

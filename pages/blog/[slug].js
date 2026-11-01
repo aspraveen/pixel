@@ -29,21 +29,9 @@ export default function PostDetails({ data, categories }) {
   const randomPosition = Math.round(Math.random() * (2100 - 1200) + 1200)
   const avatarSize = useBreakpointValue({ base: "xs", md: "lg" })
 
-  if (router.isFallback) {
-    return <h2>Loading...</h2>
-  }
-
-  const fetcher = async () => {
-    const response = await fetch(`/api/post-swr?postId=${post.id}`)
-    if (!response.ok) {
-      const error = new Error("Failed reading data")
-      throw error
-    }
-    const data = await response.json()
-    return data
-  }
   //record the count
   useEffect(() => {
+    if (!data?.id) return
     const asyncFn = async () => {
       let updateViewResult = ""
       const updateView = await fetch(`/api/post-update-fields?postId=${data.id}&fieldType=view`)
@@ -51,7 +39,11 @@ export default function PostDetails({ data, categories }) {
       console.log(updateViewResult)
     }
     asyncFn()
-  }, [])
+  }, [data?.id])
+
+  if (router.isFallback) {
+    return <h2>Loading...</h2>
+  }
 
   const likeit = async () => {
     const updateLike = await fetch(`/api/post-update-fields?postId=${data.id}&fieldType=like`)

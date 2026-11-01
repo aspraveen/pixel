@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/react"
 
-const RightDesign = ({ categories, title, content, height }) => {
+const RightDesign = ({ title, content }) => {
   //const randomPosition = Math.round(Math.random() * (2100 - 1200) + 5200)
   return (
     <Box

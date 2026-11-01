@@ -7,7 +7,7 @@ const FirstName = ({ name }) => {
   let fnameArray = name.split(" ")
   return fnameArray[0]
 }
-const LoginStatus = (props) => {
+const LoginStatus = () => {
   const session = useSession()
   const boxBgColor = useColorModeValue("gray.50", "gray.600")
   if (session.status == "authenticated") {
