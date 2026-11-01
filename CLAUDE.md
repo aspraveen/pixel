@@ -8,7 +8,7 @@ Personal site (pixeldigit.com): public blog, guestbook, contact form and Spotify
 
 ## Commands
 
-Node version is pinned in `.nvmrc` (v18). Yarn is the package manager (`yarn.lock`).
+Node 24: Vercel reads the version from `engines.node` in `package.json`; `.nvmrc` is only for local use. Yarn 1 is the package manager (`yarn.lock`).
 
 ```bash
 yarn dev            # dev server on http://localhost:3000
